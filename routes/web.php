@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/test', function () {
+    return view('profile.index');
+});
+
 Route::get('/', function () {
     return view('auth/login');
 });

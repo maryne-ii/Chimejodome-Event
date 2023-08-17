@@ -1,3 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.Div {
+    background-color: white;
+    border-radius: 25px;
+    border: 2px solid white;
+    padding: 50px;
+    margin-left: 100px;
+    margin-right: 100px;
+}
+
+.line{
+    width: 100%;
+    border-bottom: 3px solid #A1C77B;
+    margin: 10px 0 20px;
+}
+
+.bio{
+    float: left;
+    background-color: #D9D9D9;
+    border: 2px solid white;
+    padding: 20px;
+    margin-top: 50px;
+    height: 320px;
+    width: 220px;
+}
+
+.button{
+    color: white;
+    text-decoration: underline;
+    text-decoration-color: white;
+}
+
+textarea{
+    float: left;
+    background-color: #D9D9D9;
+    border: 2px solid white;
+    padding: 20px;
+    margin-top: 50px;
+    height: 320px;
+    width: 220px;
+    resize: none;
+}
