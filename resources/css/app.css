@@ -93,56 +93,56 @@ h4 {
   color: black;
 }
 
-#name{
+#name-show{
     display: flex;
     position: absolute;
     top: 145px;
     left: 420px;
     padding: 10px;
 }
-#year{
+#year-show{
     display: flex;
     position: absolute;
     top: 220px;
     left: 420px;
     padding: 10px;
 }
-#faculty{
+#faculty-show{
     display: flex;
     position: absolute;
     top: 297px;
     left: 420px;
     padding: 10px;
 }
-#email{
+#email-show{
     display: flex;
     position: absolute;
     top: 372px;
     left: 420px;
     padding: 10px;
 }
-#tel{
+#tel-show{
     display: flex;
     position: absolute;
     top: 450px;
     left: 420px;
     padding: 10px;
 }
-#line{
+#line-show{
     display: flex;
     position: absolute;
     top: 525px;
     left: 420px;
     padding: 10px;
 }
-#fb{
+#fb-show{
     display: flex;
     position: absolute;
     top: 600px;
     left: 420px;
     padding: 10px;
 }
-#ig{
+#ig-show{
     display: flex;
     position: absolute;
     top: 675px;
@@ -150,5 +150,5 @@ h4 {
     padding: 10px;
 }
 Div h1{
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
