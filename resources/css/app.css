@@ -96,56 +96,56 @@ h4 {
 #name-show{
     display: flex;
     position: absolute;
-    top: 145px;
+    top: 142px;
     left: 420px;
     padding: 10px;
 }
 #year-show{
     display: flex;
     position: absolute;
-    top: 220px;
+    top: 218px;
     left: 420px;
     padding: 10px;
 }
 #faculty-show{
     display: flex;
     position: absolute;
-    top: 297px;
+    top: 290px;
     left: 420px;
     padding: 10px;
 }
 #email-show{
     display: flex;
     position: absolute;
-    top: 372px;
+    top: 365px;
     left: 420px;
     padding: 10px;
 }
 #tel-show{
     display: flex;
     position: absolute;
-    top: 450px;
+    top: 440px;
     left: 420px;
     padding: 10px;
 }
 #line-show{
     display: flex;
     position: absolute;
-    top: 525px;
+    top: 510px;
     left: 420px;
     padding: 10px;
 }
 #fb-show{
     display: flex;
     position: absolute;
-    top: 600px;
+    top: 585px;
     left: 420px;
     padding: 10px;
 }
 #ig-show{
     display: flex;
     position: absolute;
-    top: 675px;
+    top: 660px;
     left: 420px;
     padding: 10px;
 }
