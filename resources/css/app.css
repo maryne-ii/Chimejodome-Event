@@ -9,6 +9,7 @@
     padding: 50px;
     margin-left: 100px;
     margin-right: 100px;
+    position: relative;
 }
 
 .line{
@@ -55,7 +56,7 @@ div.void {
 }
 div.grid-1 {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     column-gap: 20px;
     row-gap: 40px;
     justify-items: center;
@@ -64,20 +65,20 @@ div.grid-1 {
   }
   div.grid-2 {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr ; 
+    grid-template-columns: 1fr 1fr 1fr 1fr ;
     column-gap: 15px;
     row-gap: 40px;
     justify-items: center;
     position: relative;
     margin-bottom: 10px;
   }
-  
+
 div.content {
     color: #242424;
     background-color: #f25fff;
 
     box-sizing: border-box;
-    width: 200px; 
+    width: 200px;
     text-align: center;
 
     padding: 10px;
@@ -90,4 +91,64 @@ h3.text-5xl{
 h4 {
   background-color: aqua;
   color: black;
+}
+
+#name{
+    display: flex;
+    position: absolute;
+    top: 145px;
+    left: 420px;
+    padding: 10px;
+}
+#year{
+    display: flex;
+    position: absolute;
+    top: 220px;
+    left: 420px;
+    padding: 10px;
+}
+#faculty{
+    display: flex;
+    position: absolute;
+    top: 297px;
+    left: 420px;
+    padding: 10px;
+}
+#email{
+    display: flex;
+    position: absolute;
+    top: 372px;
+    left: 420px;
+    padding: 10px;
+}
+#tel{
+    display: flex;
+    position: absolute;
+    top: 450px;
+    left: 420px;
+    padding: 10px;
+}
+#line{
+    display: flex;
+    position: absolute;
+    top: 525px;
+    left: 420px;
+    padding: 10px;
+}
+#fb{
+    display: flex;
+    position: absolute;
+    top: 600px;
+    left: 420px;
+    padding: 10px;
+}
+#ig{
+    display: flex;
+    position: absolute;
+    top: 675px;
+    left: 420px;
+    padding: 10px;
+}
+Div h1{
+    border: 1px solid red;
 }

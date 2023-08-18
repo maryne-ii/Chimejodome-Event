@@ -7,32 +7,32 @@
             <h2 class="line"></h2>
             <img src="https://i.pinimg.com/236x/47/5a/86/475a86177aeedacf8dc7f5e2b4eff61f.jpg" alt="default" style="float: left; margin-right: 15px" >
             <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                ชื่อ-นามสกุล
+                ชื่อ-นามสกุล  <h1 id="name">{{Auth::user()->name}}</h1>
             </h1>
             <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                ชั้นปี
+                ชั้นปี <h1 id="year">{{Auth::user()->year}}years</h1>
             </h1>
             <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                คณะ
+                คณะ <h1 id="faculty">{{Auth::user()->faculty}}faculty</h1>
             </h1>
                 {{-- <div class="bio">
                     bio
                 </div> --}}
                 <textarea readonly name="bio" id="bio" cols="20" rows="10" >bio</textarea>
             <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                อีเมล
+                อีเมล    <h1 id="email">{{Auth::user()->email}}</h1>
             </h1>
             <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                เบอร์
+                เบอร์    <h1 id="tel">{{Auth::user()->tel}}</h1>
             </h1>
             <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                ID LINE
+                ID LINE <h1 id="line">{{Auth::user()->line}}line</h1>
             </h1>
             <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                FACEBOOK
+                FACEBOOK    <h1 id="fb">{{Auth::user()->facebook}}FB</h1>
             </h1>
             <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                INSTAGRAM
+                INSTAGRAM   <h1 id="ig">{{Auth::user()->ig}}IG</h1>
             </h1>
             <div style="margin-top: 50px; text-align: center; ">
                 <a href="{{  route('profile.edit')   }}">
