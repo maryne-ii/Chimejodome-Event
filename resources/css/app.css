@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .Div {
+.Div {
     background-color: white;
     border-radius: 25px;
     border: 2px solid white;
@@ -34,7 +34,7 @@
     text-decoration-color: white;
 }
 
-textarea{
+/* textarea{
     float: left;
     background-color: #D9D9D9;
     border: 2px solid white;
@@ -43,7 +43,7 @@ textarea{
     height: 320px;
     width: 220px;
     resize: none;
-}
+} */
 nav.bg-white.border-gray-200.py-2\.5 {
     background-color: rgb(167, 58, 58);
 }
@@ -88,67 +88,67 @@ h3.text-5xl{
   color: #924c4c;
   background-color: #ece2e2;
 }
-h4 {
+/* h4 {
   background-color: aqua;
   color: black;
-}
+} */
 
-#name{
+#name-show{
     display: flex;
     position: absolute;
-    top: 145px;
+    top: 142px;
     left: 420px;
     padding: 10px;
 }
-#year{
+#year-show{
     display: flex;
     position: absolute;
-    top: 220px;
+    top: 218px;
     left: 420px;
     padding: 10px;
 }
-#faculty{
+#faculty-show{
     display: flex;
     position: absolute;
-    top: 297px;
+    top: 290px;
     left: 420px;
     padding: 10px;
 }
-#email{
+#email-show{
     display: flex;
     position: absolute;
-    top: 372px;
+    top: 365px;
     left: 420px;
     padding: 10px;
 }
-#tel{
+#tel-show{
     display: flex;
     position: absolute;
-    top: 450px;
+    top: 440px;
     left: 420px;
     padding: 10px;
 }
-#line{
+#line-show{
     display: flex;
     position: absolute;
-    top: 525px;
+    top: 510px;
     left: 420px;
     padding: 10px;
 }
-#fb{
+#fb-show{
     display: flex;
     position: absolute;
-    top: 600px;
+    top: 585px;
     left: 420px;
     padding: 10px;
 }
-#ig{
+#ig-show{
     display: flex;
     position: absolute;
-    top: 675px;
+    top: 660px;
     left: 420px;
     padding: 10px;
 }
 Div h1{
-    border: 1px solid red;
-} */
+    /* border: 1px solid red; */
+} 
