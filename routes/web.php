@@ -19,6 +19,9 @@ Route::get('/test', function () {
     return view('profile.index');
 });
 
+Route::get('/login',function(){
+    return view('auth/login');
+});
 // Route::get('/greeting', function () {
 //     return 'Hello World';
 // });
