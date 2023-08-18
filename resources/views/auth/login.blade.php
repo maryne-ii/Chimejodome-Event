@@ -15,14 +15,14 @@
                     <!-- Username -->
                     <div>
                         <!-- <x-input-label for="email" :value="__('Email')" /> -->
-                        <x-text-input id="email" placeholder="Email" class="py-3 px-5 rounded-[10rem] bg-[#D9D9D9] text-black  mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                        <x-text-input id="email" placeholder="Email" class="py-3 px-5 rounded-3xl bg-[#D9D9D9] text-black  mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
                     <!-- Password -->
                     <div class="mt-4">
                         <!-- <x-input-label for="password" :value="__('Password')" /> -->
-                        <x-text-input id="password" placeholder="Password" class="py-3 px-5 rounded-[10rem] bg-[#D9D9D9] text-black  mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                        <x-text-input id="password" placeholder="Password" class="py-3 px-5 rounded-3xl bg-[#D9D9D9] text-black  mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
@@ -31,10 +31,10 @@
                         <button type="submit" class="bg-cyan-400 w-full hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-full">Sign In</button>
                     </div>
                 </form>
-                <span>Don’t have an account ? <x-nav-link class="text-[#60E16D]" :href="route('register')">
+                <span>Don’t have an account ? <x-nav-link class="text-[rgb(96,225,109)]" :href="route('register')">
                         {{ __('Register') }}
                     </x-nav-link> </span>
-                <x-nav-link class="text-[#60E16D] mt-[-2rem]" :href="route('login')">
+                <x-nav-link class="text-[rgb(96,225,109)] mt-[-2rem]" :href="route('login')">
                     {{ __('About') }}
                 </x-nav-link>
             </div>

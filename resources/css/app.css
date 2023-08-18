@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.Div {
+/* .Div {
     background-color: white;
     border-radius: 25px;
     border: 2px solid white;
@@ -151,4 +151,4 @@ h4 {
 }
 Div h1{
     border: 1px solid red;
-}
+} */
