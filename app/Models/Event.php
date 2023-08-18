@@ -16,10 +16,10 @@ class Event extends Model
     //     return $this->belongsToMany(User::class);
     // }
     public function organizes(): BelongsToMany{
-        return $this->belongsToMany(Event::class,"user_organize_event");
+        return $this->belongsToMany(User::class,"user_organize_event");
     }
     public function joins(): BelongsToMany{
-        return $this->belongsToMany(Event::class,"user_join_event");
+        return $this->belongsToMany(User::class,"user_join_event");
     }
     public function staffConfirm(): BelongsTo{
         return $this->belongsTo(User::class);

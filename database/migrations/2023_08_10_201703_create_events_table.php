@@ -14,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('events', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->string('header');
+            $table->string('name')->unique();
+            $table->string('header')->nullable();
             $table->foreignIdFor(User::class)->nullable()->comment('budget for staff');
             $table->string('detail')->nullable();
             $table->string('poster')->comment('image_path')->default('https://www.poolsawat.com/wp-content/uploads/2015/12/bigstock-events-7444309.jpg');
@@ -26,6 +26,10 @@ return new class extends Migration
             $table->string('location')->nullable();
             $table->datetime('start_date')->nullable();
             $table->datetime('end_date')->nullable();
+            $table->integer('status')->default(0)->comment('0=not yet 1=complete'); 
+
+
+
             $table->timestamps();
             $table->softDeletes();
         });

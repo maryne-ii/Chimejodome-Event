@@ -29,6 +29,7 @@ class EventFactory extends Factory
             'organizer_total'=>fake()->numberBetween(1,30),
             'budget'=>fake()->numberBetween(500,3000),
             'location'=>fake()->city(),//เดี๋ยวแก้ *ใช้ได้แต่ไม่สวย
+            'status'=>1
             
         ];
             

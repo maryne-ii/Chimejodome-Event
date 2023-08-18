@@ -1,3 +1,4 @@
+
 <nav class="bg-white border-gray-200 py-2.5">
     <div class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto">
         <a href="#" class="flex items-center">
@@ -8,6 +9,35 @@
             <div class="hidden mt-2 mr-4 sm:inline-block">
                 <span></span>
             </div>
+            <div class ="flex item-center">
+
+            <div class ="flex item-center">
+
+            @if (Auth::check())
+            {{Auth::user()->name}}
+            @else
+            <div>
+                <form action ="{{route('logout')}}" method="POST">
+                    @csrf
+                    <button type="submit">
+                        Logout
+                    </button>
+                </form>
+            </div>
+
+            <div class = "mx-4">
+            <a  href="{{route('login')}}"> 
+                    Login
+                </a>
+                
+                </div>
+            <div>  <a  href="{{route('register')}}"> 
+                    Login
+                </a> </div>
+            </div>
+
+
+            @endif
 
 
             <!-- </div>
@@ -28,6 +58,7 @@
                     </svg>
                 </button>
             </div> -->
+            
             <div class="items-center justify-between w-full lg:flex lg:w-auto lg:order-1" id="mobile-menu-2 ">
                 <ul class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
                     <li>

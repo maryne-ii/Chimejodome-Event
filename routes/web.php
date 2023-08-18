@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,29 @@ Route::get('/test', function () {
     return view('profile.index');
 });
 
+// Route::get('/greeting', function () {
+//     return 'Hello World';
+// });
 Route::get('/', function () {
-    return view('auth/login');
+    return view('events.index');
 });
+
+Route::get('/manage', [EventController::class, 'manage'])
+    ->name('events.manage');
+Route::get('/manage/{event}/kaban', [EventController::class, 'kaban'])
+    ->name('events.kaban');
+Route::get('/manage/{event}/join', [EventController::class, 'join'])
+    ->name('events.kaban');
+// Route::get('/manage/{event}/kabans.join', function () {
+//     return 'Hello World';
+// });
+Route::resource('/', EventController::class);
+Route::resource('/events', EventController::class);
+
+
+
+
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');

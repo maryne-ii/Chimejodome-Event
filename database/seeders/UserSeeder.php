@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
         $user0 = new User();
         $user0->name = "User 00";
         $user0->email = "user00@example.com";
-        $user0->password = "12345";
+        $user0->password = Hash::make("password");
         $user0->tel="080";
         $user0->role = '0';
         $user0->facebook_account="chiMeJoDome";
@@ -101,7 +101,7 @@ class UserSeeder extends Seeder
         $event = Event::factory()->count(3)->create();
         $event2 = Event::factory()->create();
         $user2->joins()->attach($event);//user2(นักเรียนธรรมดา)เข้าร่วมevent(เข้าร่วม 3 event)
-        $user3->events()->attach($event2->id);//user3(นักเรียนที่สร้างevent)สร้างevent
+        $user3->organizes()->attach($event2->id);//user3(นักเรียนที่สร้างevent)สร้างevent
 
 
 

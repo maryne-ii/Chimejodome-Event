@@ -43,3 +43,51 @@ textarea{
     width: 220px;
     resize: none;
 }
+nav.bg-white.border-gray-200.py-2\.5 {
+    background-color: rgb(167, 58, 58);
+}
+
+div.void {
+  width: 350px;
+  background-color: rgb(255, 255, 255);
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+div.grid-1 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr; 
+    column-gap: 20px;
+    row-gap: 40px;
+    justify-items: center;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  div.grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr ; 
+    column-gap: 15px;
+    row-gap: 40px;
+    justify-items: center;
+    position: relative;
+    margin-bottom: 10px;
+  }
+  
+div.content {
+    color: #242424;
+    background-color: #f25fff;
+
+    box-sizing: border-box;
+    width: 200px; 
+    text-align: center;
+
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+h3.text-5xl{
+  color: #924c4c;
+  background-color: #ece2e2;
+}
+h4 {
+  background-color: aqua;
+  color: black;
+}
