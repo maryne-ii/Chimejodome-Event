@@ -21,7 +21,8 @@ class UserSeeder extends Seeder
         $user0 = new User();
         $user0->name = "User 00";
         $user0->email = "user00@example.com";
-        $user0->password = Hash::make("password");
+        // $user0->password = Hash::make("password");
+        $user0->password = "password";
         $user0->tel="080";
         $user0->role = '0';
         $user0->facebook_account="chiMeJoDome";
@@ -77,7 +78,8 @@ class UserSeeder extends Seeder
         ))
         ->state(new Sequence(
             fn (Sequence $sequence) => [
-            'password' => Hash::make("password"),//password
+            // 'password' => Hash::make("password"),//password
+            // 'password' => "password",//password
             'year' =>fake()->numberBetween(1,4)//year
         ],
         ))
@@ -87,11 +89,12 @@ class UserSeeder extends Seeder
         
         User::factory()//create staff
         ->count(3)
-        ->state(new Sequence(
-            fn (Sequence $sequence) => [
-            'password' => Hash::make("password"),//password
-        ],
-        ))
+        // ->state(new Sequence(
+        //     fn (Sequence $sequence) => [
+        //     // 'password' => Hash::make("password"),//password
+        //     'password' => "password",//password
+        // ],
+        // ))
         ->create(['role'=>'1',]);
 
 

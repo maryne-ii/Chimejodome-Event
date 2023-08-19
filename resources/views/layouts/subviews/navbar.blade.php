@@ -40,8 +40,10 @@
     </div>
     <div class="flex justify-center items-center" id="mobile-menu-2">
         <ul class="flex flex-col justify-center items-center mr-2 mt-4 font-medium lg:flex-row  lg:mt-0 ">
-            <li class="p-5">
-                นายดาวขำมิน สุดใจ
+        @if( Auth::check() )
+
+        <li class="p-5">
+        {{Auth::user()->name}}
             </li>
             <li class="pr-3">
                 <img src="colorProfile.jpg" alt="" class="h-10 w-10 rounded-full">
@@ -65,13 +67,24 @@
                             <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
+                            <a href="{{ route('logout') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
                         </li>
                     </ul>
                 </div>
 
 
             </li>
+            @else
+                <div class=" flex gap-14 justify-start items-center">
+                    <a href="{{route('login')}}">
+                        <span>Login</span>
+                    </a>
+                    <a href="{{route('register')}}">
+                        <span>Register</span>
+                    </a>
+                </div>
+               
+            @endif
         </ul>
     </div>
 

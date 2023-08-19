@@ -31,7 +31,7 @@ class EventController extends Controller
     {
         // $events = $event->joins;
         $users = $event->joins;
-        return view('kaban.join', [
+        return view('kanban.join', [
             'users' => $users
         ]);
     }
@@ -85,9 +85,9 @@ class EventController extends Controller
             'event'=>$event
         ]);
     }
-    public function kaban(Event $event)
+    public function kanban(Event $event)
     {
-        return view('events.kaban',[
+        return view('events.kanban',[
             'event'=>$event
         ]);
     }

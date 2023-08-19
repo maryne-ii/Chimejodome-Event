@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -45,25 +46,32 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
+    // public function setPasswordAttribute($password)
+    // {
+    //     $this->attributes['password'] = Hash::make($password);
+    // }
     // public function events(): BelongsToMany{
     //     return $this->belongsToMany(Event::class,"user_organize_event");
     // }
-    public function confirms(): HasMany{
+    public function confirms(): HasMany
+    {
         return $this->hasMany(Event::class);
-
     }
-    public function events(): BelongsToMany{
+    public function events(): BelongsToMany
+    {
         return $this->belongsToMany(Event::class);
     }
-    public function joins(): BelongsToMany{
-        return $this->belongsToMany(Event::class,"user_join_event");
+    public function joins(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class, "user_join_event");
     }
-    public function organizes(): BelongsToMany{
-        return $this->belongsToMany(Event::class,"user_organize_event");
+    public function organizes(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class, "user_organize_event");
     }
-    
 
-    
+
+
     // public function joins(): BelongsToMany{
     //     return $this->belongsToMany(Event::class)->withPivot('join');
     // }

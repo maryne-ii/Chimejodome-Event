@@ -3,6 +3,7 @@
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,26 +16,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', function () {
-    return view('profile.index');
-});
+
 
 Route::get('/login',function(){
     return view('auth/login');
 });
-// Route::get('/greeting', function () {
-//     return 'Hello World';
-// });
+
+Route::get('/register', function () {
+    return view('auth/register');
+});
+
+Route::get('/logout', function ()
+{
+    auth()->logout();
+    Session()->flush();
+    return Redirect::to('/login');
+})->name('logout');
+
 Route::get('/', function () {
     return view('events.index');
 });
 
+Route::get('/test', function () {
+    return view('profile.index');
+});
+
 Route::get('/manage', [EventController::class, 'manage'])
     ->name('events.manage');
-Route::get('/manage/{event}/kaban', [EventController::class, 'kaban'])
-    ->name('events.kaban');
+Route::get('/manage/{event}/kanban', [EventController::class, 'kanban'])
+    ->name('events.kanban');
 Route::get('/manage/{event}/join', [EventController::class, 'join'])
-    ->name('events.kaban');
+    ->name('events.kanban');
 // Route::get('/manage/{event}/kabans.join', function () {
 //     return 'Hello World';
 // });
