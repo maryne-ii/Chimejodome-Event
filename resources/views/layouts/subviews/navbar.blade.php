@@ -1,7 +1,7 @@
 <nav class="bg-white border-gray-200 py-6 flex justify-between px-20 text-kuGreen">
     <div class=" flex gap-14 justify-start items-center ">
         <a href="#" class="pr-15">
-            <img src="kuLogo.png" class="h-7 w-auto pt-2 mr-3 sm:h-12" alt="Logo">
+            <img src="http://localhost/kuLogo.png" class="h-7 w-auto pt-2 mr-3 sm:h-12" alt="Logo">
         </a>
         <!-- <div class="flex items-center lg:order-2">
             <div class="hidden mt-2 ml-4 sm:inline-block">
@@ -29,7 +29,12 @@
         {{-- </div>--}} -->
         <a href="">
             <span>
-                Event list
+                <a href="{{route('events.index')}}">Event List</a>
+            </span>
+        </a>
+        <a href="">
+            <span>
+                <a href="{{route('events.joinList')}}">Join List</a>
             </span>
         </a>
         <a href="">
@@ -40,17 +45,17 @@
     </div>
     <div class="flex justify-center items-center" id="mobile-menu-2">
         <ul class="flex flex-col justify-center items-center mr-2 mt-4 font-medium lg:flex-row  lg:mt-0 ">
-        @if( Auth::check() )
+            @if( Auth::check() )
 
-        <li class="p-5">
-        {{Auth::user()->name}}
+            <li class="p-5">
+                {{Auth::user()->name}}
             </li>
             <li class="pr-3">
                 <img src="colorProfile.jpg" alt="" class="h-10 w-10 rounded-full">
             </li>
             <li class="flex justify-center items-center">
-                <button id="dropdownDelayButton" data-dropdown-placement="right" data-dropdown-offset-skidding="110" data-dropdown-offset-distance="-40" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="500" data-dropdown-trigger="hover" class="" type="button"> <img src="manuIcon1.png" alt="" class="h-10 w-10 ">
-
+                <button id="dropdownDelayButton" data-dropdown-placement="right" data-dropdown-offset-skidding="110" data-dropdown-offset-distance="-40" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="500" data-dropdown-trigger="hover" class="" type="button">
+                    <img src="http://localhost/manuIcon1.png" alt="" class="h-10 w-10 ">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                     </svg>
                 </button>
@@ -64,7 +69,7 @@
                             <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
                         </li>
                         <li>
-                            <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Earnings</a>
+                            <a href="{{ route('profile.edit') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit Profile</a>
                         </li>
                         <li>
                             <a href="{{ route('logout') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Sign out</a>
@@ -75,15 +80,15 @@
 
             </li>
             @else
-                <div class=" flex gap-14 justify-start items-center">
-                    <a href="{{route('login')}}">
-                        <span>Login</span>
-                    </a>
-                    <a href="{{route('register')}}">
-                        <span>Register</span>
-                    </a>
-                </div>
-               
+            <div class=" flex gap-14 justify-start items-center">
+                <a href="{{route('login')}}">
+                    <span>Login</span>
+                </a>
+                <a href="{{route('register')}}">
+                    <span>Register</span>
+                </a>
+            </div>
+
             @endif
         </ul>
     </div>

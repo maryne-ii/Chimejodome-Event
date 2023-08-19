@@ -8,7 +8,7 @@
             <hr class="border-[#D9D9D9] border-8 my-14 ">
             <div class="flex flex-col items-center gap-10 justify-center text-white">
                 <div class="span font-bold text-4xl">Register</div>
-                <form method="POST" class="mt-4 w-[60%] " action="{{ route('login') }}">
+                <form method="POST" class="mt-4 w-[60%] " action="{{ route('register') }}">
                     @csrf
 
                     <!-- Name -->

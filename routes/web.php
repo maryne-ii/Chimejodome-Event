@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Redirect;
 
 
 
-Route::get('/login',function(){
+Route::get('/login', function () {
     return view('auth/login');
 });
 
@@ -26,8 +26,7 @@ Route::get('/register', function () {
     return view('auth/register');
 });
 
-Route::get('/logout', function ()
-{
+Route::get('/logout', function () {
     auth()->logout();
     Session()->flush();
     return Redirect::to('/login');
@@ -37,9 +36,10 @@ Route::get('/', function () {
     return view('events.index');
 });
 
-Route::get('/test', function () {
+Route::get('/profile', function () {
     return view('profile.index');
-});
+})->name('profile.index');
+
 
 Route::get('/testE', [EventController::class, 'show_join'])->name('event.event-show');
 Route::get('/testO', [EventController::class, 'show_organize'])->name('event.event-show');
@@ -48,8 +48,18 @@ Route::get('/manage', [EventController::class, 'manage'])
     ->name('events.manage');
 Route::get('/manage/{event}/kanban', [EventController::class, 'kanban'])
     ->name('events.kanban');
-Route::get('/manage/{event}/join', [EventController::class, 'join'])
-    ->name('events.kanban');
+// Route::get('/manage/{event}/join', [EventController::class, 'join'])
+//     ->name('events.kanban');
+Route::get('/events/{event}/edit', [EventController::class, 'edit'])
+    ->name('events.edit');
+Route::get('/events/{event}/join', [EventController::class, 'joinEvent'])
+    ->name('events.join');
+Route::put('/events/{event}/store', [EventController::class, 'storeJoinUser'])
+    ->name('events.storeJoinUser');
+Route::get('/events/joinList', [EventController::class, 'joinList'])
+    ->name('events.joinList');
+
+Route::get('events/joined',[EventController::class, 'joined'])->name('events.joined');
 // Route::get('/manage/{event}/kabans.join', function () {
 //     return 'Hello World';
 // });
@@ -66,9 +76,13 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    // Route::resource('/profile', ProfileController::class);
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    // Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
+use App\Models\User;
+use App\Models\Event;
+
+use Illuminate\Support\Facades\Gate;
+
 
 class ProfileController extends Controller
 {
@@ -24,17 +29,61 @@ class ProfileController extends Controller
     /**
      * Update the user's profile information.
      */
-    public function update(ProfileUpdateRequest $request): RedirectResponse
+    public function update(Request $request, User $user_update): RedirectResponse
     {
-        $request->user()->fill($request->validated());
+        // $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
+        // if ($request->user()->isDirty('email')) {
+        //     $request->user()->email_verified_at = null;
+        // }
+
+        // $request->user()->save();
+
+        // return Redirect::route('profiles.index')->with('status', 'profile-updated');
+
+        // $user = new User();
+        // $user = $user_update;
+        // Gate::authorize('update', $user_update);
+        $id = $request->get('id');
+        $user = User::find($id);
+        $request->validate([
+            'name' => ['required', 'min:4', 'max:255']
+        ]);
+        $user->name = $request->get('name');
+        $user->year = $request->get('year');
+        $user->faculty = $request->get('faculty');
+        $user->tel = $request->get('tel');
+        $user->facebook_account = $request->get('facebook_account');
+        $user->line_account = $request->get('line_account');
+        $user->instagram_account = $request->get('instagram_account');
+        if ($request->file('profile_image')) {
+            $image_file = $request->file('profile_image'); // image->poster
+            $file_name = now()->getTimestamp() . "." . $image_file->getClientOriginalExtension();
+            $image_file->storeAs('public/' . $file_name);
+            $image_path = "storage/" . $file_name;
+            $user->profile_image = $image_path;
         }
+        $user->save();
+        // $user_update->save();
+        // $user_update->update([
+        //     'name' => $request->get('name'),
+        //     'year' => $request->get('year'),
+        //     'faculty' => $request->get('faculty'),
+        //     'tel' => $request->get('tel'),
+        //     'facebook_account' => $request->get('facebook_account'),
+        //     'line_account' => $request->get('line_account'),
+        //     'instagram_account' => $request->get('instagram_account')
+        // ]);
+        // print_r($request->get('id'));
+        return redirect()->route('profile.edit');
+    }
+    public function storeJoinUer(Request $request,User $user)
+    {
+        // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
+        $event = Event::findOrFail($request->input('event_id'));
+        $user->joins()->attach($event);
 
-        $request->user()->save();
-
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        return redirect()->route('users.index')->with('success', 'Role attached successfully');  
     }
 
     /**

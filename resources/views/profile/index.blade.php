@@ -1,95 +1,71 @@
 @extends('layouts.main')
 
 @section('content')
-    <body body style="background-color: #D9D9D9">
-        <div class="Div">
-            <h1 class="text-4xl font-semi-bold text-black">Personal Info</h1>
-            <h2 class="line"></h2>
-            <img src="https://i.pinimg.com/236x/47/5a/86/475a86177aeedacf8dc7f5e2b4eff61f.jpg" alt="default" style="float: left; margin-right: 15px" >
-            <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                ชื่อ-นามสกุล
-                <h1 id="name-show">
-                    {{Auth::user()->name}}
-                </h1>
-            </h1>
-            <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                ชั้นปี
-                <h1 id="year-show">
-                    @if (Auth::user()->year == null)
-                        -
-                    @else
-                        {{Auth::user()->year}}
-                    @endif
-                </h1>
-            </h1>
-            <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                คณะ
-                <h1 id="faculty-show">
-                    @if (Auth::user()->faculty == null)
-                        -
-                    @else
-                        {{Auth::user()->faculty}}
-                    @endif
-                </h1>
-            </h1>
-                {{-- <div class="bio">
-                    bio
-                </div> --}}
-                <textarea readonly name="bio" id="bio" cols="20" rows="10" >bio</textarea>
-            <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                อีเมล
-                <h1 id="email-show">
-                    {{Auth::user()->email}}
-                </h1>
-            </h1>
-            <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                เบอร์
-                <h1 id="tel-show">
-                    @if (Auth::user()->tel == null)
-                        -
-                    @else
-                        {{Auth::user()->tel}}
-                    @endif
-                </h1>
-            </h1>
-            <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                ID LINE
-                <h1 id="line-show">
-                    @if (Auth::user()->line_account == null)
-                        -
-                    @else
-                        {{Auth::user()->line_account}}
-                    @endif
-                </h1>
-            </h1>
-            <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                FACEBOOK
-                <h1 id="fb-show">
-                    @if (Auth::user()->facebook_account == null)
-                        -
-                    @else
-                        {{Auth::user()->facebook_account}}
-                    @endif
-                </h1>
-            </h1>
-            <h1 style="margin-top: 50px ; padding-left: 250px; ">
-                INSTAGRAM
-                <h1 id="ig-show">
-                    @if (Auth::user()->instagram_account == null)
-                        -
-                    @else
-                        {{Auth::user()->instagram_account}}
-                    @endif
-                </h1>
-            </h1>
-            <div style="margin-top: 50px; text-align: center; ">
-                <a href="{{  route('profile.edit')   }}">
-                    <button class="button" style="background-color: #A1C77B; border-radius: 25px; padding: 10px;">EDIT PROFILE</button>
-                </a>
+<div class="px-[20rem] py-6">
+    <div class="bg-white h-[36rem] px-14 py-5 rounded-3xl shadow-lg">
+        <div class="font-bold text-3xl">Personal Info</div>
+        <hr class="border-1 rounded-full mt-2 border-[#A1C77B] ">
+        <div class="grid grid-cols-12 mt-3">
+            <div class="col-span-3 flex flex-col justify-start items-center gap-10">
+                <img src="{{Auth::user()->image_path}}" class="rounded-full h-48 w-48" alt="">
+                <textarea id="bio" readonly disabled rows="5" class="resize-none block p-2.5 w-full text-sm text-gray-900 bg-[#D9D9D9] rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your bio here..."></textarea>
             </div>
-
-
-
+            <div class="col-span-9">
+                <div class="grid grid-cols-12 px-10 py-2 gap-3">
+                    <div class="col-span-4">
+                        <div class="text-xl">ชื่อ - นามสกุล</div>
+                    </div>
+                    <div class="col-span-8">
+                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{Auth::user()->name}}" disabled readonly>
+                    </div>
+                    <div class="col-span-4">
+                        <div class="text-xl">ชั้นปี</div>
+                    </div>
+                    <div class="col-span-8">
+                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{Auth::user()->year ? Auth::user()->year : '-'}}" disabled readonly>
+                    </div>
+                    <div class="col-span-4">
+                        <div class="text-xl">คณะ</div>
+                    </div>
+                    <div class="col-span-8">
+                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{Auth::user()->faculty ? Auth::user()->faculty : '-'}}" disabled readonly>
+                    </div>
+                    <div class="col-span-4">
+                        <div class="text-xl">อีเมล</div>
+                    </div>
+                    <div class="col-span-8">
+                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{Auth::user()->email}}" disabled readonly>
+                    </div>
+                    <div class="col-span-4">
+                        <div class="text-xl">เบอร์</div>
+                    </div>
+                    <div class="col-span-8">
+                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{Auth::user()->tel ? Auth::user()->tel : '-'}}" disabled readonly>
+                    </div>
+                    <div class="col-span-4">
+                        <div class="text-xl">Line ID</div>
+                    </div>
+                    <div class="col-span-8">
+                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{Auth::user()->line_account ? Auth::user()->line_account : '-'}}" disabled readonly>
+                    </div>
+                    <div class="col-span-4">
+                        <div class="text-xl">Facebook</div>
+                    </div>
+                    <div class="col-span-8">
+                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{Auth::user()->facebook_account ? Auth::user()->facebook_account : '-'}}" disabled readonly>
+                    </div>
+                    <div class="col-span-4">
+                        <div class="text-xl">Instagram</div>
+                    </div>
+                    <div class="col-span-8">
+                        <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 cursor-not-allowed dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{Auth::user()->instagram ? Auth::user()->instagram : '-'}}" disabled readonly>
+                    </div>
+                </div>
+            </div>
         </div>
-    </body>
+        <div class="flex justify-center items-center mt-3">
+            <a href="{{route('profile.edit')}}" class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white">Edit Profile</a>
+        </div>
+    </div>
+</div>
 @endsection

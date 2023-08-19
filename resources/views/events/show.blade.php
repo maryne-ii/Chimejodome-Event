@@ -1,28 +1,26 @@
 @extends('layouts.main')
 
 @section('content')
-<h1 class="text-5xl">
-    Artist: {{$event->name}}
-</h1>
-<div>
-    <a class="inline-block py-2 px-4 border-white-700 bg-pink-400 border-radius-0.5"
-        href="{{route('events.edit',['event' => $event])}}">
-        Edit event
-    </a>
-    
-</div>
-<div class="bg-white shadow-md rounded-md overflow-hidden max-w-lg mx-auto mt-16">
-        <div class="bg-pink-100 py-2 px-4">
-            <h2 class="text-xl font-semibold text-gray-800">Songs</h2>
-
-        </div>
-        <ul class="divide-y divide-gray-200">
-            <li class="flex items-center py-4 px-6 hover:bg-gray-50">
-                <div class="flex-1">
-                    <h3 class="text-lg font-medium text-gray-800">{{ $event->header }}</h3>
-                    <p class="text-gray-600 text-base">{{ $event->name }}</p>
+<div class="px-[20rem] py-6">
+    <div class="bg-white h-[36rem] px-14 py-5 rounded-3xl shadow-lg ">
+        <div class="">
+            <div class="grid grid-cols-12">
+                <div class="col-span-6 text-left pt-10 pb-5">
+                    <h1 class="">{{$event->name}}</h1>
                 </div>
-            </li>
-        </ul>
+                @if( Auth::check() )
+                <div class="col-span-6 text-right pt-10 pb-5">
+                    <a class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white" href="{{route('events.join',['event' => $event])}}">
+                        Join
+                    </a>
+                </div>
+                @endif
+            </div>
+        </div>
+        <hr class="border-1 rounded-full mt-2 border-[rgb(161,199,123)] ">
+        <div class="grid mt-10 pt-7 place-items-center ">
+            <img class="h-[20rem]" src="http://localhost/{{$event->poster}}" alt="event poster">
+        </div>
+    </div>
 </div>
 @endsection

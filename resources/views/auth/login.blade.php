@@ -31,10 +31,10 @@
                         <button type="submit" class="bg-cyan-400 w-full hover:bg-cyan-500 text-white font-bold py-2 px-4 rounded-full">Sign In</button>
                     </div>
                 </form>
-                <span>Don’t have an account ? <x-nav-link class="text-[rgb(96,225,109)]" :href="route('register')">
+                <span>Don’t have an account ? <x-nav-link class="text-[hsl(126,68%,63%)]" :href="route('register')">
                         {{ __('Register') }}
                     </x-nav-link> </span>
-                <x-nav-link class="text-[rgb(96,225,109)] mt-[-2rem]" :href="route('login')">
+                <x-nav-link class="text-[hsl(126,68%,63%)] mt-[-2rem]" :href="route('login')">
                     {{ __('About') }}
                 </x-nav-link>
             </div>
