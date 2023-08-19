@@ -15,13 +15,13 @@ class EventController extends Controller
     /**
      * Display a listing of the resource.
      */
-    
+
 
 
 
     public function index()
     {
-        
+
         $events = Event::get()->where('status',1);
         return view('events.index', [
             'events' => $events
@@ -65,13 +65,13 @@ class EventController extends Controller
             return redirect()->back();
         }
         $user = Auth::user();
-        
+
 
         $event = new Event();
         $event->name = $event_name;
         $event->header = $user->name;
         $event->save();
-        
+
         $event->organizes()->attach($user->id);
         return redirect()->route('events.manage');
     }
@@ -115,5 +115,21 @@ class EventController extends Controller
     public function destroy(Event $event)
     {
         //
+    }
+
+    public function show_join()
+    {
+        $events = Event::get();
+        return view('events.event-join',[
+            'events' => $events
+        ]);
+    }
+
+    public function show_organize()
+    {
+        $events = Event::get();
+        return view('events.event-organize',[
+            'events' => $events
+        ]);
     }
 }

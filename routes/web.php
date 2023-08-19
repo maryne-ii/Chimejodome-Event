@@ -41,6 +41,9 @@ Route::get('/test', function () {
     return view('profile.index');
 });
 
+Route::get('/testE', [EventController::class, 'show_join'])->name('event.event-show');
+Route::get('/testO', [EventController::class, 'show_organize'])->name('event.event-show');
+
 Route::get('/manage', [EventController::class, 'manage'])
     ->name('events.manage');
 Route::get('/manage/{event}/kanban', [EventController::class, 'kanban'])
