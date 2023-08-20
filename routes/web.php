@@ -25,6 +25,13 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('auth/register');
 });
+// Route::get('/greeting', function () {
+//     return 'Hello World';
+// });
+// Route::get('/', function () {
+//     return view('events.index');
+// });
+
 
 Route::get('/logout', function () {
     auth()->logout();
@@ -32,9 +39,13 @@ Route::get('/logout', function () {
     return Redirect::to('/login');
 })->name('logout');
 
-Route::get('/', function () {
-    return view('events.index');
+Route::get('/', function () {//staff rosarin
+    return view('staff.index');
 });
+// Route::get('/', function () {
+//     return view('events.index');
+// });
+
 
 Route::get('/profile', function () {
     return view('profile.index');
@@ -62,10 +73,33 @@ Route::get('/events/joinList', [EventController::class, 'joinList'])
 Route::get('events/joined',[EventController::class, 'joined'])->name('events.joined');
 // Route::get('/manage/{event}/kabans.join', function () {
 //     return 'Hello World';
+Route::get('/manage/{event}/kanban/move', [EventController::class, 'move'])
+    ->name('kanban.move');
+Route::get('/manage/{event}/kanban/join', [EventController::class, 'join'])
+    ->name('kanban.join');
+    
+Route::get('/manage/{event}/kanban/member', [EventController::class, 'member'])
+    ->name('kanban.member');
+Route::get('/manage/{event}/kanban/disbursement', [EventController::class, 'disbursement'])
+    ->name('kanban.disbursement');
+Route::get('/manage/{event}/kanban/eventComplete', [EventController::class, 'eventComplete'])
+    ->name('kanban.eventComplete');
+Route::get('/manage/{event}/kanban/storeComplete', [EventController::class, 'storeComplete'])
+    ->name('kanban.storeComplete');
+Route::get('/manage/{event}/kanban/createKanbanPage', [EventController::class, 'createKanbanPage'])
+    ->name('kanban.createKanbanPage');
+Route::get('/manage/{event}/kanban/createKanbanNotes', [EventController::class, 'createKanban'])
+    ->name('kanban.createKanban');
+
+
+Route::resource('/', UserController::class);
+Route::resource('/users', UserController::class);
+// Route::get('/manage/{event}/kabans/join', function () {
+//     return view('greeting', ['name' => 'James']);
 // });
 Route::resource('/', EventController::class);
 Route::resource('/events', EventController::class);
-
+// Route::resource('/manage/{event}/kanban', KanbanController::class);
 
 
 

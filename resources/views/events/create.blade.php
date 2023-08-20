@@ -20,6 +20,8 @@
                     </div>  
                 </div>
             </form>
+        </div>
+
 </div>
 
 @endsection

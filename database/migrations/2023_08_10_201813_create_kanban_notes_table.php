@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Event;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -15,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('task_name');
             $table->string('writer');
+            $table->foreignIdFor(Event::class);
             $table->integer('status')->comment('0 = toDo, 1 = InProgress, 2 = Check, 3 = Finish')->default(0);
             $table->string('description');
             $table->timestamps();

@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
         $user1 = new User();
         $user1->name = "User Staff";
         $user1->email = "userStaff@example.com";
-        $user1->password ="12345";
+        $user1->password =Hash::make("password");
         $user1->tel="081";
         $user1->role = '1';
         $user1->facebook_account="mary";
@@ -44,7 +44,7 @@ class UserSeeder extends Seeder
         $user2 = new User();
         $user2->name = "User 02";
         $user2->email = "user02@example.com";
-        $user2->password ="12345";
+        $user2->password =Hash::make("password");
         $user2->tel="082";
         $user2->role = '2';
         $user2->faculty = 'comsci';
@@ -57,7 +57,7 @@ class UserSeeder extends Seeder
         $user3 = new User();
         $user3->name = "User 03";
         $user3->email = "user03@example.com";
-        $user3->password ="12345";
+        $user3->password =Hash::make("password");
         $user3->tel="083";
         $user3->role = '2';
         $user3->faculty = 'comsci';

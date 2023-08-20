@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Event;
+use App\Models\KanbanNote;
 use App\Models\User;
+use Illuminate\Auth\Access\Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\DB;
 
 
@@ -34,6 +35,69 @@ class EventController extends Controller
         // $events = $event->joins;
         $users = $event->joins;
         return view('kanban.join', [
+            'users' => $users
+        ]);
+    }
+    public function member(Event $event)
+    {
+        // $events = $event->joins;
+        $users = $event->organizes;
+        return view('kanban.member', [
+            'users' => $users
+        ]);
+    }
+    public function eventComplete(Event $event)
+    {
+        // $events = $event->joins;
+        $users = $event->joins;
+        return view('kanban.eventComplete', [
+            'event' => $event
+        ]);
+    }
+    public function storeComplete(Request $request,Event $event)
+    {
+        $event_name = $request->get('name');
+        $event_header = $request->get('header');
+        $event_detail = $request->get('detail');
+        $event_location = $request->get('location');
+        if ($request->hasFile('image_path')) {
+            // บันทึกไฟล์รูปภาพลงใน folder ชื่อ 'artist_images' ที่ storage/app/public
+            $path = $request->file('image_path')->store('event_images', 'public');
+            $event->poster = $path;
+        }
+        $event_participant_total = $request->get('participant_total');
+        $event_organizer_total = $request->get('organizer_total');
+        $event_start_date = $request->get('start_date');
+        $event_end_date = $request->get('end_date');
+        
+        if ($event_name == null) {
+            return redirect()->back();
+        }
+        $user = Auth::user();
+        
+
+        
+        $event->name = $event_name;
+        $event->header = $event_header;
+        $event->detail = $event_detail;
+        $event->location = $event_location;
+        $event->participant_total = $event_participant_total;
+        $event->organizer_total = $event_organizer_total;
+        $event->start_date = $event_start_date;
+        $event->end_date = $event_end_date;
+        $event->status =1;
+
+        $event->save();
+        
+        $event->organizes()->attach($user->id);
+        return redirect()->route('events.index');
+    }
+    
+    public function disbursement(Event $event)
+    {
+        // $events = $event->joins;
+        $users = $event->joins;
+        return view('kanban.disbursement', [
             'users' => $users
         ]);
     }
@@ -63,15 +127,24 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $event_name = $request->get('name');
+        $event_header = $request->get('header');
+        
         if ($event_name == null) {
             return redirect()->back();
         }
+        
         $user = Auth::user();
 
 
         $event = new Event();
+        // if ($request->hasFile('post')) {
+        //     // บันทึกไฟล์รูปภาพลงใน folder ชื่อ 'artist_images' ที่ storage/app/public
+        //     $path = $request->file('post')->store('event_images', 'public');
+        //     $event->post = $path;
+        // }
         $event->name = $event_name;
         $event->header = $user->name;
+
         $event->save();
 
         $event->organizes()->attach($user->id);
@@ -87,10 +160,100 @@ class EventController extends Controller
             'event'=>$event
         ]);
     }
+    public function createKanbanPage(Event $event)
+    {
+        // $events = $event->joins;
+        $user = Auth::user();
+        return view('kanban.createKanbanNotes', [
+            'event' => $event,
+            'user' => $user
+        ]);
+        
+    }
+
+
+    public function createKanban(Request $request,Event $event)
+    {
+        $kanban_name = $request->get('name');
+        // $kanban_writer = $request->get('writer');
+        $kanban_description = $request->get('description');
+
+        if ($kanban_name == null) {
+            return redirect()->back();
+        }
+        $user = Auth::user();
+
+        $kanban = new KanbanNote();
+        
+
+        
+        $kanban->task_name = $kanban_name;
+        $kanban->writer = $user->name;
+        $kanban->description = $kanban_description;
+        $kanban->event_id = $event->id;
+        $kanban->status = 0;
+        $kanban->save();
+        // $event->kanbanNotes()->$kanban;
+        return redirect()->route('events.kanban',
+        [
+            'event'=>$event
+        ]
+    );
+
+        // $kanban = new KanbanNote();
+        // $event->kanbanNotes()->attach($kanban->id);
+        // $kanban->event_id = $event->id;
+        // $kanban->task_name = "1qe";
+        // $kanban->writer = $event->name;
+        // $kanban->description = 'dasfghj';
+        // $kanban->save();
+        
+    }
+    public function move(Request $request, $kanban) {
+
+        // $kanban_name = $request->get('name');
+        // $kanban_description = $request->get('description');
+        // $kanban_writer = $request->get('writer');
+
+
+        $kanban = KanbanNote::find($request->id);
+
+
+
+        
+        $kanban->status = 1;
+
+
+        // // $kanban->task_name = $kanban_name;
+        // // $kanban->description = $kanban_description;
+
+        
+        // dd($kanban->description);
+
+        $kanban->save();
+        // return redirect()->route('events.kanban',[
+        //     'event'=>$event
+        // ]);
+    }
+    
+
+
+
+
     public function kanban(Event $event)
     {
+        
+        $kanbans0 = KanbanNote::get()->where('status',0)->where('event_id',$event->id);
+        $kanbans1 = KanbanNote::get()->where('status',1)->where('event_id',$event->id);
+        $kanbans2 = KanbanNote::get()->where('status',2)->where('event_id',$event->id);
+        $kanbans3 = KanbanNote::get()->where('status',3)->where('event_id',$event->id);
+
         return view('events.kanban',[
-            'event'=>$event
+            'event'=>$event,
+            'kanbans0'=>$kanbans0,
+            'kanbans1'=>$kanbans1,
+            'kanbans2'=>$kanbans2,
+            'kanbans3'=>$kanbans3
         ]);
     }
 
@@ -197,7 +360,12 @@ class EventController extends Controller
      */
     public function destroy(Event $event)
     {
-        //
+        if ($event->songs->isEMPTY()) {
+            $event->delete();
+            return redirect()->route('events.index');
+
+        }
+        return redirect()->back();
     }
 
     public function show_join()

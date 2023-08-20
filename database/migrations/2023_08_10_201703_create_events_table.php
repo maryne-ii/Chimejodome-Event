@@ -18,7 +18,8 @@ return new class extends Migration
             $table->string('header')->nullable();
             $table->foreignIdFor(User::class)->nullable()->comment('budget for staff');
             $table->string('detail')->nullable();
-            $table->string('poster')->comment('image_path')->default('https://www.poolsawat.com/wp-content/uploads/2015/12/bigstock-events-7444309.jpg');
+            $table->string('poster')->comment('image_path')->default("event_images/simple.jpg");
+            // $table->string('poster')->comment('image_path')->default('event_images/simple.jpg');
             $table->string('bank_account_number')->nullable();
             $table->integer('participant_total')->default(0);
             $table->integer('organizer_total')->default(0);
