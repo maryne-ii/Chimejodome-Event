@@ -41,7 +41,7 @@
             </span>
             @elseif((Auth::user()->role) === 1)
             <span>
-                <a href="{{route('eventsList')}}">Event List</a>
+                <a href="{{route('EventsList')}}">Event List</a>
             </span>
             <span>
                 <!-- <a href="{{route('events.joinList')}}">Join List</a> -->
@@ -52,6 +52,9 @@
             </span>
             <span>
                 <a href="{{route('events.joinList')}}">Join List</a>
+            </span>
+            <span>
+                <a href="{{route('events.organizeList')}}">Organize List</a>
             </span>
             @endif
         

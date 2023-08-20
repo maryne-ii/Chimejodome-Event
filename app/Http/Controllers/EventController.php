@@ -45,7 +45,8 @@ class EventController extends Controller
         // $events = $event->joins;
         $users = $event->organizes;
         return view('kanban.member', [
-            'users' => $users
+            'users' => $users,
+            'event' => $event
         ]);
     }
 
@@ -289,7 +290,12 @@ class EventController extends Controller
     //     ]);
     // }
 
-
+    public function getAllEvent(){
+        $events = Event::get();
+        return view('admins.eventList', [
+            'events' => $events
+        ]);
+    }
 
 
     public function kanban(Event $event)
@@ -352,11 +358,11 @@ class EventController extends Controller
         // return view('events.show');
     }
 
-    public function organizeEvent(Event $event)
-    {
-        // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
-        return view('events.organize',['event'=>$event]);
-    }
+    // public function organizeEvent(Event $event)
+    // {
+    //     // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
+    //     return view('events.organize',['event'=>$event]);
+    // }
 
     public function storeOrganizeUser(Request $request,Event $event)
     {

@@ -119,6 +119,17 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function getAllStudent(Event $event){
+
+        dd($event->name);
+
+        $users = User::get()->where('role',2);
+        return view('events.pickOrganize', [
+            'users' => $users,
+            'event' => $event
+        ]);
+    }
+
 
 
     /**
