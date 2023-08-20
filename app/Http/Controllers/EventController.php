@@ -119,19 +119,51 @@ class EventController extends Controller
         return redirect()->route('events.index')->with('success', 'User attached successfully');     
     }
 
-    public function joinList(Request $request,User $user)
+    public function joinList()
     {
         
         // $user = User::findOrFail($request->get('user_id'));
-        print_r($user->id);
-        // $records = DB::table('user_join_event')->where('user_id',$user->id)->where('event_id',$event->id)->get();
+        $user = Auth::user();
+        $records = DB::table('user_join_event')->where('user_id',$user->id)->get();
 
-        // return view('events.joinList'
-        // , [
-        //     'records' => $records
-        // ]);
+        return view('events.joinList'
+        , [
+            'records' => $records
+        ]);
+        //certificate and applied status
         // return view('events.show');
     }
+
+    public function organizeEvent(Event $event)
+    {
+        // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
+        return view('events.organize',['event'=>$event]);
+    }
+
+    public function storeOrganizeUser(Request $request,Event $event)
+    {
+        // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
+        $user = User::findOrFail($request->input('user_id'));
+        $event->organizes()->attach($user);
+        // DB::table('user_organize_event')->where('user_id',$user->id)->where('event_id',$event->id);
+        return redirect()->route('events.index')->with('success', 'User attached successfully');     
+    }
+
+    public function organizeList()
+    {
+        
+        // $user = User::findOrFail($request->get('user_id'));
+        $user = Auth::user();
+        $records = DB::table('user_organize_event')->where('user_id',$user->id)->get();
+
+        return view('events.organizeList'
+        , [
+            'records' => $records
+        ]);
+        // return view('events.show');
+    }
+
+
 
     
 
