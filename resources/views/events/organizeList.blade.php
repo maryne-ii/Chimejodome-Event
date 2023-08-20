@@ -7,18 +7,18 @@
          </div>
             <ul class="divide-y divide-gray-200">
                 @foreach ($records as $record)
-                <li class="flex items-center py-4 px-6 hover:bg-gray-50">
+                <a class="flex items-center py-4 px-6 hover:bg-gray-50" href="{{ route('events.show', ['event' => App\Models\Event::find($record->event_id)]) }}">
                     <span class="text-gray-700 text-lg font-medium mr-4">{{ $loop->iteration }}.</span>
                     <div class="flex-1">
-                        <a href="{{ route('events.show', ['event' => App\Models\Event::find($record->event_id)]) }}">{{(App\Models\Event::find($record->event_id))->name}}</a>
-
+                        {{(App\Models\Event::find($record->event_id))->name}}
+                        
                         <img src="{{(App\Models\Event::find($record->event_id))->poster}}" alt="">
                         <h3 class="text-lg font-medium text-gray-800">user_id : {{ $record->user_id }}</h3>
-                        </a>
                         <p class="text-gray-600 text-base"></p>
                     </div>
                     <span class="text-gray-400"></span>
-                </li>
+                </a>
+
                 @endforeach
             </ul>
     </div>
