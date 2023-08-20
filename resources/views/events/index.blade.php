@@ -16,7 +16,7 @@
         </div>
         
         
-        <ul class="divide-y divide-gray-200">
+        <!-- <ul class="divide-y divide-gray-200">
             @foreach ($events as $event)
                 <li class="flex items-center py-4 px-6 hover:bg-gray-50">
                     <span class="text-gray-700 text-lg font-medium mr-4">{{ $loop->iteration }}.</span>
@@ -32,9 +32,9 @@
                 </li>
             @endforeach
         </ul>
-    </div>
+    </div> -->
 
-    <!-- <ul class="divide-y divide-gray-200">
+    <ul class="divide-y divide-gray-200">
         @foreach ($events as $event)
         <li class="flex items-center py-4 px-6 hover:bg-gray-50">
             <span class="text-gray-700 text-lg font-medium mr-4">{{ $loop->iteration }}.</span>
@@ -49,5 +49,5 @@
         </li>
         @endforeach
     </ul>
-</div> -->
+</div>
 @endsection

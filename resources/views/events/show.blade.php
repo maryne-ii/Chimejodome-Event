@@ -7,6 +7,7 @@
             <div class="grid grid-cols-12">
                 <div class="col-span-6 text-left pt-10 pb-5">
                     <h1 class="">{{$event->name}}</h1>
+                    <h1 class="">{{$event->header}}</h1>
                 </div>
                 @if( Auth::check() )
                 <div class="col-span-6 text-right pt-10 pb-5">

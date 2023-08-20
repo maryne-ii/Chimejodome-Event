@@ -40,7 +40,7 @@ Route::get('/logout', function () {
 })->name('logout');
 
 Route::get('/', function () {//staff rosarin
-    return view('staff.index');
+    return view('events.index');
 });
 // Route::get('/', function () {
 //     return view('events.index');
@@ -73,7 +73,7 @@ Route::get('/events/joinList', [EventController::class, 'joinList'])
 Route::get('events/joined',[EventController::class, 'joined'])->name('events.joined');
 // Route::get('/manage/{event}/kabans.join', function () {
 //     return 'Hello World';
-Route::get('/manage/{event}/kanban/move', [EventController::class, 'move'])
+Route::get('/manage/{event}/{kanban}', [EventController::class, 'move'])
     ->name('kanban.move');
 Route::get('/manage/{event}/kanban/join', [EventController::class, 'join'])
     ->name('kanban.join');

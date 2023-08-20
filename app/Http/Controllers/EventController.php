@@ -32,6 +32,8 @@ class EventController extends Controller
     }
     public function join(Event $event)
     {
+        // $user = Auth::user();
+        // $records = DB::table('user_join_event')->where('user_id',$user->id)->get();
         // $events = $event->joins;
         $users = $event->joins;
         return view('kanban.join', [
@@ -56,6 +58,8 @@ class EventController extends Controller
     }
     public function storeComplete(Request $request,Event $event)
     {
+        $users = $event->joins;
+        $event->participant_total = count($users);
         $event_name = $request->get('name');
         $event_header = $request->get('header');
         $event_detail = $request->get('detail');
@@ -74,6 +78,10 @@ class EventController extends Controller
             return redirect()->back();
         }
         $user = Auth::user();
+
+
+        // $users = $event->joins;
+        // $event->participant_total = count($users);
         
 
         
@@ -139,9 +147,11 @@ class EventController extends Controller
         $user = Auth::user();
         // $events = Event::get()->where('status',0);
         $events = $user->organizes->where('status',0);
+        $events2 = $user->organizes->where('status',1);
         // $events = Event::get($user)->where('status',1);
         return view('events.manage', [
-            'events' => $events
+            'events' => $events,
+            'events2'=> $events2
         ]);
     }
 
@@ -241,19 +251,27 @@ class EventController extends Controller
         // $kanban->save();
         
     }
-    public function move(Request $request, $kanban) {
+    public function move(Event $event,KanbanNote $kanban,Request $request) {
 
         // $kanban_name = $request->get('name');
         // $kanban_description = $request->get('description');
         // $kanban_writer = $request->get('writer');
 
 
-        $kanban = KanbanNote::find($request->id);
+        // $kanban = new KanbanNote();
+        // $kanban = KanbanNote::find(1);
+
+        // dd($kanban->id);
 
 
 
         
-        $kanban->status = 1;
+        $kanban->status = $kanban->status+1;
+        $kanban->save();
+        // return view('events.kaban',
+        // [
+        //     'kanban'=> $kanban
+        // ]);
 
 
         // // $kanban->task_name = $kanban_name;
@@ -263,11 +281,20 @@ class EventController extends Controller
         // dd($kanban->description);
 
         $kanban->save();
-        // return redirect()->route('events.kanban',[
-        //     'event'=>$event
-        // ]);
+        return redirect()->route('events.kanban',
+        [
+            'event'=>$event
+        ]
+    );
     }
     
+    // public function move() {
+
+    //     return view('events.kaban',
+    //     [
+    //         'kanban'=> $kanban
+    //     ]);
+    // }
 
 
 
@@ -275,10 +302,13 @@ class EventController extends Controller
     public function kanban(Event $event)
     {
         
+        
         $kanbans0 = KanbanNote::get()->where('status',0)->where('event_id',$event->id);
         $kanbans1 = KanbanNote::get()->where('status',1)->where('event_id',$event->id);
         $kanbans2 = KanbanNote::get()->where('status',2)->where('event_id',$event->id);
         $kanbans3 = KanbanNote::get()->where('status',3)->where('event_id',$event->id);
+        $users = $event->joins;
+        $event->participant_total = count($users);
 
         return view('events.kanban',[
             'event'=>$event,
@@ -382,6 +412,7 @@ class EventController extends Controller
         $image_file->storeAs('public/'.$file_name);
         $image_path = "storage/".$file_name;
         $event->poster = $image_path;
+        $event->status =1;
 
         $event->save();
         return redirect()->route('events.index');
