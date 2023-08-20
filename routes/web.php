@@ -2,6 +2,10 @@
 
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\Auth\RegisteredUserController;
+
+
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Redirect;
 
@@ -25,6 +29,9 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('auth/register');
 });
+Route::get('/registerStaff', function () {
+    return view('admins.createStaff');
+})->name('registerStaff');
 // Route::get('/greeting', function () {
 //     return 'Hello World';
 // });
@@ -40,7 +47,7 @@ Route::get('/logout', function () {
 })->name('logout');
 
 Route::get('/', function () {//staff rosarin
-    return view('events.index');
+    return view('auth/login');
 });
 // Route::get('/', function () {
 //     return view('events.index');
@@ -92,6 +99,14 @@ Route::get('/manage/{event}/kanban/createKanbanPage', [EventController::class, '
     ->name('kanban.createKanbanPage');
 Route::get('/manage/{event}/kanban/createKanbanNotes', [EventController::class, 'createKanban'])
     ->name('kanban.createKanban');
+
+Route::get('/eventsList',[EventController::class, 'getAllEvent'])->name('EventsList');
+Route::get('/usersList',[ProfileController::class, 'getAllUser'])->name('UsersList');
+Route::get('/{user}/deleteUser',[ProfileController::class, 'delete'])->name('DeleteUser');
+
+
+Route::post('addStaff', [RegisteredUserController::class, 'storeStaff'])->name('addStaff');
+
 
 
 Route::resource('/', UserController::class);

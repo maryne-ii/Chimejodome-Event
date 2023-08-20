@@ -24,7 +24,7 @@ class UserSeeder extends Seeder
         // $user0->password = Hash::make("password");
         $user0->password = "password";
         $user0->tel="080";
-        $user0->role = '0';
+        $user0->role = 0;
         $user0->facebook_account="chiMeJoDome";
         $user0->instagram_account='chiMe_JoDome';
         $user0->line_account='chiMe The JoDome';
@@ -35,7 +35,7 @@ class UserSeeder extends Seeder
         $user1->email = "userStaff@example.com";
         $user1->password =Hash::make("password");
         $user1->tel="081";
-        $user1->role = '1';
+        $user1->role = 1;
         $user1->facebook_account="mary";
         $user1->instagram_account='maaaary';
         $user1->line_account='ma the ry';
@@ -46,7 +46,7 @@ class UserSeeder extends Seeder
         $user2->email = "user02@example.com";
         $user2->password =Hash::make("password");
         $user2->tel="082";
-        $user2->role = '2';
+        $user2->role = 2;
         $user2->faculty = 'comsci';
         $user2->facebook_account="shu shu";
         $user2->instagram_account='dome_shushu';
@@ -59,7 +59,7 @@ class UserSeeder extends Seeder
         $user3->email = "user03@example.com";
         $user3->password =Hash::make("password");
         $user3->tel="083";
-        $user3->role = '2';
+        $user3->role = 2;
         $user3->faculty = 'comsci';
         $user3->facebook_account="jo jo";
         $user3->instagram_account='jo_jojo';
@@ -84,7 +84,7 @@ class UserSeeder extends Seeder
         ],
         ))
         ->create(
-           ['role'=>'2']);
+           ['role'=>2]);
 
         
         User::factory()//create staff
@@ -95,7 +95,7 @@ class UserSeeder extends Seeder
         //     'password' => "password",//password
         // ],
         // ))
-        ->create(['role'=>'1',]);
+        ->create(['role'=>1,]);
 
 
         // $user3 = User::find(4);

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('header')->nullable();
             $table->foreignIdFor(User::class)->nullable()->comment('budget for staff');
             $table->string('detail')->nullable();
-            $table->string('poster')->comment('image_path')->default("storage/simple.jpg");
+            $table->string('poster')->comment('image_path')->default("storage/1692471072.jpg");
             // $table->string('poster')->comment('image_path')->default('event_images/simple.jpg');
             $table->string('bank_account_number')->nullable();
             $table->integer('participant_total')->default(0);

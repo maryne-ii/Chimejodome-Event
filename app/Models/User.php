@@ -24,6 +24,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'tel'
     ];
 
     /**
@@ -68,6 +70,16 @@ class User extends Authenticatable
     public function organizes(): BelongsToMany
     {
         return $this->belongsToMany(Event::class, "user_organize_event");
+    }
+
+    public function isAdmin():bool{
+        return $this->role === 0;
+    }
+    public function isStaff():bool{
+        return $this->role === 1;
+    }
+    public function isStudent():bool{
+        return $this->role === 2;
     }
 
 

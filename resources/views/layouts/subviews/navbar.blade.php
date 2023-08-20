@@ -27,21 +27,34 @@
         {{-- </svg>--}}
         {{-- </button>--}}
         {{-- </div>--}} -->
-        <a href="">
+
+        
+           @if((Auth::user()->role) === 0)
+           <span>
+                <a href="{{route('EventsList')}}">Event List</a>
+            </span>
+            <span>
+                <a href="{{route('UsersList')}}">User List</a>
+            </span>
+            <span>
+                <a href="{{route('registerStaff')}}">Create Staff</a>
+            </span>
+            @elseif((Auth::user()->role) === 1)
+            <span>
+                <a href="{{route('eventsList')}}">Event List</a>
+            </span>
+            <span>
+                <!-- <a href="{{route('events.joinList')}}">Join List</a> -->
+            </span>
+            @elseif((Auth::user())->role === 2)
             <span>
                 <a href="{{route('events.index')}}">Event List</a>
             </span>
-        </a>
-        <a href="">
             <span>
                 <a href="{{route('events.joinList')}}">Join List</a>
             </span>
-        </a>
-        <a href="">
-            <span>
-                User list
-            </span>
-        </a>
+            @endif
+        
     </div>
     <div class="flex justify-center items-center" id="mobile-menu-2">
         <ul class="flex flex-col justify-center items-center mr-2 mt-4 font-medium lg:flex-row  lg:mt-0 ">

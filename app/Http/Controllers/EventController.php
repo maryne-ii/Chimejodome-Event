@@ -48,6 +48,7 @@ class EventController extends Controller
             'users' => $users
         ]);
     }
+
     public function eventComplete(Event $event)
     {
         // $events = $event->joins;
@@ -252,20 +253,15 @@ class EventController extends Controller
         
     }
     public function move(Event $event,KanbanNote $kanban,Request $request) {
+  
 
         // $kanban_name = $request->get('name');
         // $kanban_description = $request->get('description');
         // $kanban_writer = $request->get('writer');
-
-
         // $kanban = new KanbanNote();
         // $kanban = KanbanNote::find(1);
 
         // dd($kanban->id);
-
-
-
-        
         $kanban->status = $kanban->status+1;
         $kanban->save();
         // return view('events.kaban',
@@ -276,10 +272,7 @@ class EventController extends Controller
 
         // // $kanban->task_name = $kanban_name;
         // // $kanban->description = $kanban_description;
-
-        
         // dd($kanban->description);
-
         $kanban->save();
         return redirect()->route('events.kanban',
         [

@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
+
 
 use Illuminate\Support\Facades\Gate;
 
@@ -19,6 +21,14 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+
+     public function index()
+     {
+         $users = User::get();
+         return view('admins.userList', [
+             'users' => $users
+         ]);
+     }
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -26,6 +36,21 @@ class ProfileController extends Controller
         ]);
     }
 
+    
+
+    public function delete(Request $request, User $user)
+    {
+        // $user->delete();
+        DB::table('users')->where('id',$user->id)->delete();
+
+        // return view('admins.userList',[
+        //     'users' => User::get(),
+        // ]);  
+        // return redirect()->back();
+        return redirect()->route('UsersList');
+
+
+    }
     /**
      * Update the user's profile information.
      */
@@ -85,6 +110,16 @@ class ProfileController extends Controller
 
         return redirect()->route('users.index')->with('success', 'Role attached successfully');  
     }
+
+    public function getAllUser(){
+
+        $users = User::get();
+        return view('admins.userList', [
+            'users' => $users
+        ]);
+    }
+
+
 
     /**
      * Delete the user's account.
