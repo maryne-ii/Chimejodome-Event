@@ -98,8 +98,40 @@ class EventController extends Controller
         // $events = $event->joins;
         $users = $event->joins;
         return view('kanban.disbursement', [
-            'users' => $users
+            'event' => $event
         ]);
+    }
+
+    public function disburseConfirm(Event $event,Request $request)
+    {
+        $user=User::find(2);
+
+        $event_detail = $request->get('detail');
+        $event_bank_account_number = $request->get('bank_account_number');
+        $event_budget = $request->get('budget');
+
+        $event->detail=$event_detail;
+        $event->bank_account_number=$event_bank_account_number;
+        $event->budget=$event_budget;
+        $event->user_id=$user->id;
+        $event->save();
+
+        $kanbans0 = KanbanNote::get()->where('status',0)->where('event_id',$event->id);
+        $kanbans1 = KanbanNote::get()->where('status',1)->where('event_id',$event->id);
+        $kanbans2 = KanbanNote::get()->where('status',2)->where('event_id',$event->id);
+        $kanbans3 = KanbanNote::get()->where('status',3)->where('event_id',$event->id);
+
+        return view('events.kanban',[
+            'event'=>$event,
+            'kanbans0'=>$kanbans0,
+            'kanbans1'=>$kanbans1,
+            'kanbans2'=>$kanbans2,
+            'kanbans3'=>$kanbans3
+        ]);
+
+        // return view('events.kanban', [
+        //     'event' => $event
+        // ]);
     }
 
     public function manage()

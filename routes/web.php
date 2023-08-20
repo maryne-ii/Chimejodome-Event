@@ -82,6 +82,8 @@ Route::get('/manage/{event}/kanban/member', [EventController::class, 'member'])
     ->name('kanban.member');
 Route::get('/manage/{event}/kanban/disbursement', [EventController::class, 'disbursement'])
     ->name('kanban.disbursement');
+Route::get('/manage/{event}/kanban/disburseConfirm', [EventController::class, 'disburseConfirm'])
+    ->name('kanban.disburseConfirm');
 Route::get('/manage/{event}/kanban/eventComplete', [EventController::class, 'eventComplete'])
     ->name('kanban.eventComplete');
 Route::get('/manage/{event}/kanban/storeComplete', [EventController::class, 'storeComplete'])
