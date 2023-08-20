@@ -71,7 +71,7 @@ Route::get('/events/{event}/edit', [EventController::class, 'edit'])
 
 Route::get('/events/{event}/join', [EventController::class, 'joinEvent'])
     ->name('events.join');
-Route::put('/events/{event}/store', [EventController::class, 'storeJoinUser'])
+Route::put('/events/{event}/storeJoinUser', [EventController::class, 'storeJoinUser'])
     ->name('events.storeJoinUser');
 Route::get('/events/joinList', [EventController::class, 'joinList'])
     ->name('events.joinList');

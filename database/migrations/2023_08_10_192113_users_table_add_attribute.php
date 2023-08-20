@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('profile_image')->default('storage/miku-3.jpg')->nullable();
-            $table->string('tel')->nullable();
+            $table->string('tel')->default('-')->nullable();
             $table->integer('role')->default(2)->comment('0=admin,1=staff,2=student');
             $table->string('facebook_account')->nullable();
             $table->string('instagram_account')->nullable();
