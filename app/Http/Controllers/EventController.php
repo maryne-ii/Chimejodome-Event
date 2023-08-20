@@ -446,4 +446,14 @@ class EventController extends Controller
             'events' => $events
         ]);
     }
+
+    public function portfolio()
+    {
+        $events = Event::get();
+        $user = Auth::user();
+        return view('events.portfolio',[
+            'events' => $events,
+            'user' => $user
+        ]);
+    }
 }

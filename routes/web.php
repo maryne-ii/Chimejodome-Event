@@ -69,6 +69,8 @@ Route::put('/events/{event}/store', [EventController::class, 'storeJoinUser'])
     ->name('events.storeJoinUser');
 Route::get('/events/joinList', [EventController::class, 'joinList'])
     ->name('events.joinList');
+Route::get('/events/portfolio', [EventController::class, 'portfolio'])
+    ->name('events.portfolio');
 
 Route::get('events/joined',[EventController::class, 'joined'])->name('events.joined');
 // Route::get('/manage/{event}/kabans.join', function () {
