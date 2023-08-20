@@ -75,7 +75,7 @@ class EventController extends Controller
         $event_organizer_total = $request->get('organizer_total');
         $event_start_date = $request->get('start_date');
         $event_end_date = $request->get('end_date');
-        
+
         if ($event_name == null) {
             return redirect()->back();
         }
@@ -84,9 +84,9 @@ class EventController extends Controller
 
         // $users = $event->joins;
         // $event->participant_total = count($users);
-        
 
-        
+
+
         $event->name = $event_name;
         $event->header = $event_header;
         $event->detail = $event_detail;
@@ -98,11 +98,11 @@ class EventController extends Controller
         $event->status =1;
 
         $event->save();
-        
+
         $event->organizes()->attach($user->id);
         return redirect()->route('events.index');
     }
-    
+
     public function disbursement(Event $event)
     {
         // $events = $event->joins;
@@ -172,11 +172,11 @@ class EventController extends Controller
     {
         $event_name = $request->get('name');
         $event_header = $request->get('header');
-        
+
         if ($event_name == null) {
             return redirect()->back();
         }
-        
+
         $user = Auth::user();
 
 
@@ -212,7 +212,7 @@ class EventController extends Controller
             'event' => $event,
             'user' => $user
         ]);
-        
+
     }
 
 
@@ -228,9 +228,9 @@ class EventController extends Controller
         $user = Auth::user();
 
         $kanban = new KanbanNote();
-        
 
-        
+
+
         $kanban->task_name = $kanban_name;
         $kanban->writer = $user->name;
         $kanban->description = $kanban_description;
@@ -251,10 +251,10 @@ class EventController extends Controller
         // $kanban->writer = $event->name;
         // $kanban->description = 'dasfghj';
         // $kanban->save();
-        
+
     }
     public function move(Event $event,KanbanNote $kanban,Request $request) {
-  
+
 
         // $kanban_name = $request->get('name');
         // $kanban_description = $request->get('description');
@@ -281,7 +281,7 @@ class EventController extends Controller
         ]
     );
     }
-    
+
     // public function move() {
 
     //     return view('events.kaban',
@@ -300,8 +300,8 @@ class EventController extends Controller
 
     public function kanban(Event $event)
     {
-        
-        
+
+
         $kanbans0 = KanbanNote::get()->where('status',0)->where('event_id',$event->id);
         $kanbans1 = KanbanNote::get()->where('status',1)->where('event_id',$event->id);
         $kanbans2 = KanbanNote::get()->where('status',2)->where('event_id',$event->id);
@@ -340,12 +340,12 @@ class EventController extends Controller
         $user = User::findOrFail($request->input('user_id'));
         $event->joins()->attach($user);
         DB::table('user_join_event')->where('user_id',$user->id)->where('event_id',$event->id)->update(['image_for_event' => $request->image_for_event]);
-        return redirect()->route('events.index')->with('success', 'User attached successfully');     
+        return redirect()->route('events.index')->with('success', 'User attached successfully');
     }
 
     public function joinList()
     {
-        
+
         // $user = User::findOrFail($request->get('user_id'));
         $user = Auth::user();
         $records = DB::table('user_join_event')->where('user_id',$user->id)->get();
@@ -370,12 +370,12 @@ class EventController extends Controller
         $user = User::findOrFail($request->input('user_id'));
         $event->organizes()->attach($user);
         // DB::table('user_organize_event')->where('user_id',$user->id)->where('event_id',$event->id);
-        return redirect()->route('events.index')->with('success', 'User attached successfully');     
+        return redirect()->route('events.index')->with('success', 'User attached successfully');
     }
 
     public function organizeList()
     {
-        
+
         // $user = User::findOrFail($request->get('user_id'));
         $user = Auth::user();
         $records = DB::table('user_organize_event')->where('user_id',$user->id)->get();
@@ -389,7 +389,7 @@ class EventController extends Controller
 
 
 
-    
+
 
     /**
      * Update the specified resource in storage.
@@ -428,22 +428,6 @@ class EventController extends Controller
 
         }
         return redirect()->back();
-    }
-
-    public function show_join()
-    {
-        $events = Event::get();
-        return view('events.event-join',[
-            'events' => $events
-        ]);
-    }
-
-    public function show_organize()
-    {
-        $events = Event::get();
-        return view('events.event-organize',[
-            'events' => $events
-        ]);
     }
 
     public function portfolio()

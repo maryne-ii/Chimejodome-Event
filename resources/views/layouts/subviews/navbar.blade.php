@@ -1,6 +1,6 @@
 <nav class="bg-white border-gray-200 py-6 flex justify-between px-20 text-kuGreen">
     <div class=" flex gap-14 justify-start items-center ">
-        <a href="#" class="pr-15">
+        <a href="{{route('login')}}" class="pr-15">
             <img src="http://localhost/kuLogo.png" class="h-7 w-auto pt-2 mr-3 sm:h-12" alt="Logo">
         </a>
         <!-- <div class="flex items-center lg:order-2">
@@ -28,7 +28,7 @@
         {{-- </button>--}}
         {{-- </div>--}} -->
 
-        
+
            @if((Auth::user()->role) === 0)
            <span>
                 <a href="{{route('EventsList')}}">Event List</a>
@@ -57,7 +57,7 @@
                 <a href="{{route('events.organizeList')}}">Organize List</a>
             </span>
             @endif
-        
+
     </div>
     <div class="flex justify-center items-center" id="mobile-menu-2">
         <ul class="flex flex-col justify-center items-center mr-2 mt-4 font-medium lg:flex-row  lg:mt-0 ">
