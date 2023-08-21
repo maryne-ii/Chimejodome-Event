@@ -2,9 +2,8 @@
 
 @section('content')
 <div class="px-[20rem] py-6">
-    <div class="bg-white h-[36rem] px-14 py-5 rounded-3xl shadow-lg">
-        <div class="font-bold text-3xl">Edit Personal Info</div>
-        <h3>{{$event->organizer_total}}</h3>
+    <div class="bg-white h-full px-14 py-5 rounded-3xl shadow-lg">
+        <div class="font-bold text-3xl">ลงบอร์ดกิจกรรม</div>
         <hr class="border-1 rounded-full mt-2 border-[rgb(161,199,123)] ">
         <form action="{{ route('events.update', ['event' => $event])}}" method="POST" enctype="multipart/form-data">
             @csrf

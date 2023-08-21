@@ -1,6 +1,6 @@
 <nav class="bg-white border-gray-200 py-6 flex justify-between px-20 text-kuGreen">
     <div class=" flex gap-14 justify-start items-center ">
-        <a href="#" class="pr-15">
+        <a href="{{route('login')}}" class="pr-15">
             <img src="http://localhost/kuLogo.png" class="h-7 w-auto pt-2 mr-3 sm:h-12" alt="Logo">
         </a>
         <!-- <div class="flex items-center lg:order-2">
@@ -27,28 +27,55 @@
         {{-- </svg>--}}
         {{-- </button>--}}
         {{-- </div>--}} -->
-        <a href="">
+        @if( Auth::check() )
+
+
+           @if((Auth::user()->role) === 0)
+           <span>
+                <a href="{{route('EventsList')}}">Event List</a>
+            </span>
+            <span>
+                <a href="{{route('UsersList')}}">User List</a>
+            </span>
+            <span>
+                <a href="{{route('registerStaff')}}">Create Staff</a>
+            </span>
+            @elseif((Auth::user()->role) === 1)
+            <span>
+                <a href="{{route('needBudgetList')}}">Event List</a>
+            </span>
+            <span>
+                <!-- <a href="{{route('events.joinList')}}">Join List</a> -->
+            </span>
+            @elseif((Auth::user())->role === 2)
             <span>
                 <a href="{{route('events.index')}}">Event List</a>
             </span>
-        </a>
-        <a href="">
             <span>
                 <a href="{{route('events.joinList')}}">Join List</a>
             </span>
-        </a>
-        <a href="">
             <span>
-                User list
+                <a href="{{route('events.organizeList')}}">Organize List</a>
             </span>
-        </a>
+            @endif
+
     </div>
     <div class="flex justify-center items-center" id="mobile-menu-2">
         <ul class="flex flex-col justify-center items-center mr-2 mt-4 font-medium lg:flex-row  lg:mt-0 ">
-            @if( Auth::check() )
 
             <li class="p-5">
+                <div>
                 {{Auth::user()->name}}
+                </div>
+                <div class="text-xs">
+                @if (Auth::user()->role === 0)
+                        <p>Admin</p>
+                        @elseif (Auth::user()->role === 1)
+                        <p>Staff</p>
+                        @elseif (Auth::user()->role === 2)
+                        <p>Student</p>
+                        @endif
+                </div>
             </li>
             <li class="pr-3">
                 <img src="http://localhost/{{Auth::user()->profile_image ? Auth::user()->profile_image : default_peson.jpeg}}" alt="" class="h-10 w-10 rounded-full">
@@ -69,6 +96,9 @@
                             <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
                         </li>
                         <li>
+                            <a href="{{ route('profile.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">My Profile</a>
+                        </li>
+                        <li>
                             <a href="{{ route('profile.edit') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Edit Profile</a>
                         </li>
                         <li>
@@ -80,7 +110,7 @@
 
             </li>
             @else
-            <div class=" flex gap-14 justify-start items-center">
+            <div class="flex mr-5 gap-14">
                 <a href="{{route('login')}}">
                     <span>Login</span>
                 </a>

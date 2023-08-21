@@ -16,11 +16,15 @@
                     <h2 class="block w-full bg-blue-500 text-white font-bold p-4 rounded-lg">{{$event->start_date}}  {{$event->end_date}}</h1>
                 </div>
                 @if( Auth::check() )
-                <div class="col-span-6 text-right pt-10 pb-5">
-                    <a class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white" href="{{route('events.join',['event' => $event])}}">
-                        Join
-                    </a>
-                </div>
+                    @if ($event->joins()->where('user_id', Auth::user()->id)->exists())
+                    @elseif ($event->organizes()->where('user_id', Auth::user()->id)->exists())
+                    @else
+                    <div class="col-span-6 text-right pt-10 pb-5">
+                        <a class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white" href="{{route('events.join',['event' => $event])}}">
+                            Join
+                        </a>
+                    </div>
+                    @endif
                 @endif
             </div>
         </div>

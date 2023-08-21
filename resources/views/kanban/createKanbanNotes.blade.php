@@ -8,7 +8,7 @@
                 @csrf
 <div class="mb-5">
     <label for="name" class="block mb-2 font-bold text-gray-600">Kanban Name</label>
-    <input type="text" id="name" name="name"  placeholder="put name" >
+    <input type="text" id="name" name="name"  placeholder="put name" required >
 
 </div>
 <div class="mb-5">
@@ -19,7 +19,7 @@
 </div>
 <div class="mb-5">
     <label for="name" class="block mb-2 font-bold text-gray-600">Description</label>
-    <input type="text" id="description" name="description"  placeholder="put description" >
+    <input type="text" id="description" name="description"  placeholder="put description" required >
 
 </div>
 

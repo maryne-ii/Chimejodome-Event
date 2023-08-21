@@ -6,11 +6,14 @@ use App\Models\Event;
 use App\Models\KanbanNote;
 use App\Models\User;
 use Illuminate\Auth\Access\Gate;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Validator;
 
 
 class EventController extends Controller
@@ -26,7 +29,7 @@ class EventController extends Controller
     {
         $user =Auth::user();
 
-        $events = Event::get()->where('status',1);
+        $events = Event::get()->where('status', 1);
         return view('events.index', [
             'events' => $events
         ]);
@@ -152,6 +155,18 @@ class EventController extends Controller
 
         ]);
     }
+    public function delete(Request $request, Event $event)
+    {
+        // $user->delete();
+        DB::table('events')->where('id', $event->id)->delete();
+
+        // return view('admins.userList',[
+        //     'users' => User::get(),
+        // ]);
+        // return redirect()->back();
+        return redirect()->route('EventsList');
+    }
+
     public function eventComplete(Event $event)
     {
         // $events = $event->joins;
@@ -160,7 +175,7 @@ class EventController extends Controller
             'event' => $event
         ]);
     }
-    public function storeComplete(Request $request,Event $event)
+    public function storeComplete(Request $request, Event $event)
     {
         $users = $event->joins;
         $event->participant_total = count($users);
@@ -177,7 +192,7 @@ class EventController extends Controller
         $event_organizer_total = $request->get('organizer_total');
         $event_start_date = $request->get('start_date');
         $event_end_date = $request->get('end_date');
-        
+
         if ($event_name == null) {
             return redirect()->back();
         }
@@ -186,9 +201,9 @@ class EventController extends Controller
 
         // $users = $event->joins;
         // $event->participant_total = count($users);
-        
 
-        
+
+
         $event->name = $event_name;
         $event->header = $event_header;
         $event->detail = $event_detail;
@@ -197,14 +212,14 @@ class EventController extends Controller
         $event->organizer_total = $event_organizer_total;
         $event->start_date = $event_start_date;
         $event->end_date = $event_end_date;
-        $event->status =1;
+        $event->status = 1;
 
         $event->save();
-        
+
         $event->organizes()->attach($user->id);
         return redirect()->route('events.index');
     }
-    
+
     public function disbursement(Event $event)
     {
         // $events = $event->joins;
@@ -214,7 +229,7 @@ class EventController extends Controller
         ]);
     }
 
-    public function disburseConfirm(Event $event,Request $request)
+    public function disburseConfirm(Event $event, Request $request)
     {
         $users=User::get()->where('role',1);
 
@@ -224,24 +239,24 @@ class EventController extends Controller
         $event_bank_account_number = $request->get('bank_account_number');
         $event_budget = $request->get('budget');
 
-        $event->detail=$event_detail;
-        $event->bank_account_number=$event_bank_account_number;
-        $event->budget=$event_budget;
-        $event->user_id=$user->id;
+        $event->detail = $event_detail;
+        $event->bank_account_number = $event_bank_account_number;
+        $event->budget = $event_budget;
+        $event->user_id = $user->id;
         $event->save();
         }
 
-        $kanbans0 = KanbanNote::get()->where('status',0)->where('event_id',$event->id);
-        $kanbans1 = KanbanNote::get()->where('status',1)->where('event_id',$event->id);
-        $kanbans2 = KanbanNote::get()->where('status',2)->where('event_id',$event->id);
-        $kanbans3 = KanbanNote::get()->where('status',3)->where('event_id',$event->id);
+        $kanbans0 = KanbanNote::get()->where('status', 0)->where('event_id', $event->id);
+        $kanbans1 = KanbanNote::get()->where('status', 1)->where('event_id', $event->id);
+        $kanbans2 = KanbanNote::get()->where('status', 2)->where('event_id', $event->id);
+        $kanbans3 = KanbanNote::get()->where('status', 3)->where('event_id', $event->id);
 
-        return view('events.kanban',[
-            'event'=>$event,
-            'kanbans0'=>$kanbans0,
-            'kanbans1'=>$kanbans1,
-            'kanbans2'=>$kanbans2,
-            'kanbans3'=>$kanbans3
+        return view('events.kanban', [
+            'event' => $event,
+            'kanbans0' => $kanbans0,
+            'kanbans1' => $kanbans1,
+            'kanbans2' => $kanbans2,
+            'kanbans3' => $kanbans3
         ]);
 
         // return view('events.kanban', [
@@ -253,12 +268,12 @@ class EventController extends Controller
     {
         $user = Auth::user();
         // $events = Event::get()->where('status',0);
-        $events = $user->organizes->where('status',0);
-        $events2 = $user->organizes->where('status',1);
+        $events = $user->organizes->where('status', 0);
+        $events2 = $user->organizes->where('status', 1);
         // $events = Event::get($user)->where('status',1);
         return view('events.manage', [
             'events' => $events,
-            'events2'=> $events2
+            'events2' => $events2
         ]);
     }
 
@@ -277,11 +292,13 @@ class EventController extends Controller
     {
         $event_name = $request->get('name');
         $event_header = $request->get('header');
-        
+        $request->validate([
+            'name' => ['required','unique:events,name']
+        ]);
         if ($event_name == null) {
             return redirect()->back();
         }
-        
+
         $user = Auth::user();
 
 
@@ -297,7 +314,7 @@ class EventController extends Controller
         $event->save();
 
         $event->organizes()->attach($user->id);
-        return redirect()->route('events.manage');
+        return redirect()->route('events.manage')->with('success', 'User attached successfully');
     }
 
     /**
@@ -305,8 +322,8 @@ class EventController extends Controller
      */
     public function show(Event $event)
     {
-        return view('events.show',[
-            'event'=>$event
+        return view('events.show', [
+            'event' => $event
         ]);
     }
     public function createKanbanPage(Event $event)
@@ -317,11 +334,11 @@ class EventController extends Controller
             'event' => $event,
             'user' => $user
         ]);
-        
+
     }
 
 
-    public function createKanban(Request $request,Event $event)
+    public function createKanban(Request $request, Event $event)
     {
         $kanban_name = $request->get('name');
         // $kanban_writer = $request->get('writer');
@@ -333,9 +350,9 @@ class EventController extends Controller
         $user = Auth::user();
 
         $kanban = new KanbanNote();
-        
 
-        
+
+
         $kanban->task_name = $kanban_name;
         $kanban->writer = $user->name;
         $kanban->description = $kanban_description;
@@ -356,23 +373,18 @@ class EventController extends Controller
         // $kanban->writer = $event->name;
         // $kanban->description = 'dasfghj';
         // $kanban->save();
-        
+
     }
     public function move(Event $event,KanbanNote $kanban,Request $request) {
+
 
         // $kanban_name = $request->get('name');
         // $kanban_description = $request->get('description');
         // $kanban_writer = $request->get('writer');
-
-
         // $kanban = new KanbanNote();
         // $kanban = KanbanNote::find(1);
 
         // dd($kanban->id);
-
-
-
-        
         $kanban->status = $kanban->status+1;
         $kanban->save();
         // return view('events.kaban',
@@ -383,10 +395,7 @@ class EventController extends Controller
 
         // // $kanban->task_name = $kanban_name;
         // // $kanban->description = $kanban_description;
-
-        
         // dd($kanban->description);
-
         $kanban->save();
         return redirect()->route('events.kanban',
         [
@@ -394,7 +403,7 @@ class EventController extends Controller
         ]
     );
     }
-    
+
     // public function move() {
 
     //     return view('events.kaban',
@@ -403,7 +412,15 @@ class EventController extends Controller
     //     ]);
     // }
 
-
+    public function getAllEvent()
+    {
+        $user = Auth::user();
+        $events = Event::get();
+        return view('admins.eventList', [
+            'events' => $events,
+            'user' => $user
+        ]);
+    }
 
 
     public function kanban(Event $event)
@@ -423,12 +440,12 @@ class EventController extends Controller
         $event->organizer_total = count($usersOrganize);
         $event->save();
 
-        return view('events.kanban',[
-            'event'=>$event,
-            'kanbans0'=>$kanbans0,
-            'kanbans1'=>$kanbans1,
-            'kanbans2'=>$kanbans2,
-            'kanbans3'=>$kanbans3
+        return view('events.kanban', [
+            'event' => $event,
+            'kanbans0' => $kanbans0,
+            'kanbans1' => $kanbans1,
+            'kanbans2' => $kanbans2,
+            'kanbans3' => $kanbans3
         ]);
     }
 
@@ -439,27 +456,64 @@ class EventController extends Controller
     public function edit(Event $event)
     {
         // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
-        return view('events.edit',['event'=>$event]);
+        return view('events.edit', ['event' => $event]);
+    }
+
+    public function needBudgetView(Event $event)
+    {
+        // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
+        return view('events.getBudget', ['event' => $event]);
+    }
+    public function needBudget(Request $request, Event $event):RedirectResponse
+    {
+        // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
+
+        DB::table('events')->where('id', $event->id)->update(['budget' => $request->budget,
+                                                            'detail' => $request->detail,
+                                                            'bank_account_number' => $request->bank_account_number]);
+//        return view('events.getBudget', ['event' => $event]);
+    return redirect()->back();
+    }
+    public function needBudgetList()
+    {
+        // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
+        $user = Auth::user();
+//        $eventList = Event::get()->where('budget', '!=', 0)->orWhereNull('budget')->get();
+//        $events = DB::table('events')->where('budget', '<>','null')->get();
+//        echo $eventList;
+//        $events = DB::table('events')->whereNotNull('budget')->get();
+        $events = Event::whereNotNull('budget')->get();
+
+        return view('staff.needBudgetList', [
+            'events' => $events,
+            'user' => $user
+        ]);
+    }
+    public function acceptBudget(Request $request, Event $event)
+    {
+        $user = Auth::user();
+        DB::table('events')->where('id', $event->id)->update(['user_id' => $user->id]); // staff useri_d
+        return redirect()->route('needBudgetList');
     }
 
     public function joinEvent(Event $event)
     {
         // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
-        return view('events.join',['event'=>$event]);
+        return view('events.join', ['event' => $event]);
     }
 
-    public function storeJoinUser(Request $request,Event $event)
+    public function storeJoinUser(Request $request, Event $event)
     {
         // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
         $user = User::findOrFail($request->input('user_id'));
         $event->joins()->attach($user);
-        DB::table('user_join_event')->where('user_id',$user->id)->where('event_id',$event->id)->update(['image_for_event' => $request->image_for_event]);
-        return redirect()->route('events.index')->with('success', 'User attached successfully');     
+        DB::table('user_join_event')->where('user_id', $user->id)->where('event_id', $event->id)->update(['image_for_event' => $request->image_for_event]);
+        return redirect()->route('events.index')->with('success', 'User attached successfully');
     }
 
     public function joinList()
     {
-        
+
         // $user = User::findOrFail($request->get('user_id'));
         $user = Auth::user();
         $records = DB::table('user_join_event')->where('user_id',$user->id)->get()->where('status',0);
@@ -474,24 +528,24 @@ class EventController extends Controller
         // return view('events.show');
     }
 
-    public function organizeEvent(Event $event)
-    {
-        // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
-        return view('events.organize',['event'=>$event]);
-    }
+    // public function organizeEvent(Event $event)
+    // {
+    //     // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
+    //     return view('events.organize',['event'=>$event]);
+    // }
 
-    public function storeOrganizeUser(Request $request,Event $event)
+    public function storeOrganizeUser(Request $request, Event $event)
     {
         // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
         $user = User::findOrFail($request->input('user_id'));
         $event->organizes()->attach($user);
         // DB::table('user_organize_event')->where('user_id',$user->id)->where('event_id',$event->id);
-        return redirect()->route('events.index')->with('success', 'User attached successfully');     
+        return redirect()->route('events.index')->with('success', 'User attached successfully');
     }
 
     public function organizeList()
     {
-        
+
         // $user = User::findOrFail($request->get('user_id'));
         $user = Auth::user();
         $records = DB::table('user_organize_event')->where('user_id',$user->id)->get();
@@ -505,7 +559,7 @@ class EventController extends Controller
 
 
 
-    
+
 
     /**
      * Update the specified resource in storage.
@@ -559,6 +613,20 @@ class EventController extends Controller
         $events = Event::get();
         return view('events.event-organize',[
             'events' => $events
+        ]);
+    }
+
+    public function portfolio()
+    {
+        $events = Event::get();
+        $user = Auth::user();
+        $records = DB::table('user_join_event')->where('user_id', $user->id)->get();
+        $status = DB::table('user_join_event')->get();
+        return view('events.portfolio',[
+            'events' => $events,
+            'user' => $user,
+            'records' => $records,
+            'status' => $status
         ]);
     }
 }

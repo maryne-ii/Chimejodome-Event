@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use App\Models\User;
 use App\Models\Event;
+use Illuminate\Support\Facades\DB;
+
 
 use Illuminate\Support\Facades\Gate;
 
@@ -19,6 +21,14 @@ class ProfileController extends Controller
     /**
      * Display the user's profile form.
      */
+
+     public function index()
+     {
+         $users = User::get();
+         return view('admins.userList', [
+             'users' => $users
+         ]);
+     }
     public function edit(Request $request): View
     {
         return view('profile.edit', [
@@ -26,6 +36,27 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function view(Request $request): View
+    {
+        return view('profile.index', [
+            'user' => $request->user(),
+        ]);
+    }
+
+
+    public function delete(Request $request, User $user)
+    {
+        // $user->delete();
+        DB::table('users')->where('id',$user->id)->delete();
+
+        // return view('admins.userList',[
+        //     'users' => User::get(),
+        // ]);
+        // return redirect()->back();
+        return redirect()->route('UsersList');
+
+
+    }
     /**
      * Update the user's profile information.
      */
@@ -47,7 +78,8 @@ class ProfileController extends Controller
         $id = $request->get('id');
         $user = User::find($id);
         $request->validate([
-            'name' => ['required', 'min:4', 'max:255']
+            'name' => ['required', 'min:4', 'max:255'],
+            'tel' => ['integer'],
         ]);
         $user->name = $request->get('name');
         $user->year = $request->get('year');
@@ -56,6 +88,7 @@ class ProfileController extends Controller
         $user->facebook_account = $request->get('facebook_account');
         $user->line_account = $request->get('line_account');
         $user->instagram_account = $request->get('instagram_account');
+        $user->bio = $request->get('bio');
         if ($request->file('profile_image')) {
             $image_file = $request->file('profile_image'); // image->poster
             $file_name = now()->getTimestamp() . "." . $image_file->getClientOriginalExtension();
@@ -75,16 +108,37 @@ class ProfileController extends Controller
         //     'instagram_account' => $request->get('instagram_account')
         // ]);
         // print_r($request->get('id'));
-        return redirect()->route('profile.edit');
+        return redirect()->route('profile.index');
     }
-    public function storeJoinUer(Request $request,User $user)
+    public function storeJoinUser(Request $request,User $user)
     {
         // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
         $event = Event::findOrFail($request->input('event_id'));
         $user->joins()->attach($event);
 
-        return redirect()->route('users.index')->with('success', 'Role attached successfully');  
+        return redirect()->route('users.index');
     }
+
+    public function getAllUser(){
+
+        $users = User::get();
+        return view('admins.userList', [
+            'users' => $users
+        ]);
+    }
+
+    public function getAllStudent(Event $event){
+
+        dd($event->name);
+
+        $users = User::get()->where('role',2);
+        return view('events.pickOrganize', [
+            'users' => $users,
+            'event' => $event
+        ]);
+    }
+
+
 
     /**
      * Delete the user's account.
