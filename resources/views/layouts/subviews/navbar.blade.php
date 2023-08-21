@@ -83,7 +83,9 @@
                 </div>
             </li>
             <li class="pr-3">
-                <img src="http://localhost/{{Auth::user()->profile_image ? Auth::user()->profile_image : default_peson.jpeg}}" alt="" class="h-10 w-10 rounded-full">
+                <a href="{{ route('profile.index') }}">
+                    <img src="http://localhost/{{Auth::user()->profile_image ? Auth::user()->profile_image : default_peson.jpeg}}" alt="" class="h-10 w-10 rounded-full">
+                </a>
             </li>
             <li class="flex justify-center items-center">
                 <button id="dropdownDelayButton" data-dropdown-placement="right" data-dropdown-offset-skidding="110" data-dropdown-offset-distance="-40" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="500" data-dropdown-trigger="hover" class="" type="button">
