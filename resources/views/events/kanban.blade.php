@@ -1,19 +1,99 @@
 @extends('layouts.main')
 
 @section('content')
-<h3 class="text-5xl">
-    Event: {{$event->header}}
-</h3>
-<h3 class="text-5xl">
-    Event: {{$event->name}}
-</h3>
-<h3 class="text-5xl">
-    Event: {{$event->participant_total}}
-</h3>
-<div class="grid-1">
-    <div class="void">
-  
+<div class="px-[20rem] py-6">
+    <div class="flex gap-10 items-center justify-center">
+
+        <div class="py-4 px-4 w-full text-center bg-white rounded-full">Event Name</div>
+        <div class="py-4 px-4 w-full text-center bg-white rounded-full">ลงบอร์ด</div>
+        <div class="py-4 px-4 w-full text-center bg-white rounded-full">ผู้เข้าร่วม</div>
+        <div class="py-4 px-4 w-full text-center bg-white rounded-full"><a href="{{route('events.needBudget',['event'=>$event])}}">เบิกงบกิจกรรม</a></div>
+        <div class="py-4 px-4 w-full text-center bg-white rounded-full">สมาชิก</div>
     </div>
+    <div class="grid grid-cols-12 gap-10 mt-5">
+        <div class="bg-white px-3 pb-3 rounded-2xl col-span-3 flex flex-col">
+            <div class="py-4 px-4 text-center flex items-baseline justify-between">
+                <span>To Do</span>
+                <a class="bg-[#A1C77B] px-2 py-1 rounded-md flex justify-center items-center"href="{{ route('kanban.createKanbanPage', ['event' => $event]) }}">+</a>
+            </div>
+            <hr class="border-[#A1C77B]">
+            @foreach ($kanbans0 as $kanban)
+            <li class="flex flex-col gap-3 items-left pt-4 pb-2 px-2 hover:bg-gray-50 border-[#A1C77B] border-2 mt-3 rounded-md">
+                <form action="{{ route('kanban.move',['kanban'=>$kanban,'event'=>$event]) }}" method="GET" enctype="multipart/form-data">
+                    @csrf
+
+                    @method('PUT')
+                    <h3 id='name' name='name' class="text-lg font-bold text-gray-800">{{ $kanban->task_name }}</h3>
+                    <p class="text-sm font-medium text-red-800 break-all"><?= mb_strimwidth($kanban->description, 0, 25, "...") ?></p>
+                    <div class="flex justify-end mt-5">
+                        <button type="submit" class="px-2 py-1  text-white text-xs text-center bg-[#A1C77B] rounded-full">Submit</button>
+
+                    </div>
+                </form>
+            </li>
+            @endforeach
+        </div>
+        <div class="bg-white px-3 pb-3 rounded-2xl col-span-3 flex flex-col">
+            <div class="py-4 px-4 text-center">In Progress</div>
+            <hr class="border-[#A1C77B]">
+            @foreach ($kanbans1 as $kanban)
+            <li class="flex flex-col gap-3 items-left pt-4 pb-2 px-2 hover:bg-gray-50 border-[#A1C77B] border-2 mt-3 rounded-md">
+                <form action="{{ route('kanban.move',['kanban'=>$kanban,'event'=>$event]) }}" method="GET" enctype="multipart/form-data">
+                    @csrf
+
+                    @method('PUT')
+                    <h3 id='name' name='name' class="text-lg font-bold text-gray-800">{{ $kanban->task_name }}</h3>
+                    <p class="text-sm font-medium text-red-800 break-all"><?= mb_strimwidth($kanban->description, 0, 25, "...") ?></p>
+                    <div class="flex justify-end mt-5">
+                        <button type="submit" class="px-2 py-1  text-white text-xs text-center bg-[#A1C77B] rounded-full">Submit</button>
+
+                    </div>
+                </form>
+            </li>
+            @endforeach
+        </div>
+        <div class="bg-white px-3 pb-3 rounded-2xl col-span-3 flex flex-col">
+            <div class="py-4 px-4 text-center">Check</div>
+            <hr class="border-[#A1C77B]">
+            @foreach ($kanbans2 as $kanban)
+            <li class="flex flex-col gap-3 items-left pt-4 pb-2 px-2 hover:bg-gray-50 border-[#A1C77B] border-2 mt-3 rounded-md">
+                <form action="{{ route('kanban.move',['kanban'=>$kanban,'event'=>$event]) }}" method="GET" enctype="multipart/form-data">
+                    @csrf
+
+                    @method('PUT')
+                    <h3 id='name' name='name' class="text-lg font-bold text-gray-800">{{ $kanban->task_name }}</h3>
+                    <p class="text-sm font-medium text-red-800 break-all"><?= mb_strimwidth($kanban->description, 0, 25, "...") ?></p>
+                    <div class="flex justify-end mt-5">
+                        <button type="submit" class="px-2 py-1  text-white text-xs text-center bg-[#A1C77B] rounded-full">Submit</button>
+
+                    </div>
+                </form>
+            </li>
+            @endforeach
+        </div>
+        <div class="bg-white px-3 pb-3 rounded-2xl col-span-3 flex flex-col">
+            <div class="py-4 px-4 text-center">Finish</div>
+            <hr class="border-[#A1C77B]">
+            @foreach ($kanbans3 as $kanban)
+            <li class="flex flex-col gap-3 items-left pt-4 pb-2 px-2 hover:bg-gray-50 border-[#A1C77B] border-2 mt-3 rounded-md">
+                <form action="{{ route('kanban.move',['kanban'=>$kanban,'event'=>$event]) }}" method="GET" enctype="multipart/form-data">
+                    @csrf
+
+                    @method('PUT')
+                    <h3 id='name' name='name' class="text-lg font-bold text-gray-800">{{ $kanban->task_name }}</h3>
+                    <p class="text-sm font-medium text-red-800 break-all"><?= mb_strimwidth($kanban->description, 0, 25, "...") ?></p>
+                    <div class="flex justify-end mt-5">
+                        <button type="submit" class="px-2 py-1  text-white text-xs text-center bg-[#A1C77B] rounded-full">Submit</button>
+
+                    </div>
+                </form>
+            </li>
+            @endforeach
+        </div>
+    </div>
+</div>
+</div>
+<!-- <div class="grid-1">
     <div class="content">
     <a href="{{ route('kanban.createKanbanPage', ['event' => $event]) }}">create kanban</a>
     </div>
@@ -122,5 +202,5 @@
                 </li>
             @endforeach
     </div>
-</div>
+</div> -->
 @endsection

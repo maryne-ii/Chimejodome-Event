@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('bank_account_number')->nullable();
             $table->integer('participant_total')->default(0);
             $table->integer('organizer_total')->default(0);
-            $table->float('budget')->nullable();
+            $table->string('budget')->nullable();
             $table->string('location')->nullable();
             $table->datetime('start_date')->nullable();
             $table->datetime('end_date')->nullable();

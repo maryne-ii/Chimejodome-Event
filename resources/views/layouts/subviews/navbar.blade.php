@@ -27,6 +27,7 @@
         {{-- </svg>--}}
         {{-- </button>--}}
         {{-- </div>--}} -->
+        @if( Auth::check() )
 
 
            @if((Auth::user()->role) === 0)
@@ -41,7 +42,7 @@
             </span>
             @elseif((Auth::user()->role) === 1)
             <span>
-                <a href="{{route('EventsList')}}">Event List</a>
+                <a href="{{route('needBudgetList')}}">Event List</a>
             </span>
             <span>
                 <!-- <a href="{{route('events.joinList')}}">Join List</a> -->
@@ -61,10 +62,20 @@
     </div>
     <div class="flex justify-center items-center" id="mobile-menu-2">
         <ul class="flex flex-col justify-center items-center mr-2 mt-4 font-medium lg:flex-row  lg:mt-0 ">
-            @if( Auth::check() )
 
             <li class="p-5">
+                <div>
                 {{Auth::user()->name}}
+                </div>
+                <div class="text-xs">
+                @if (Auth::user()->role === 0)
+                        <p>Admin</p>
+                        @elseif (Auth::user()->role === 1)
+                        <p>Staff</p>
+                        @elseif (Auth::user()->role === 2)
+                        <p>Student</p>
+                        @endif
+                </div>
             </li>
             <li class="pr-3">
                 <img src="http://localhost/{{Auth::user()->profile_image ? Auth::user()->profile_image : default_peson.jpeg}}" alt="" class="h-10 w-10 rounded-full">
@@ -96,7 +107,7 @@
 
             </li>
             @else
-            <div class=" flex gap-14 justify-start items-center">
+            <div class="flex mr-5 gap-14">
                 <a href="{{route('login')}}">
                     <span>Login</span>
                 </a>

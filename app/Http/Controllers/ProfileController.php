@@ -102,13 +102,13 @@ class ProfileController extends Controller
         // print_r($request->get('id'));
         return redirect()->route('profile.edit');
     }
-    public function storeJoinUer(Request $request,User $user)
+    public function storeJoinUser(Request $request,User $user)
     {
         // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
         $event = Event::findOrFail($request->input('event_id'));
         $user->joins()->attach($event);
 
-        return redirect()->route('users.index')->with('success', 'Role attached successfully');  
+        return redirect()->route('users.index');  
     }
 
     public function getAllUser(){

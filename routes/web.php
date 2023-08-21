@@ -65,8 +65,14 @@ Route::get('/manage/{event}/kanban', [EventController::class, 'kanban'])
     ->name('events.kanban');
 // Route::get('/manage/{event}/join', [EventController::class, 'join'])
 //     ->name('events.kanban');
-Route::get('/events/{event}/edit', [EventController::class, 'edit'])
+Route::get('/events/{event}/edit', [EventController::class, 'edit']) // edit data of event and complete an event
     ->name('events.edit');
+Route::get('/events/{event}/needBudget', [EventController::class, 'needBudgetView']) // for student need budget
+    ->name('events.needBudget');
+Route::get('/needBudgetList', [EventController::class, 'needBudgetList'])->name('needBudgetList'); // for staff
+Route::get('/{event}/acceptBudget', [EventController::class, 'acceptBudget'])->name('acceptBudget');
+
+
 
 
 Route::get('/events/{event}/join', [EventController::class, 'joinEvent'])
@@ -114,8 +120,13 @@ Route::get('/manage/{event}/kanban/createKanbanNotes', [EventController::class, 
     ->name('kanban.createKanban');
 
 Route::get('/eventsList', [EventController::class, 'getAllEvent'])->name('EventsList');
+
 Route::get('/usersList', [ProfileController::class, 'getAllUser'])->name('UsersList');
 Route::get('/{user}/deleteUser', [ProfileController::class, 'delete'])->name('DeleteUser');
+Route::get('/{event}/deleteEvent', [EventController::class, 'delete'])->name('DeleteEvent');
+Route::get('/{event}/getBudget', [EventController::class, 'needBudgetView'])->name('needBudget');
+
+
 
 
 Route::post('addStaff', [RegisteredUserController::class, 'storeStaff'])->name('addStaff');

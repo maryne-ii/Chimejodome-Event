@@ -21,7 +21,7 @@
                     <div class="flex-1">
                     <a href="{{ route('events.show', ['event' => $event]) }}">
                             <h3 class="text-lg font-medium text-gray-800">{{ $event->name }}</h3>
-                            <img src="{{$event->poster}}">
+                            <img class="w-80 h-100"src="{{$event->poster}}">
 
                     </a>
                         <p class="text-gray-600 text-base"></p>

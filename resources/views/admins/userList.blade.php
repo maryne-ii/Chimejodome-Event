@@ -3,7 +3,7 @@
 @section('content')
 <div class="bg-white shadow-md rounded-md overflow-hidden max-w-lg mx-auto mt-16">
     <div class="bg-pink-100 py-2 px-4">
-        <h2 class="text-xl font-semibold text-gray-800">Event List</h2>
+        <h2 class="text-xl font-semibold text-gray-800">User List</h2>
     </div>
     <div>
 
