@@ -24,28 +24,132 @@ class EventController extends Controller
 
     public function index()
     {
+        $user =Auth::user();
 
         $events = Event::get()->where('status',1);
         return view('events.index', [
             'events' => $events
         ]);
     }
-    public function join(Event $event)
+    public function join( Event $event)
+    {
+        
+        // $user = Auth::user();
+        // $records = DB::table('user_join_event')->where('user_id',$user->id)->get();
+        // $events = $event->joins;
+        
+    
+        // dd($users->user_id);
+        $records = DB::table('user_join_event')->where('event_id',$event->id)->get()->where('status',0);
+        $records2 = DB::table('user_join_event')->where('event_id',$event->id)->get()->where('status',1);
+
+        return view('kanban.join', [
+            'event' => $event,
+            'records' =>$records,
+            'records2'=>$records2
+
+        ]);
+    }
+    public function addJoin(Request $request,Event $event)
+    {
+        // $user = Auth::user();
+        // $records = DB::table('user_join_event')->where('user_id',$user->id)->get();
+        // $events = $event->joins;
+        $user = User::find($request->input('user_id'));
+
+        // dd($user->id);
+        
+        // $records = $event->joins->where('user_id',$user->id)->where('status',0);
+        // $records = DB::table('user_join_event')->where('user_id',$user->id)->get();
+        // $records =$user->joins->updateExistingPivot($user, ['status' => 1]);
+        $event->joins()->updateExistingPivot($user, ['status' => 1]);
+        // foreach ($records as $record) {
+        //     $status = $record->status;
+        //     // dd($record->event_id);
+        //     $record->status = 1;
+        // }
+        $records = DB::table('user_join_event')->where('user_id',$user->id)->get()->where('status',0);
+        $records2 = DB::table('user_join_event')->where('user_id',$user->id)->get()->where('status',1);
+
+
+        
+        // $user=$event->joins->where('user_id',$user->id);
+        return view('kanban.join', [
+            'event' => $event,
+            'records' =>$records,
+            'records2'=>$records2
+
+        ]);
+    }
+    public function deleteJoin(Event $event)
     {
         // $user = Auth::user();
         // $records = DB::table('user_join_event')->where('user_id',$user->id)->get();
         // $events = $event->joins;
         $users = $event->joins;
         return view('kanban.join', [
-            'users' => $users
+            'users' => $users,
+            'event' => $event
         ]);
     }
+
     public function member(Event $event)
     {
         // $events = $event->joins;
+        // $userss = User::get()->where('role','12345');
+        $userss = User::get();
         $users = $event->organizes;
         return view('kanban.member', [
-            'users' => $users
+            'users' => $users,
+            'userss' => $userss,
+            'event' =>$event
+
+        ]);
+    }
+
+    public function seachMember(Request $request,Event $event) {
+
+        $userss = User::get()->where('name',$request->get('name'));
+        $users = $event->organizes;
+        // if ($userss = User::get()->where('name',$request->get('name')) == null) {
+        //     return redirect()->back();
+        // }
+        // else {
+        //     return view('kanban.member', [
+        //         'users' => $users,
+        //         'userss' => $userss,
+        //         'event' =>$event
+    
+        //     ]);
+
+        // }
+        return view('kanban.member', [
+            'users' => $users,
+            'userss' => $userss,
+            'event' =>$event
+
+        ]);
+
+    }
+    public function addMember(Request $request,Event $event) {
+        // $user = $request->input('user');
+        $user = User::find($request->input('user_id'));
+        // $user1 =User::get()->where('id',$user->id);
+        // dd($user->name);
+
+        // $user3->organizes()->attach($event2->id);
+
+        $event->organizes()->attach($user->id);
+
+        // dd($user);
+        $userss = User::get();
+        $users = $event->organizes;
+
+        return view('kanban.member', [
+            'users' => $users,
+            'userss' => $userss,
+            'event' =>$event
+
         ]);
     }
     public function eventComplete(Event $event)
@@ -112,7 +216,9 @@ class EventController extends Controller
 
     public function disburseConfirm(Event $event,Request $request)
     {
-        $user=User::find(2);
+        $users=User::get()->where('role',1);
+
+        foreach ($users as $user) {
 
         $event_detail = $request->get('detail');
         $event_bank_account_number = $request->get('bank_account_number');
@@ -123,6 +229,7 @@ class EventController extends Controller
         $event->budget=$event_budget;
         $event->user_id=$user->id;
         $event->save();
+        }
 
         $kanbans0 = KanbanNote::get()->where('status',0)->where('event_id',$event->id);
         $kanbans1 = KanbanNote::get()->where('status',1)->where('event_id',$event->id);
@@ -301,14 +408,20 @@ class EventController extends Controller
 
     public function kanban(Event $event)
     {
+
+        
+
         
         
         $kanbans0 = KanbanNote::get()->where('status',0)->where('event_id',$event->id);
         $kanbans1 = KanbanNote::get()->where('status',1)->where('event_id',$event->id);
         $kanbans2 = KanbanNote::get()->where('status',2)->where('event_id',$event->id);
         $kanbans3 = KanbanNote::get()->where('status',3)->where('event_id',$event->id);
-        $users = $event->joins;
-        $event->participant_total = count($users);
+        $userJoin = $event->joins;
+        $usersOrganize = $event->organizes;
+        $event->participant_total = count($userJoin);
+        $event->organizer_total = count($usersOrganize);
+        $event->save();
 
         return view('events.kanban',[
             'event'=>$event,
@@ -349,11 +462,13 @@ class EventController extends Controller
         
         // $user = User::findOrFail($request->get('user_id'));
         $user = Auth::user();
-        $records = DB::table('user_join_event')->where('user_id',$user->id)->get();
+        $records = DB::table('user_join_event')->where('user_id',$user->id)->get()->where('status',0);
+        $records2 = DB::table('user_join_event')->where('user_id',$user->id)->get()->where('status',1);
 
         return view('events.joinList'
         , [
-            'records' => $records
+            'records' => $records,
+            'records2' => $records2
         ]);
         //certificate and applied status
         // return view('events.show');

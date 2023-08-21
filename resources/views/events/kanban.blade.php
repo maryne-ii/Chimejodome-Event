@@ -7,9 +7,6 @@
 <h3 class="text-5xl">
     Event: {{$event->name}}
 </h3>
-<h3 class="text-5xl">
-    Event: {{$event->participant_total}}
-</h3>
 <div class="grid-1">
     <div class="void">
   

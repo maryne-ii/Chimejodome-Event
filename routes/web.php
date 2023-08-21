@@ -77,9 +77,17 @@ Route::get('/manage/{event}/{kanban}', [EventController::class, 'move'])
     ->name('kanban.move');
 Route::get('/manage/{event}/kanban/join', [EventController::class, 'join'])
     ->name('kanban.join');
+Route::get('/manage/{event}/kanban/addJoin', [EventController::class, 'addJoin'])
+    ->name('kanban.addJoin');
+Route::get('/manage/{event}/kanban/deleteJoin', [EventController::class, 'deleteJoin'])
+    ->name('kanban.deleteJoin');
     
 Route::get('/manage/{event}/kanban/member', [EventController::class, 'member'])
     ->name('kanban.member');
+Route::get('/manage/{event}/kanban/searchMember', [EventController::class, 'seachMember'])
+    ->name('kanban.seachMember');
+Route::get('/manage/{event}/kanban/addMember', [EventController::class, 'addMember'])
+    ->name('kanban.addMember');
 Route::get('/manage/{event}/kanban/disbursement', [EventController::class, 'disbursement'])
     ->name('kanban.disbursement');
 Route::get('/manage/{event}/kanban/disburseConfirm', [EventController::class, 'disburseConfirm'])

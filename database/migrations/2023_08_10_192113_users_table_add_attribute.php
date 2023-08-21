@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::table('users', function (Blueprint $table) {
             $table->string('profile_image')->default('https://static.vecteezy.com/system/resources/previews/005/544/718/original/profile-icon-design-free-vector.jpg')->nullable();
             $table->string('tel')->nullable();
-            $table->string('role')->default(0)->comment('0=admin,1=staff,2=student');
+            $table->interger('role')->default(2)->comment('0=admin,1=staff,2=student');
             $table->string('facebook_account')->nullable();
             $table->string('instagram_account')->nullable();
             $table->string('line_account')->nullable();

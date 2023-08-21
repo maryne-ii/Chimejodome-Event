@@ -101,10 +101,37 @@ class UserSeeder extends Seeder
         // $user3 = User::find(4);
         // $user2 = User::find(3);
 
-        $event = Event::factory()->count(3)->create();
-        $event2 = Event::factory()->create();
+        $event = Event::factory()->count(10)
+        ->state(new Sequence(
+            ['location' => 'KU HALL'],
+            ['location' => 'KU CENTER'],//faculty
+            ['location' => 'KU COMSCI SPECIAL EVENT HALL'],
+            ['location' => 'KU SPORT YARD'],
+        ))
+        ->create();
+        $event2 = Event::factory()->count(10)
+        ->state(new Sequence(
+            ['location' => 'KU HALL'],
+            ['location' => 'KU CENTER'],//faculty
+            ['location' => 'KU COMSCI SPECIAL EVENT HALL'],
+            ['location' => 'KU SPORT YARD'],
+        ))
+        ->create();
+        $user4=User::factory()->count(10)->create();
+        // $user4->organizes()->attach($event);
+        foreach ($event as $events){
+        foreach ($user4 as $user) {
+            
+            $events->header = $user->name;
+            $events->save();
+            $user->organizes()->attach($event);
+
+            }
+            
+        }
+
         $user2->joins()->attach($event);//user2(นักเรียนธรรมดา)เข้าร่วมevent(เข้าร่วม 3 event)
-        $user3->organizes()->attach($event2->id);//user3(นักเรียนที่สร้างevent)สร้างevent
+        $user3->organizes()->attach($event2);//user3(นักเรียนที่สร้างevent)สร้างevent
 
 
 
