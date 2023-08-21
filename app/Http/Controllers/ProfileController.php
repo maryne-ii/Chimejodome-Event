@@ -36,7 +36,7 @@ class ProfileController extends Controller
         ]);
     }
 
-    
+
 
     public function delete(Request $request, User $user)
     {
@@ -45,7 +45,7 @@ class ProfileController extends Controller
 
         // return view('admins.userList',[
         //     'users' => User::get(),
-        // ]);  
+        // ]);
         // return redirect()->back();
         return redirect()->route('UsersList');
 
@@ -100,7 +100,7 @@ class ProfileController extends Controller
         //     'instagram_account' => $request->get('instagram_account')
         // ]);
         // print_r($request->get('id'));
-        return redirect()->route('profile.edit');
+        return redirect()->route('profile.index')->with('success','You profile have updated');
     }
     public function storeJoinUser(Request $request,User $user)
     {
@@ -108,7 +108,7 @@ class ProfileController extends Controller
         $event = Event::findOrFail($request->input('event_id'));
         $user->joins()->attach($event);
 
-        return redirect()->route('users.index');  
+        return redirect()->route('users.index');
     }
 
     public function getAllUser(){
