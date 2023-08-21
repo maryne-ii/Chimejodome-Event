@@ -77,9 +77,10 @@ class ProfileController extends Controller
         // Gate::authorize('update', $user_update);
         $id = $request->get('id');
         $user = User::find($id);
+        // $user = Auth::user();
         $request->validate([
-            'name' => ['required', 'min:4', 'max:255'],
-            'tel' => ['integer'],
+            'name' => ['required', 'min:4', 'max:255']
+        
         ]);
         $user->name = $request->get('name');
         $user->year = $request->get('year');
@@ -121,7 +122,7 @@ class ProfileController extends Controller
 
     public function getAllUser(){
 
-        $users = User::get();
+        $users = User::where('id', '!=', 1)->get();
         return view('admins.userList', [
             'users' => $users
         ]);
