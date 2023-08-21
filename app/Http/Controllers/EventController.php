@@ -36,12 +36,12 @@ class EventController extends Controller
     }
     public function join( Event $event)
     {
-        
+
         // $user = Auth::user();
         // $records = DB::table('user_join_event')->where('user_id',$user->id)->get();
         // $events = $event->joins;
-        
-    
+
+
         // dd($users->user_id);
         $records = DB::table('user_join_event')->where('event_id',$event->id)->get()->where('status',0);
         $records2 = DB::table('user_join_event')->where('event_id',$event->id)->get()->where('status',1);
@@ -61,7 +61,7 @@ class EventController extends Controller
         $user = User::find($request->input('user_id'));
 
         // dd($user->id);
-        
+
         // $records = $event->joins->where('user_id',$user->id)->where('status',0);
         // $records = DB::table('user_join_event')->where('user_id',$user->id)->get();
         // $records =$user->joins->updateExistingPivot($user, ['status' => 1]);
@@ -75,9 +75,15 @@ class EventController extends Controller
         $records2 = DB::table('user_join_event')->where('event_id',$event->id)->get()->where('status',1);
 
 
-        
+
         // $user=$event->joins->where('user_id',$user->id);
-        return view('kanban.join', [
+        // return view('kanban.join', [
+        //     'event' => $event,
+        //     'records' =>$records,
+        //     'records2'=>$records2
+
+        // ]);
+        return redirect()->route('kanban.join', [
             'event' => $event,
             'records' =>$records,
             'records2'=>$records2
@@ -122,7 +128,7 @@ class EventController extends Controller
         //         'users' => $users,
         //         'userss' => $userss,
         //         'event' =>$event
-    
+
         //     ]);
 
         // }
@@ -426,10 +432,10 @@ class EventController extends Controller
     public function kanban(Event $event)
     {
 
-        
 
-        
-        
+
+
+
         $kanbans0 = KanbanNote::get()->where('status',0)->where('event_id',$event->id);
         $kanbans1 = KanbanNote::get()->where('status',1)->where('event_id',$event->id);
         $kanbans2 = KanbanNote::get()->where('status',2)->where('event_id',$event->id);
@@ -527,7 +533,13 @@ class EventController extends Controller
         // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
         $user = User::findOrFail($request->input('user_id'));
         $event->joins()->attach($user);
-        DB::table('user_join_event')->where('user_id', $user->id)->where('event_id', $event->id)->update(['image_for_event' => $request->image_for_event]);
+        if ($request->hasFile('image_for_event')) {
+            $path = $request->file('image_for_event')->store('images', 'public');
+
+        }else{
+            $path = '-';
+        }
+        DB::table('user_join_event')->where('user_id', $user->id)->where('event_id', $event->id)->update(['image_for_event' => $path]);
         return redirect()->route('events.index')->with('success', 'User attached successfully');
     }
 
