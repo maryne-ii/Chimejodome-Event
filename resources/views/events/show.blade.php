@@ -6,8 +6,14 @@
         <div class="">
             <div class="grid grid-cols-12">
                 <div class="col-span-6 text-left pt-10 pb-5">
-                    <h1 class="">{{$event->name}}</h1>
-                    <h1 class="">{{$event->header}}</h1>
+                    <h1 >Event Name</h1>
+                    <h2 class="block w-full bg-blue-500 text-white font-bold p-4 rounded-lg">{{$event->name}}</h1>
+                    <h1>Event Header</h1>
+                    <h2 class="block w-full bg-blue-500 text-white font-bold p-4 rounded-lg">{{$event->header}}</h1>
+                    <h1>Event Location</h1>
+                    <h2 class="block w-full bg-blue-500 text-white font-bold p-4 rounded-lg">{{$event->location}}</h1>
+                    <h1>Event date</h1>
+                    <h2 class="block w-full bg-blue-500 text-white font-bold p-4 rounded-lg">{{$event->start_date}}  {{$event->end_date}}</h1>
                 </div>
                 @if( Auth::check() )
                     @if ($event->joins()->where('user_id', Auth::user()->id)->exists())

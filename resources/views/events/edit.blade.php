@@ -16,61 +16,62 @@
                 <div class="col-span-9">
                     <div class="grid grid-cols-12 px-10 py-2 gap-3">
                         <!-- <input type="hidden" value="{Auth::user()->password" name="password"> -->
-                        <input type="hidden" value="{{Auth::user()->id}}" name="id">
+                        <input type="hidden" value="{{Auth::user()->id}}" name="id" required>
                         <div class="col-span-4">
                             <div class="text-xl">ชื่อ Event</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->name}}" name="name">
+                            <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->name}}" name="name" required readonly>
                         </div>
                         <div class="col-span-4">
                             <div class="text-xl">รูป poster</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="file" id="name"  class="border border-gray-300 shadow p-3 w-full rounded mb-" name="poster">
+                            <input type="file" id="name"  class="border border-gray-300 shadow p-3 w-full rounded mb-" name="poster" required>
                         </div>
                         <div class="col-span-4">
                             <div class="text-xl">ชื่อผู้จัด</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->header ? $event->header : ''}}" name="header">
+                            <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->header ? $event->header : ''}}" name="header" required readonly>
                         </div>
                         <div class="col-span-4">
                             <div class="text-xl">รายละเอียด</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="text" id="disabled-input-2" aria-label="disabled input 2" cursor-not-allowed class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->detail ? $event->detail : ''}}" name="detail" >
+                            <input type="text" id="disabled-input-2" aria-label="disabled input 2" cursor-not-allowed class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->detail ? $event->detail : ''}}" name="detail" required >
                         </div>
                         <div class="col-span-4">
                             <div class="text-xl">สถานที่</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->location ? $event->location : ''}}" name="location">
+                            <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->location ? $event->location : ''}}" name="location" required>
                         </div>
                         <div class="col-span-4">
                             <div class="number">จำนวนผู้จัด</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->organizer_total ? $event->organizer_total : ''}}" name="organizer_total">
+                            <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{old('organizer_total',$event->organizer_total)}}" name="organizer_total" required readonly>
                         </div>
                         <div class="col-span-4">
                             <div class="number">จำนวนผู้เข้าร่วม</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->participant_total ? $event->participant_total : ''}}" name="participant_total">
+                            <input type="text" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{old('participant_total',$event->participant_total)}}" name="participant_total" required readonly>
                         </div>
                         <div class="col-span-4">
                             <div class="text-xl">วันที่เริ่ม</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="date" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->start_date ? $event->start_date : ''}}" name="start_date">
+                            <input type="date" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->start_date ? $event->start_date : ''}}" name="start_date" required>
                         </div>
                         <div class="col-span-4">
                             <div class="text-xl">วันที่สิ้นสุด</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="date" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->end_date ? $event->end_date : ''" name="end_date">
+                            <input type="date" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->end_date ? $event->end_date : ''" name="end_date" required>
                         </div>
+                
                     </div>
                 </div>
             </div>

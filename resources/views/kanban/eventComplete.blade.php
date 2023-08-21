@@ -13,23 +13,23 @@
                     {{$message}}
                     </div>
     @enderror
-    <input type="text" id="name" name="name" value ="{{old('name',$event->name)}}" placeholder="{{$event->name}}" >
+    <input type="text" id="name" name="name" value ="{{old('name',$event->name)}}" placeholder="{{$event->name}}" required>
 
 </div>
 <div class="mb-5">
     <label for="header" class="block mb-2 font-bold text-gray-600">Header</label>
 
-    <input type="text" id="header" name="header" value ="{{old('header',$event->header)}}" placeholder="{{$event->header}}" >
+    <input type="text" id="header" name="header" value ="{{old('header',$event->header)}}" placeholder="{{$event->header}}" required>
 
 </div>
 <div class="mb-5">
     <label for="name" class="block mb-2 font-bold text-gray-600">Detail</label>
-    <input type="text" id="deteil" name="detail" value ="{{old('detail',$event->detail)}}" placeholder="{{$event->detail}}" >
+    <input type="text" id="deteil" name="detail" value ="{{old('detail',$event->detail)}}" placeholder="{{$event->detail}}" required>
 
 </div>
 <div class="mb-5">
     <label for="name" class="block mb-2 font-bold text-gray-600">Location</label>
-    <input type="text" id="location" name="location" value ="{{old('location',$event->location)}}" placeholder="{{$event->location}}" >
+    <input type="text" id="location" name="location" value ="{{old('location',$event->location)}}" placeholder="{{$event->location}}" required>
 
 </div>
 <div class="mb-5">
