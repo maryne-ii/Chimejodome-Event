@@ -16,7 +16,7 @@
                     </div>
                     <span class="flex space-x-8 mb-8">
                         <label for="name" class="block mb-4 mt-6 font-bold text-gray-600">Event Name</label>
-                        <input type="text" class="py-8 px-5 mt-6 rounded-full bg-[#D9D9D9] text-black flex-1 h-7" id="name" name="name" autocomplete="off" placeholder="Put in event name" >
+                        <input type="text" class="py-8 px-5 mt-6 rounded-full bg-[#D9D9D9] text-black flex-1 h-7" id="name" name="name" autocomplete="off" placeholder="Put in event name" required>
                     </span>
 
                     <div class="flex justify-center space-x-8">

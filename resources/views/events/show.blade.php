@@ -11,6 +11,7 @@
                 </div>
                 @if( Auth::check() )
                     @if ($event->joins()->where('user_id', Auth::user()->id)->exists())
+                    @elseif ($event->organizes()->where('user_id', Auth::user()->id)->exists())
                     @else
                     <div class="col-span-6 text-right pt-10 pb-5">
                         <a class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white" href="{{route('events.join',['event' => $event])}}">
