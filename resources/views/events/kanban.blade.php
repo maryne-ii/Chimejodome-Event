@@ -6,9 +6,9 @@
 
         <div class="py-4 px-4 w-full text-center bg-white rounded-full">{{$event->name}}</div>
         <div class="py-4 px-4 w-full text-center bg-white rounded-full"><a href="{{route('events.edit',['event'=>$event])}}">ลงบอร์ด</a></div>
-        <div class="py-4 px-4 w-full text-center bg-white rounded-full">ผู้เข้าร่วม</div>
+        <div class="py-4 px-4 w-full text-center bg-white rounded-full"><a href="{{route('kanban.join',['event'=>$event])}}">ผู้เข้าร่วม</a></div>
         <div class="py-4 px-4 w-full text-center bg-white rounded-full"><a href="{{route('events.needBudget',['event'=>$event])}}">เบิกงบกิจกรรม</a></div>
-        <div class="py-4 px-4 w-full text-center bg-white rounded-full">สมาชิก</div>
+        <div class="py-4 px-4 w-full text-center bg-white rounded-full"><a href="{{route('kanban.member',['event'=>$event])}}">สมาชิก</a></div>
     </div>
     <div class="grid grid-cols-12 gap-10 mt-5">
         <div class="bg-white px-3 pb-3 rounded-2xl col-span-3 flex flex-col">

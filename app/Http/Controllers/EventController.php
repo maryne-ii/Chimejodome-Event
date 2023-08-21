@@ -71,8 +71,8 @@ class EventController extends Controller
         //     // dd($record->event_id);
         //     $record->status = 1;
         // }
-        $records = DB::table('user_join_event')->where('user_id',$user->id)->get()->where('status',0);
-        $records2 = DB::table('user_join_event')->where('user_id',$user->id)->get()->where('status',1);
+        $records = DB::table('user_join_event')->where('event_id',$event->id)->get()->where('status',0);
+        $records2 = DB::table('user_join_event')->where('event_id',$event->id)->get()->where('status',1);
 
 
         
