@@ -10,7 +10,8 @@
             @method('PUT')
             <div class="">
                 <div class="grid mt-10 pt-7 place-items-center ">
-                    <img class="h-[20rem]" src="http://localhost/{{$event->poster}}" alt="event poster">
+                    {{-- <img class="h-[20rem]" src="http://localhost/{{$event->poster}}" alt="event poster"> --}}
+                    <img src="{{ asset('storage/' . $event->poster) }}" class='h-[20rem]'>
                 </div>
                 <div class="col-span-9">
                     <div class="grid grid-cols-12 px-10 py-2 gap-3">

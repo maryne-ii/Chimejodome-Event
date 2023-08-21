@@ -30,7 +30,8 @@
         </div>
         <hr class="border-1 rounded-full mt-2 border-[rgb(161,199,123)] ">
         <div class="grid mt-10 pt-7 place-items-center ">
-            <img class="h-[20rem]" src="http://localhost/{{$event->poster}}" alt="event poster">
+            {{-- <img class="h-[20rem]" src="http://localhost/{{$event->poster}}" alt="event poster"> --}}
+            <img class="h-[20rem]" src="{{ asset('storage/' . $event->poster) }}">
         </div>
     </div>
 </div>

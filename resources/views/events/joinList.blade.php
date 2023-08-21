@@ -4,25 +4,22 @@
 <div class="bg-white shadow-md rounded-md overflow-hidden max-w-lg mx-auto mt-16">
     <div class="bg-pink-100 py-2 px-4">
         <h2 class="text-xl font-semibold text-gray-800">Event</h2>
+     </div>
+        <ul class="divide-y divide-gray-200">
+            @foreach ($records as $record)
+            <a href="{{ route('events.show', ['event' => App\Models\Event::find($record->event_id)]) }}" class="flex items-center py-4 px-6 hover:bg-gray-50">
+                <span class="text-gray-700 text-lg font-medium mr-4">{{ $loop->iteration }}.</span>
+                <div class="flex-1">
+                    <h3 class="text-lg font-medium text-gray-800">{{(App\Models\Event::find($record->event_id))->name}}</h3>
+                    <img class="h-[20rem]" src="{{ asset('storage/' . (App\Models\Event::find($record->event_id))->poster) }}">
 
-    </div>
-            <ul class="divide-y divide-gray-200">
-                @foreach ($records as $record)
-                
-                    <span class="text-gray-700 text-lg font-medium mr-4">{{ $loop->iteration }}.</span>
-                    <div class="flex-1">
-                    {{(App\Models\Event::find($record->event_id))->name}}
 
-                        <img src="{{(App\Models\Event::find($record->event_id))->poster}}" alt="">
-                        <h3 class="text-lg font-medium text-gray-800">{{(App\Models\Event::find($record->event_id))->header}}</h3>
-                        <h3 class="text-lg font-medium text-gray-800">{{(App\Models\Event::find($record->event_id))->start_date}}</h3>
-
-                        <p class="text-gray-600 text-base"></p>
-                    </div>
-                    <span class="text-gray-400"></span>
-                </a>
-                @endforeach
-            </ul>
+                    <p class="text-gray-600 text-base"></p>
+                </div>
+                <span class="text-gray-400"></span>
+            </a>
+            @endforeach
+        </ul>
     </div>
 
     <div class="bg-white shadow-md rounded-md overflow-hidden max-w-lg mx-auto mt-16">
@@ -31,24 +28,18 @@
          </div>
             <ul class="divide-y divide-gray-200">
                 @foreach ($records2 as $record)
-                <li class="flex items-center py-4 px-6 hover:bg-gray-50">
+                <a href="{{ route('events.show', ['event' => App\Models\Event::find($record->event_id)]) }}" class="flex items-center py-4 px-6 hover:bg-gray-50">
                     <span class="text-gray-700 text-lg font-medium mr-4">{{ $loop->iteration }}.</span>
                     <div class="flex-1">
-                        <a href="{{ route('events.show', ['event' => App\Models\Event::find($record->event_id)]) }}">{{(App\Models\Event::find($record->event_id))->name}}</a>
-
-                        <img src="{{(App\Models\Event::find($record->event_id))->poster}}" alt="">
-                        <h3 class="text-lg font-medium text-gray-800">user_id : {{ $record->user_id }}</h3>
+                        {{(App\Models\Event::find($record->event_id))->name}}
+                        <img class="h-[20rem]" src="{{ asset('storage/' . (App\Models\Event::find($record->event_id))->poster) }}">
                         <p class="text-gray-600 text-base"></p>
                     </div>
                     <span class="text-gray-400"></span>
                 </a>
                 @endforeach
             </ul>
-<<<<<<< HEAD
-           
-=======
 
->>>>>>> e70da2bd52eb66fa9632589c2d68a139b3cf4c4b
     </div>
 </div>
 @endsection

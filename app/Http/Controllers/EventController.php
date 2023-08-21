@@ -582,6 +582,13 @@ class EventController extends Controller
         $request->validate([
             'name' => ['required','min:4','max:255']
         ]);
+
+        if ($request->hasFile('poster')) {
+
+            $path = $request->file('poster')->store('images', 'public');
+
+        }
+
         $event->name = $request->get('name');
         $event->header = $request->get('header');
         $event->detail = $request->get('detail');
@@ -592,12 +599,14 @@ class EventController extends Controller
         $file_name = now()->getTimestamp().".".$image_file->getClientOriginalExtension();
         $image_file->storeAs('public/'.$file_name);
         $image_path = "storage/".$file_name;
-        $event->poster = $image_path;
+        $event->poster = $path;
         $event->status =1;
 
         $event->save();
-        return redirect()->route('events.index')->with('success', 'User attached successfully');
+        // return redirect()->route('events.index')->with('success', 'User attached successfully');
+        return redirect()->route('events.index')->with('success');
     }
+
 
     /**
      * Remove the specified resource from storage.

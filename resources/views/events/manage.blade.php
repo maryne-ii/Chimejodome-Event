@@ -5,7 +5,7 @@
         <div class="bg-pink-100 py-2 px-4">
             <h2 class="text-xl font-semibold text-gray-800">Event</h2>
         </div>
-        
+
         <ul class="divide-y divide-gray-200">
             @foreach ($events as $event)
                 <li class="flex items-center py-4 px-6 hover:bg-gray-50">
@@ -13,7 +13,8 @@
                     <div class="flex-1">
                     <a href="{{ route('events.kanban', ['event' => $event]) }}">
                             <h3 class="text-lg font-medium text-gray-800">{{ $event->name }}</h3>
-                            <img src="{{ asset('storage/' . $event->post) }}">
+                            <img class="h-[20rem]" src="{{ asset('storage/' . $event->poster) }}">
+
 
                     </a>
                         <p class="text-gray-600 text-base"></p>
@@ -32,7 +33,8 @@
                     <div class="flex-1">
                     <a href="{{ route('events.kanban', ['event' => $event]) }}">
                             <h3 class="text-lg font-medium text-gray-800">{{ $event->name }}</h3>
-                            <img src="{{ asset('storage/' . $event->post) }}">
+                            <img class="h-[20rem]" src="{{ asset('storage/' . $event->poster) }}">
+
 
                     </a>
                         <p class="text-gray-600 text-base"></p>

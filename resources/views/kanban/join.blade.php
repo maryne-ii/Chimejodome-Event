@@ -19,7 +19,7 @@
                                 <h3 class="text-lg font-medium text-gray-800">เบอร์โทรศัพท์:{{''}} {{(App\Models\User::find($record->user_id))->tel ? (App\Models\User::find($record->user_id))->tel : '-'}}</h3>
                                 @if ($record->image_for_event == '-')
                                 @else
-                                <h3 class="text-lg font-medium text-gray-800">รูป:<img src="{{ asset('storage/' . $record->image_for_event) }}" style="width: 300px; height: 300px;"></h3>
+                                <h3 class="text-lg font-medium text-gray-800">รูป:<img src="{{ asset('storage/' . $record->image_for_event) }}" style="width: 150px; height: 200px;"></h3>
                                 @endif
 
 

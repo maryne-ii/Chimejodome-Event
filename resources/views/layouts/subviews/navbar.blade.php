@@ -1,7 +1,8 @@
 <nav class="bg-white border-gray-200 py-6 flex justify-between px-20 text-kuGreen">
     <div class=" flex gap-14 justify-start items-center ">
         <a href="{{App\Providers\RouteServiceProvider::HOME}}" class="pr-15">
-            <img src="http://localhost/kuLogo.png" class="h-7 w-auto pt-2 mr-3 sm:h-12" alt="Logo">
+            {{-- <img src="http://localhost/kuLogo.png" class="h-7 w-auto pt-2 mr-3 sm:h-12" alt="Logo"> --}}
+            <img src="{{env('APP_URL')."/".'kuLogo.png'}}" class="h-7 w-auto pt-2 mr-3 sm:h-12" alt="Logo">
         </a>
         <!-- <div class="flex items-center lg:order-2">
             <div class="hidden mt-2 ml-4 sm:inline-block">
@@ -84,12 +85,14 @@
             </li>
             <li class="pr-3">
                 <a href="{{ route('profile.index') }}">
-                    <img src="http://localhost/{{Auth::user()->profile_image ? Auth::user()->profile_image : default_peson.jpeg}}" alt="" class="h-10 w-10 rounded-full">
+                    {{-- <img src="http://localhost/{{Auth::user()->profile_image ? Auth::user()->profile_image : default_peson.jpeg}}" alt="" class="h-10 w-10 rounded-full"> --}}
+                    <img src="{{ asset('storage/' . Auth::user()->profile_image) }}" class="h-10 w-10 rounded-full">
                 </a>
             </li>
             <li class="flex justify-center items-center">
                 <button id="dropdownDelayButton" data-dropdown-placement="right" data-dropdown-offset-skidding="110" data-dropdown-offset-distance="-40" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="500" data-dropdown-trigger="hover" class="" type="button">
-                    <img src="http://localhost/manuIcon1.png" alt="" class="h-10 w-10 ">
+                    {{-- <img src="http://localhost/manuIcon1.png" alt="" class="h-10 w-10 "> --}}
+                    <img src="{{env('APP_URL')."/".'manuIcon1.png'}}" alt="" class="h-10 w-10 ">
                     <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4" />
                     </svg>
                 </button>

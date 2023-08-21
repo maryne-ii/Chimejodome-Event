@@ -27,7 +27,7 @@
                             <div class="text-xl">รูป poster</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="file" id="name"  class="border border-gray-300 shadow p-3 w-full rounded mb-" name="poster" required>
+                            <input type="file" id="poster"  class="border border-gray-300 shadow p-3 w-full rounded mb-" name="poster" required>
                         </div>
                         <div class="col-span-4">
                             <div class="text-xl">ชื่อผู้จัด</div>
