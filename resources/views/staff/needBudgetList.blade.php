@@ -17,16 +17,51 @@
                             <span class="text-gray-700 text-lg font-medium mr-4">{{ $loop->iteration }}.</span>
 
                             <div class="flex flex-col">
-                                <h3 class="text-md font-medium text-gray-800">{{ $event->name }}</h3>
+                                <h3 class="text-md font-medium text-gray-800">Header: {{ $event->name }}</h3>
+                                <h3 class="text-lg font-medium text-gray-800">Budget: {{ $event->budget }}</h3>
+                            <h3 class="text-lg font-medium text-gray-800">organizeTotal: {{ $event->organizer_total }}</h3>
+                            <h3 class="text-lg font-medium text-gray-800">userJoinTotal: {{ $event->participant_total }}</h3>
+                            <h3 class="text-lg font-medium text-gray-800">bank account: {{ $event->bank_account_number }}</h3>
                                 <img class="h-30 w-20"src="{{$event->poster}}">
+                                
                                 @if ($event->status === 0)
-                                    <p>processing ..</p>
+                                    <p>event status: processing ..</p>
                                 @elseif ($event->status === 1)
-                                    <p>Complete</p>
+                                    <p>event status: Complete</p>
                                 @endif
                             </div>
                         </div>
                         <button type="submit" class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white">Accept</button>
+                    </li>
+                </form>
+            @endforeach
+        </ul>
+    </div>
+
+    <div class="bg-white shadow-md rounded-md overflow-hidden max-w-lg mx-auto mt-16">
+        <div class="bg-pink-100 py-2 px-4">
+            <h2 class="text-xl font-semibold text-gray-800">Event List Complete</h2>
+        </div>
+        <div>
+
+        </div>
+
+        <ul class="divide-y divide-gray-200">
+            @foreach ($events2 as $event)
+                <form class="" action="{{route('acceptBudget', ['event' => $event]) }}">
+                    <li class="flex items-center justify-between py-4 px-6 hover:bg-gray-50">
+                        <div class="flex items-center">
+                            <span class="text-gray-700 text-lg font-medium mr-4">{{ $loop->iteration }}.</span>
+
+                            <div class="flex flex-col">
+                                <h3 class="text-md font-medium text-gray-800">Header: {{ $event->name }}</h3>
+                                <h3 class="text-lg font-medium text-gray-800">Budget: {{ $event->budget }}</h3>
+                            <h3 class="text-lg font-medium text-gray-800">organizeTotal: {{ $event->organizer_total }}</h3>
+                            <h3 class="text-lg font-medium text-gray-800">userJoinTotal: {{ $event->participant_total }}</h3>
+                            <h3 class="text-lg font-medium text-gray-800">bank account: {{ $event->bank_account_number }}</h3>
+                                <img class="h-30 w-20"src="{{$event->poster}}">
+                            </div>
+                        </div>
                     </li>
                 </form>
             @endforeach

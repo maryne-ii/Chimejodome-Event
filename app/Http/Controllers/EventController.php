@@ -470,15 +470,29 @@ class EventController extends Controller
         // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
         return view('events.getBudget', ['event' => $event]);
     }
-    public function needBudget(Request $request, Event $event):RedirectResponse
+    public function needBudget(Request $request, Event $event)
     {
+        // $user=User::get()->where('id',2);
         // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
 
         DB::table('events')->where('id', $event->id)->update(['budget' => $request->budget,
                                                             'detail' => $request->detail,
                                                             'bank_account_number' => $request->bank_account_number]);
+
+        $kanbans0 = KanbanNote::get()->where('status',0)->where('event_id',$event->id);
+        $kanbans1 = KanbanNote::get()->where('status',1)->where('event_id',$event->id);
+        $kanbans2 = KanbanNote::get()->where('status',2)->where('event_id',$event->id);
+        $kanbans3 = KanbanNote::get()->where('status',3)->where('event_id',$event->id);
+
+                                                            
 //        return view('events.getBudget', ['event' => $event]);
-    return redirect()->back();
+         return view('events.kanban', [
+    'event' => $event,
+    'kanbans0' => $kanbans0,
+    'kanbans1' => $kanbans1,
+    'kanbans2' => $kanbans2,
+    'kanbans3' => $kanbans3
+]);
     }
     public function needBudgetList()
     {
@@ -488,17 +502,23 @@ class EventController extends Controller
 //        $events = DB::table('events')->where('budget', '<>','null')->get();
 //        echo $eventList;
 //        $events = DB::table('events')->whereNotNull('budget')->get();
-        $events = Event::whereNotNull('budget')->get();
+
+
+        $events = Event::whereNotNull('budget')->where('budgetStatus',0)->get();
+        $events2 = Event::whereNotNull('budget')->whereNotNull('user_id')->where('budgetStatus',1)->get();
+        // $events = $user->confirms;
 
         return view('staff.needBudgetList', [
             'events' => $events,
-            'user' => $user
+            'user' => $user,
+            'events2'=>$events2
         ]);
     }
     public function acceptBudget(Request $request, Event $event)
     {
-        $user = Auth::user();
-        DB::table('events')->where('id', $event->id)->update(['user_id' => $user->id]); // staff useri_d
+        $user = Auth::user();      
+        DB::table('events')->where('id', $event->id)->update(['user_id' => $user->id,
+    'budgetStatus'=>1]); // staff useri_d
         return redirect()->route('needBudgetList');
     }
 

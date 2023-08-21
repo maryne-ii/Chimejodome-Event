@@ -24,6 +24,7 @@ return new class extends Migration
             $table->integer('participant_total')->default(0);
             $table->integer('organizer_total')->default(0);
             $table->string('budget')->nullable();
+            $table->integer('budgetStatus')->default(0);
             $table->string('location')->nullable();
             $table->datetime('start_date')->nullable();
             $table->datetime('end_date')->nullable();

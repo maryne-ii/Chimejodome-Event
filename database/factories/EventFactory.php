@@ -27,7 +27,6 @@ class EventFactory extends Factory
             'bank_account_number'=>fake()->bankAccountNumber(),
             'participant_total' =>fake()->numberBetween(10,100),
             'organizer_total'=>fake()->numberBetween(1,30),
-            'budget'=>fake()->numberBetween(500,3000),
             'location'=>fake()->city(),//เดี๋ยวแก้ *ใช้ได้แต่ไม่สวย
             'status'=>1,
             'start_date'=>fake()->dateTimeBetween('0 week', '+4 week')

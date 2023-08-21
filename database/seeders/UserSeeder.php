@@ -129,6 +129,37 @@ class UserSeeder extends Seeder
         $user2->joins()->attach($event);//user2(นักเรียนธรรมดา)เข้าร่วมevent(เข้าร่วม 3 event)
         $user3->organizes()->attach($event);
         $user3->organizes()->attach($event2);//user3(นักเรียนที่สร้างevent)สร้างevent
+
+        $user4 = User::factory()//create student
+        ->state(new Sequence(
+            ['faculty' => 'comsci'],
+            ['faculty' => 'engineer'],//faculty
+            ['faculty' => 'art'],
+        ))
+        ->state(new Sequence(
+            fn (Sequence $sequence) => [
+            // 'password' => Hash::make("password"),//password
+            // 'password' => "password",//password
+            'year' =>fake()->numberBetween(1,4)//year
+        ],
+        ))
+        ->create(
+           ['role'=>2]);
+
+
+        // $user4 = User::factory()->count(1)->create();
+        $event3 = Event::factory()->count(40) 
+        ->state(new Sequence(
+            ['location' => 'KU HALL'],
+            ['location' => 'KU CENTER'],//faculty
+            ['location' => 'KU COMSCI SPECIAL EVENT HALL'],
+            ['location' => 'KU SPORT YARD'],
+        ))
+        ->state(new Sequence(
+            ['header' => $user4->name],
+        ))
+        ->create();
+        $user4->organizes()->attach($event3);
         
 
 
