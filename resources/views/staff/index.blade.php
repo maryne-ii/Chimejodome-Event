@@ -9,6 +9,9 @@
                     <div class="flex-1">
                     <a href="{{ route('users.show', ['event' => $event]) }}">
                             <h3 class="text-lg font-medium text-gray-800">{{ $event->name }}</h3>
+                            <h3 class="text-lg font-medium text-gray-800">{{ $event->budget }}</h3>
+                            <h3 class="text-lg font-medium text-gray-800">{{ $event->organizer_total }}</h3>
+                            <h3 class="text-lg font-medium text-gray-800">{{ $event->participant_total }}</h3>
                             <img src="{{ asset('storage/' . $event->poster) }}">
 
                     </a>

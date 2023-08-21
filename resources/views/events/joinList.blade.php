@@ -8,10 +8,10 @@
     </div>
             <ul class="divide-y divide-gray-200">
                 @foreach ($records as $record)
-                
+                <a class="flex items-center py-4 px-6 hover:bg-gray-50" href="{{ route('events.show', ['event' => App\Models\Event::find($record->event_id)]) }}">
                     <span class="text-gray-700 text-lg font-medium mr-4">{{ $loop->iteration }}.</span>
                     <div class="flex-1">
-                    {{(App\Models\Event::find($record->event_id))->name}}
+                        {{(App\Models\Event::find($record->event_id))->name}}
 
                         <img src="{{(App\Models\Event::find($record->event_id))->poster}}" alt="">
                         <h3 class="text-lg font-medium text-gray-800">{{(App\Models\Event::find($record->event_id))->header}}</h3>
@@ -44,11 +44,6 @@
                 </a>
                 @endforeach
             </ul>
-<<<<<<< HEAD
-           
-=======
 
->>>>>>> e70da2bd52eb66fa9632589c2d68a139b3cf4c4b
     </div>
-</div>
 @endsection
