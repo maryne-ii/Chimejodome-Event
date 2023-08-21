@@ -153,7 +153,7 @@ Route::get('/dashboard', function () {
 Route::middleware('auth')->group(function () {
     // Route::resource('/profile', ProfileController::class);
 
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
 

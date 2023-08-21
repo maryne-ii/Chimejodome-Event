@@ -9,15 +9,20 @@
             <form action="{{ route('events.store') }}" method="POST">
                 @csrf
                 <div>
+                    <div>
+                        @error('name')
+                            <div class="text-red-600">{{'The Event name has already been taken'}}<br>{{'please choose new Event name and resubmit'}}</div>
+                        @enderror
+                    </div>
                     <span class="flex space-x-8 mb-8">
                         <label for="name" class="block mb-4 mt-6 font-bold text-gray-600">Event Name</label>
                         <input type="text" class="py-8 px-5 mt-6 rounded-full bg-[#D9D9D9] text-black flex-1 h-7" id="name" name="name" autocomplete="off" placeholder="Put in event name" >
                     </span>
-                    
+
                     <div class="flex justify-center space-x-8">
                         <button type="submit" class="flex-1 block bg-blue-500 mt-8 text-white font-bold p-2 rounded-full">Submit</button>
                         <button type="submit" class="flex-1 block bg-red-500 mt-8 text-white font-bold p-2 rounded-full">Cancel</button>
-                    </div>  
+                    </div>
                 </div>
             </form>
         </div>

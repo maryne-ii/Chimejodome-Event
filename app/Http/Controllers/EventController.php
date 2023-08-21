@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Validator;
 
 
 class EventController extends Controller
@@ -111,7 +112,7 @@ class EventController extends Controller
         $event->save();
 
         $event->organizes()->attach($user->id);
-        return redirect()->route('events.index');
+        return redirect()->route('events.index')->with('success', 'User attached successfully');
     }
 
     public function disbursement(Event $event)
@@ -183,7 +184,9 @@ class EventController extends Controller
     {
         $event_name = $request->get('name');
         $event_header = $request->get('header');
-
+        $request->validate([
+            'name' => ['required','unique:events,name']
+        ]);
         if ($event_name == null) {
             return redirect()->back();
         }
@@ -203,7 +206,7 @@ class EventController extends Controller
         $event->save();
 
         $event->organizes()->attach($user->id);
-        return redirect()->route('events.manage');
+        return redirect()->route('events.manage')->with('success', 'User attached successfully');
     }
 
     /**
@@ -461,7 +464,7 @@ class EventController extends Controller
         $event->status =1;
 
         $event->save();
-        return redirect()->route('events.index');
+        return redirect()->route('events.index')->with('success', 'User attached successfully');
     }
 
     /**
