@@ -5,14 +5,10 @@
     <div class="bg-white h-full px-14 py-5 rounded-3xl shadow-lg">
         <div class="font-bold text-3xl">ของบประมาณ</div>
         <hr class="border-1 rounded-full mt-5 mb-5 border-[rgb(161,199,123)] ">
-        <form action="{{ route('events.needBudget', ['event' => $event])}}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('sendRequestBudget', ['event' => $event])}}" method="GET" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="">
-                <!-- <div class="col-span-3 flex flex-col justify-start items-center gap-10">
-                    <img src="{{Auth::user()->profile_image ? Auth::user()->profile_image : default_peson.jpeg}}" class="rounded-full h-48 w-48" alt="">
-                    <textarea id="bio" rows="5" class="resize-none block p-2.5 w-full text-sm text-gray-900 bg-[#D9D9D9] rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your bio here..."></textarea>
-                </div> -->
                 <div class="grid mt-10 pt-7 place-items-center ">
                     <img class="h-[20rem]" src="http://localhost/{{$event->poster}}" alt="event poster">
                 </div>
@@ -26,12 +22,6 @@
                         <div class="col-span-8">
                             <input type="text" disabled readonly class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->name ? $event->name : ''}}" name="name">
                         </div>
-                        <!-- <div class="col-span-4">
-                            <div class="text-xl">รูป poster</div>
-                        </div>
-                        <div class="col-span-8">
-                            <input type="file" id="name"  class="border border-gray-300 shadow p-3 w-full rounded mb-" name="poster">
-                        </div> -->
 
                         <div class="col-span-4">
                             <div class="text">รายละเอียด</div>
@@ -44,7 +34,7 @@
                             <div class="number">จำนวนผู้จัด</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="number" disabled readonly class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->organizer_total ? $event->organizer_total : 0}}" mnae="organizer_total">
+                            <input type="number" disabled readonly class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->organizer_total ? $event->organizer_total : 0}}" name="organizer_total">
                         </div>
                         <div class="col-span-4">
                             <div class="number">จำนวนผู้เข้าร่วม</div>
@@ -62,7 +52,7 @@
                             <div class="text">เลขที่บัญชี</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="text" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->bank_account ? $event->bank_account : ''}}" name="bank_account">
+                            <input type="text" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{$event->bank_account_number ? $event->bank_account_number : '-'}}" name="bank_account_number">
                         </div>
 
                     </div>

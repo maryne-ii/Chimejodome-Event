@@ -71,6 +71,8 @@ Route::get('/events/{event}/needBudget', [EventController::class, 'needBudgetVie
     ->name('events.needBudget');
 Route::get('/needBudgetList', [EventController::class, 'needBudgetList'])->name('needBudgetList'); // for staff
 Route::get('/{event}/acceptBudget', [EventController::class, 'acceptBudget'])->name('acceptBudget');
+Route::get('/{event}/requestBudget', [EventController::class, 'needBudget'])->name('sendRequestBudget');
+
 
 
 
@@ -156,7 +158,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     // Route::post('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-
+    Route::get('/profile', [ProfileController::class, 'view'])->name('profile.index');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 

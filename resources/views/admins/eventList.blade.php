@@ -11,7 +11,7 @@
 
     <ul class="divide-y divide-gray-200">
         @foreach ($events as $event)
-        <form class="" action="{{ ($user->role === 0) ? route('DeleteEvent', ['event' => $event]) : route('acceptBudget', ['event' => $event]) }}">
+        <form class="" action="{{route('DeleteEvent', ['event' => $event]) }}">
             <li class="flex items-center justify-between py-4 px-6 hover:bg-gray-50">
                 <div class="flex items-center">
                     <span class="text-gray-700 text-lg font-medium mr-4">{{ $loop->iteration }}.</span>
@@ -25,11 +25,7 @@
                         @endif
                     </div>
                 </div>
-                @if(($user->role) === 0)
                 <button type="submit" class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white">Delete</button>
-                @elseif(($user()->role) === 1)
-                <button type="submit" class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white">Accept Budget</button>
-                @endif
             </li>
         </form>
         @endforeach

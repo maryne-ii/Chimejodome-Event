@@ -4,8 +4,8 @@
 <div class="px-[20rem] py-6">
     <div class="flex gap-10 items-center justify-center">
 
-        <div class="py-4 px-4 w-full text-center bg-white rounded-full">Event Name</div>
-        <div class="py-4 px-4 w-full text-center bg-white rounded-full">ลงบอร์ด</div>
+        <div class="py-4 px-4 w-full text-center bg-white rounded-full">{{$event->name}}</div>
+        <div class="py-4 px-4 w-full text-center bg-white rounded-full"><a href="{{route('events.edit',['event'=>$event])}}">ลงบอร์ด</a></div>
         <div class="py-4 px-4 w-full text-center bg-white rounded-full">ผู้เข้าร่วม</div>
         <div class="py-4 px-4 w-full text-center bg-white rounded-full"><a href="{{route('events.needBudget',['event'=>$event])}}">เบิกงบกิจกรรม</a></div>
         <div class="py-4 px-4 w-full text-center bg-white rounded-full">สมาชิก</div>
@@ -120,7 +120,7 @@
                     <div class="flex-1">
                     <form action="{{ route('kanban.move',['kanban'=>$kanban,'event'=>$event]) }}" method="GET" enctype="multipart/form-data">
                     @csrf
-                    
+
                     @method('PUT')
                             <h3 id ='name' name='name' class="text-lg font-medium text-gray-800">{{ $kanban->task_name }}</h3>
                             <h3 class="text-lg font-medium text-blue-800">{{ $kanban->writer }}</h3>
@@ -145,7 +145,7 @@
                     <div class="flex-1">
                     <form action="{{ route('kanban.move',['kanban'=>$kanban,'event'=>$event]) }}" method="GET" enctype="multipart/form-data">
                     @csrf
-                    
+
                     @method('PUT')
                             <h3 id ='name' name='name' class="text-lg font-medium text-gray-800">{{ $kanban->task_name }}</h3>
                             <h3 class="text-lg font-medium text-blue-800">{{ $kanban->writer }}</h3>
@@ -169,7 +169,7 @@
                     <div class="flex-1">
                     <form action="{{ route('kanban.move',['kanban'=>$kanban,'event'=>$event]) }}" method="GET" enctype="multipart/form-data">
                     @csrf
-                    
+
                     @method('PUT')
                             <h3 id ='name' name='name' class="text-lg font-medium text-gray-800">{{ $kanban->task_name }}</h3>
                             <h3 class="text-lg font-medium text-blue-800">{{ $kanban->writer }}</h3>

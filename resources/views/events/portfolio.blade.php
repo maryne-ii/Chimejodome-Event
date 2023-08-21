@@ -4,7 +4,7 @@
 
     <ul class="divide-y divide-gray-200">
         @foreach ($records as $record)
-        @if((App\Models\Event::find($record->event_id))->status === 1)
+        @if((App\Models\Event::find($record->status === 1)))
         <div class="bg-white p-10 mt-8 flex flex-col items-center rounded-lg shadow md:w-3/4 mx-auto lg:w-1/2">
             <h1 class="text-black font-bold text-5xl mb-4">Certificate</h1>
             <h1 class="text-black text-large mb-2">of Appreciation</h1>

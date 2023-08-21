@@ -6,11 +6,13 @@ use App\Models\Event;
 use App\Models\KanbanNote;
 use App\Models\User;
 use Illuminate\Auth\Access\Gate;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Factories\Sequence;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Validator;
 
 
@@ -112,7 +114,7 @@ class EventController extends Controller
         $event->save();
 
         $event->organizes()->attach($user->id);
-        return redirect()->route('events.index')->with('success', 'User attached successfully');
+        return redirect()->route('events.index');
     }
 
     public function disbursement(Event $event)
@@ -353,28 +355,35 @@ class EventController extends Controller
         // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
         return view('events.getBudget', ['event' => $event]);
     }
-    public function needBudget(Request $request, Event $event)
+    public function needBudget(Request $request, Event $event):RedirectResponse
     {
         // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
 
         DB::table('events')->where('id', $event->id)->update(['budget' => $request->budget,
                                                             'detail' => $request->detail,
-                                                            'bank_account' => $request->bank_account]);
-        return redirect()->back();
+                                                            'bank_account_number' => $request->bank_account_number]);
+//        return view('events.getBudget', ['event' => $event]);
+    return redirect()->back();
     }
     public function needBudgetList()
     {
         // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
         $user = Auth::user();
-        $eventList = DB::table('events')->where('budget', '!=', 0)->orWhereNull('budget')->get();
-        return view('admins.eventList', [
-            'events' => $eventList,
+//        $eventList = Event::get()->where('budget', '!=', 0)->orWhereNull('budget')->get();
+//        $events = DB::table('events')->where('budget', '<>','null')->get();
+//        echo $eventList;
+//        $events = DB::table('events')->whereNotNull('budget')->get();
+        $events = Event::whereNotNull('budget')->get();
+
+        return view('staff.needBudgetList', [
+            'events' => $events,
             'user' => $user
         ]);
     }
     public function acceptBudget(Request $request, Event $event)
     {
-        DB::table('events')->where('id', $event->id)->update(['user_id' =>Auth::user()->id]); // staff useri_d
+        $user = Auth::user();
+        DB::table('events')->where('id', $event->id)->update(['user_id' => $user->id]); // staff useri_d
         return redirect()->route('needBudgetList');
     }
 
@@ -464,7 +473,7 @@ class EventController extends Controller
         $event->status =1;
 
         $event->save();
-        return redirect()->route('events.index')->with('success', 'User attached successfully');
+        return redirect()->route('events.index');
     }
 
     /**

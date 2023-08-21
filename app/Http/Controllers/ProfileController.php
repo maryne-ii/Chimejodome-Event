@@ -36,6 +36,12 @@ class ProfileController extends Controller
         ]);
     }
 
+    public function view(Request $request): View
+    {
+        return view('profile.index', [
+            'user' => $request->user(),
+        ]);
+    }
 
 
     public function delete(Request $request, User $user)
@@ -102,7 +108,7 @@ class ProfileController extends Controller
         //     'instagram_account' => $request->get('instagram_account')
         // ]);
         // print_r($request->get('id'));
-        return redirect()->route('profile.index')->with('success','You profile have updated');
+        return redirect()->route('profile.index');
     }
     public function storeJoinUser(Request $request,User $user)
     {
