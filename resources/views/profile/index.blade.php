@@ -17,7 +17,7 @@
         <div class="grid grid-cols-12 mt-3">
             <div class="col-span-3 flex flex-col justify-start items-center gap-10">
                 <img src="http://localhost/{{Auth::user()->profile_image ? Auth::user()->profile_image : default_peson.jpeg}}" class="rounded-full h-48 w-48" alt="">
-                <textarea readonly disabled rows="5" class="resize-none block p-2.5 w-full text-sm text-gray-900 bg-[#D9D9D9] rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your bio here..."></textarea>
+                <textarea readonly disabled rows="5" class="resize-none block p-2.5 w-full text-sm text-gray-900 bg-[#D9D9D9] rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Write your bio here...">{{Auth::user()->bio ? Auth::user()->bio : '-'}}</textarea>
             </div>
             <div class="col-span-9">
                 <div class="grid grid-cols-12 px-10 py-2 gap-3">
