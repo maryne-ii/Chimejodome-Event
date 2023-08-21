@@ -497,9 +497,13 @@ class EventController extends Controller
     {
         $events = Event::get();
         $user = Auth::user();
+        $records = DB::table('user_join_event')->where('user_id', $user->id)->get();
+        $status = DB::table('user_join_event')->get();
         return view('events.portfolio',[
             'events' => $events,
-            'user' => $user
+            'user' => $user,
+            'records' => $records,
+            'status' => $status
         ]);
     }
 }
