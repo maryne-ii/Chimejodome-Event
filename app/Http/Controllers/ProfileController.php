@@ -109,7 +109,7 @@ class ProfileController extends Controller
         //     'instagram_account' => $request->get('instagram_account')
         // ]);
         // print_r($request->get('id'));
-        return redirect()->route('profile.index');
+        return redirect()->route('profile.index')->with('success','You profile have updated');
     }
     public function storeJoinUser(Request $request,User $user)
     {

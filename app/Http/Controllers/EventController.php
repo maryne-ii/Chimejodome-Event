@@ -217,7 +217,7 @@ class EventController extends Controller
         $event->save();
 
         $event->organizes()->attach($user->id);
-        return redirect()->route('events.index');
+        return redirect()->route('events.index')->with('success', 'User attached successfully');
     }
 
     public function disbursement(Event $event)
@@ -584,7 +584,7 @@ class EventController extends Controller
         $event->status =1;
 
         $event->save();
-        return redirect()->route('events.index');
+        return redirect()->route('events.index')->with('success', 'User attached successfully');
     }
 
     /**

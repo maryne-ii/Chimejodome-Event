@@ -1,6 +1,6 @@
 <nav class="bg-white border-gray-200 py-6 flex justify-between px-20 text-kuGreen">
     <div class=" flex gap-14 justify-start items-center ">
-        <a href="{{route('login')}}" class="pr-15">
+        <a href="{{App\Providers\RouteServiceProvider::HOME}}" class="pr-15">
             <img src="http://localhost/kuLogo.png" class="h-7 w-auto pt-2 mr-3 sm:h-12" alt="Logo">
         </a>
         <!-- <div class="flex items-center lg:order-2">
@@ -57,6 +57,11 @@
             <span>
                 <a href="{{route('events.organizeList')}}">Organize List</a>
             </span>
+            <span>
+                <a href="{{ route('events.portfolio') }}">
+                    portfolio
+                </a>
+            </span>
             @endif
 
     </div>
@@ -78,7 +83,9 @@
                 </div>
             </li>
             <li class="pr-3">
-                <img src="http://localhost/{{Auth::user()->profile_image ? Auth::user()->profile_image : default_peson.jpeg}}" alt="" class="h-10 w-10 rounded-full">
+                <a href="{{ route('profile.index') }}">
+                    <img src="http://localhost/{{Auth::user()->profile_image ? Auth::user()->profile_image : default_peson.jpeg}}" alt="" class="h-10 w-10 rounded-full">
+                </a>
             </li>
             <li class="flex justify-center items-center">
                 <button id="dropdownDelayButton" data-dropdown-placement="right" data-dropdown-offset-skidding="110" data-dropdown-offset-distance="-40" data-dropdown-toggle="dropdownDelay" data-dropdown-delay="500" data-dropdown-trigger="hover" class="" type="button">
@@ -89,12 +96,12 @@
                 <!-- Dropdown menu -->
                 <div id="dropdownDelay" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44  dark:bg-gray-700">
                     <ul class="py-2  text-sm text-gray-700 dark:text-gray-200" aria-labelledby="dropdownDelayButton">
-                        <li>
+                        {{-- <li>
                             <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</a>
                         </li>
                         <li>
                             <a href="#" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Settings</a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a href="{{ route('profile.index') }}" class="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">My Profile</a>
                         </li>
