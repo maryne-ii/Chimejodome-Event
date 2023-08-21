@@ -57,6 +57,11 @@
             <span>
                 <a href="{{route('events.organizeList')}}">Organize List</a>
             </span>
+            <span>
+                <a href="{{ route('events.portfolio') }}">
+                    portfolio
+                </a>
+            </span>
             @endif
 
     </div>
