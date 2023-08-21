@@ -72,7 +72,8 @@ class ProfileController extends Controller
         $id = $request->get('id');
         $user = User::find($id);
         $request->validate([
-            'name' => ['required', 'min:4', 'max:255']
+            'name' => ['required', 'min:4', 'max:255'],
+            'tel' => ['integer'],
         ]);
         $user->name = $request->get('name');
         $user->year = $request->get('year');
@@ -81,6 +82,7 @@ class ProfileController extends Controller
         $user->facebook_account = $request->get('facebook_account');
         $user->line_account = $request->get('line_account');
         $user->instagram_account = $request->get('instagram_account');
+        $user->bio = $request->get('bio');
         if ($request->file('profile_image')) {
             $image_file = $request->file('profile_image'); // image->poster
             $file_name = now()->getTimestamp() . "." . $image_file->getClientOriginalExtension();
