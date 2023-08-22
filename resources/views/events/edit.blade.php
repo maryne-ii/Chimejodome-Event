@@ -77,9 +77,10 @@
             </div>
             <div class="flex justify-center items-center mt-3">
                 <button type="submit" class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white">Submit</button>
+            </div>
         </form>
 
     </div>
 </div>
-</div>
+
 @endsection

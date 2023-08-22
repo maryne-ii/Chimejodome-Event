@@ -24,31 +24,31 @@
                             <div class="text-xl">ชื่อ-นามสกุล</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="text"  value="{{Auth::user()->name}}" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value='{{Auth::user()->year}}' name="name" readonly>
+                            <input type="text"  value="{{Auth::user()->name}}" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value='{{Auth::user()->year}}' name="name" >
                         </div>
                         <div class="col-span-4">
                             <div class="text-xl">ชั้นปี</div>
                         </div>
                         <div class="col-span-8">
-                        <input type="number" value="{{Auth::user()->year}}" id="disabled-input-2" min="1" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"  name="header" readonly>
+                        <input type="number" value="{{Auth::user()->year}}" id="disabled-input-2" min="1" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"  name="header" >
                         </div>
                         <div class="col-span-4">
                             <div class="text-xl">คณะ</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="text" value="{{Auth::user()->faculty}}" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"  name="header" readonly>
+                            <input type="text" value="{{Auth::user()->faculty}}" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"  name="header" >
                         </div>
                         <div class="col-span-4">
                             <div class="text-xl">อีเมล</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="text" value="{{Auth::user()->email}}" id="disabled-input-2" aria-label="disabled input 2" cursor-not-allowed class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"  name="detail" readonly>
+                            <input type="text" value="{{Auth::user()->email}}" id="disabled-input-2" aria-label="disabled input 2" cursor-not-allowed class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"  name="detail" >
                         </div>
                         <div class="col-span-4">
                             <div class="text-xl">เบอร์</div>
                         </div>
                         <div class="col-span-8">
-                            <input type="text" value="{{Auth::user()->tel}}" id="disabled-input-2" aria-label="disabled input 2" cursor-not-allowed class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"  name="detail" readonly>
+                            <input type="text" value="{{Auth::user()->tel}}" id="disabled-input-2" aria-label="disabled input 2" cursor-not-allowed class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"  name="detail" >
                         </div>
                         <div class="col-span-4">
                             <div class="text-xl">อัพโหลด รูปภาพ</div>

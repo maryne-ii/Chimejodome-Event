@@ -69,6 +69,8 @@ Route::get('/events/{event}/edit', [EventController::class, 'edit']) // edit dat
     ->name('events.edit');
 Route::get('/events/{event}/needBudget', [EventController::class, 'needBudgetView']) // for student need budget
     ->name('events.needBudget');
+Route::get('/events/{event}/header', [EventController::class, 'header']) // edit data of event and complete an event
+->name('events.header');
 Route::get('/needBudgetList', [EventController::class, 'needBudgetList'])->name('needBudgetList'); // for staff
 Route::get('/{event}/acceptBudget', [EventController::class, 'acceptBudget'])->name('acceptBudget');
 Route::get('/{event}/requestBudget', [EventController::class, 'needBudget'])->name('sendRequestBudget');
@@ -109,7 +111,7 @@ Route::get('/manage/{event}/kanban/addJoin', [EventController::class, 'addJoin']
     ->name('kanban.addJoin');
 Route::get('/manage/{event}/kanban/deleteJoin', [EventController::class, 'deleteJoin'])
     ->name('kanban.deleteJoin');
-    
+
 
 Route::get('/manage/{event}/kanban/member', [EventController::class, 'member'])
     ->name('kanban.member');
@@ -169,6 +171,8 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::get('/profile', [ProfileController::class, 'view'])->name('profile.index');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/profile/{user}', [ProfileController::class, 'show'])->name('profile.user');
+
 });
 
 require __DIR__ . '/auth.php';

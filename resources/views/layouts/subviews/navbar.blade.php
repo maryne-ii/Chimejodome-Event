@@ -50,19 +50,26 @@
             </span>
             @elseif((Auth::user())->role === 2)
             <span>
-                <a href="{{route('events.index')}}">Event List</a>
+                <a href="{{route('events.index')}}">Event</a>
             </span>
             <span>
-                <a href="{{route('events.joinList')}}">Join List</a>
+                <a href="{{route('events.joinList')}}">Join Event</a>
             </span>
             <span>
-                <a href="{{route('events.organizeList')}}">Organize List</a>
+                <a href="{{route('events.organizeList')}}">Organize Event</a>
             </span>
-            <span>
-                <a href="{{ route('events.portfolio') }}">
-                    portfolio
+                <span>
+                <a  href="{{ route('events.manage') }}">
+                    My Event
                 </a>
-            </span>
+                </span>
+            <span><a  href="{{ route('events.portfolio') }}">
+                portfolio
+            </a></span>
+                <span><a  href="{{ route('events.create') }}">
+                    Create Event
+                </a>
+                </span>
             @endif
 
     </div>
@@ -86,7 +93,7 @@
             <li class="pr-3">
                 <a href="{{ route('profile.index') }}">
                     {{-- <img src="http://localhost/{{Auth::user()->profile_image ? Auth::user()->profile_image : default_peson.jpeg}}" alt="" class="h-10 w-10 rounded-full"> --}}
-                    <img src="{{ asset('storage/' . Auth::user()->profile_image) }}" class="h-10 w-10 rounded-full">
+                    <img src="{{ env('APP_URL')."/". Auth::user()->profile_image}}" class="h-10 w-10 rounded-full">
                 </a>
             </li>
             <li class="flex justify-center items-center">

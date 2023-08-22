@@ -148,3 +148,31 @@ h3.text-5xl{
     z-index: 1000;
     padding: 50px;
 }
+
+/* custom-pagination.css */
+
+.custom-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.custom-pagination a {
+    padding: 8px 12px;
+    margin: 0 4px;
+    color: #333;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.custom-pagination a:hover {
+    background-color: #f4f4f4;
+}
+
+.custom-pagination .active {
+    background-color: #007bff;
+    color: #fff;
+}
+

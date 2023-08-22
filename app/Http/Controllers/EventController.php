@@ -29,7 +29,9 @@ class EventController extends Controller
     {
         $user =Auth::user();
 
-        $events = Event::get()->where('status', 1);
+//        $events = Event::get()->where('status', 1)->paginate(16);
+        $events = Event::where('status', 1)->paginate(16);
+
         return view('events.index', [
             'events' => $events
         ]);
@@ -106,11 +108,14 @@ class EventController extends Controller
     {
         // $events = $event->joins;
         // $userss = User::get()->where('role','12345');
-        $userss = User::get();
+
         $users = $event->organizes;
+        $users2 = User::whereNotIn('role', [0, 1])
+            ->whereNotIn('id', $event->organizes->pluck('id')->toArray())
+            ->get();
         return view('kanban.member', [
             'users' => $users,
-            'userss' => $userss,
+            'userss' => $users2,
             'event' =>$event
 
         ]);
@@ -118,7 +123,9 @@ class EventController extends Controller
 
     public function seachMember(Request $request,Event $event) {
 
-        $userss = User::get()->where('name',$request->get('name'));
+        $userss = User::whereNotIn('role', [0, 1])
+            ->whereNotIn('id', $event->organizes->pluck('id')->toArray())
+            ->get()->where('name',$request->get('name'));
         $users = $event->organizes;
         // if ($userss = User::get()->where('name',$request->get('name')) == null) {
         //     return redirect()->back();
@@ -151,7 +158,9 @@ class EventController extends Controller
         $event->organizes()->attach($user->id);
 
         // dd($user);
-        $userss = User::get();
+        $userss = User::whereNotIn('role', [0, 1])
+            ->whereNotIn('id', $event->organizes->pluck('id')->toArray())
+            ->get();
         $users = $event->organizes;
 
         return view('kanban.member', [
@@ -484,7 +493,7 @@ class EventController extends Controller
         $kanbans2 = KanbanNote::get()->where('status',2)->where('event_id',$event->id);
         $kanbans3 = KanbanNote::get()->where('status',3)->where('event_id',$event->id);
 
-                                                            
+
 //        return view('events.getBudget', ['event' => $event]);
          return view('events.kanban', [
     'event' => $event,
@@ -516,7 +525,7 @@ class EventController extends Controller
     }
     public function acceptBudget(Request $request, Event $event)
     {
-        $user = Auth::user();      
+        $user = Auth::user();
         DB::table('events')->where('id', $event->id)->update(['user_id' => $user->id,
     'budgetStatus'=>1]); // staff useri_d
         return redirect()->route('needBudgetList');
@@ -533,13 +542,7 @@ class EventController extends Controller
         // Gate::authorize('update', $event); UserPolicy do isJoin in UserModel
         $user = User::findOrFail($request->input('user_id'));
         $event->joins()->attach($user);
-        if ($request->hasFile('image_for_event')) {
-            $path = $request->file('image_for_event')->store('images', 'public');
-
-        }else{
-            $path = '-';
-        }
-        DB::table('user_join_event')->where('user_id', $user->id)->where('event_id', $event->id)->update(['image_for_event' => $path]);
+        DB::table('user_join_event')->where('user_id', $user->id)->where('event_id', $event->id)->update(['image_for_event' => $request->image_for_event]);
         return redirect()->route('events.index')->with('success', 'User attached successfully');
     }
 
@@ -619,14 +622,12 @@ class EventController extends Controller
         $file_name = now()->getTimestamp().".".$image_file->getClientOriginalExtension();
         $image_file->storeAs('public/'.$file_name);
         $image_path = "storage/".$file_name;
-        $event->poster = $path;
+        $event->poster = $image_path;
         $event->status =1;
 
         $event->save();
-        // return redirect()->route('events.index')->with('success', 'User attached successfully');
-        return redirect()->route('events.index')->with('success');
+        return redirect()->route('events.index')->with('success', 'User attached successfully');
     }
-
 
     /**
      * Remove the specified resource from storage.
@@ -668,6 +669,16 @@ class EventController extends Controller
             'user' => $user,
             'records' => $records,
             'status' => $status
+        ]);
+    }
+    public function header(Event $event)
+    {
+        // $user = Auth::user();
+        // $records = DB::table('user_join_event')->where('user_id',$user->id)->get();
+        // $events = $event->joins;
+        $user = $event->header;
+        return view('profile.user', [
+            'user' => $user
         ]);
     }
 }

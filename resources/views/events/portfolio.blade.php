@@ -1,17 +1,17 @@
 @extends('layouts.main')
 
 <style type='text/css'>
-    body, html {
-        margin: 0;
-        padding: 0;
-    }
-    body {
-        color: black;
-        display: table;
-        /* font-family: Georgia, serif; */
-        font-size: 24px;
-        text-align: center;
-    }
+    /*body, html {*/
+    /*    margin: 0;*/
+    /*    padding: 0;*/
+    /*}*/
+    /*body {*/
+    /*    color: black;*/
+    /*    display: table;*/
+    /*    !* font-family: Georgia, serif; *!*/
+    /*    font-size: 24px;*/
+    /*    text-align: center;*/
+    /*}*/
     .container {
         border: 20px solid tan;
         width: 750px;
@@ -64,7 +64,7 @@
                 </div>
 
                 <div class="assignment">
-                    This certificate is proudly presented to 
+                    This certificate is proudly presented to
                 </div>
 
                 <div class="person">
