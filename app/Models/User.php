@@ -4,9 +4,12 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Hash;
 
 class User extends Authenticatable
 {
@@ -21,6 +24,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'tel'
     ];
 
     /**
@@ -42,4 +47,47 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    // public function setPasswordAttribute($password)
+    // {
+    //     $this->attributes['password'] = Hash::make($password);
+    // }
+    // public function events(): BelongsToMany{
+    //     return $this->belongsToMany(Event::class,"user_organize_event");
+    // }
+    public function confirms(): HasMany
+    {
+        return $this->hasMany(Event::class);
+    }
+    public function events(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class);
+    }
+    public function joins(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class, "user_join_event");
+    }
+    public function organizes(): BelongsToMany
+    {
+        return $this->belongsToMany(Event::class, "user_organize_event");
+    }
+
+    public function isAdmin():bool{
+        return $this->role === 0;
+    }
+    public function isStaff():bool{
+        return $this->role === 1;
+    }
+    public function isStudent():bool{
+        return $this->role === 2;
+    }
+
+
+
+    // public function joins(): BelongsToMany{
+    //     return $this->belongsToMany(Event::class)->withPivot('join');
+    // }
+    // public function organizes(): BelongsToMany{
+    //     return $this->belongsToMany(Event::class)->wherePivot('type', 'organize');
+    // }
 }

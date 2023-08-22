@@ -11,6 +11,10 @@ export default {
 
     theme: {
         extend: {
+            colors:{
+                'kuGreen':'#2E8B57',
+                'profileHover': '#9ACD32'
+            },
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
