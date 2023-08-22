@@ -32,7 +32,7 @@
 <div class="grid grid-cols-4 gap-4 mt-10 mr-40 ml-40">
     @foreach ($records as $record)
         <div class="flex flex-col justify-center items-center px-5 py-5 bg-white h-full w-full rounded-md mr-10 ml-10  ">
-            <a href="{{ route('events.show', ['event' => App\Models\Event::find($record->event_id)]) }}">
+            <a href="{{ route('events.kanban', ['event' => App\Models\Event::find($record->event_id)]) }}">
                 <div class="">
                     <p class="text-lg font-medium text-gray-800">{{(App\Models\Event::find($record->event_id))->name}}</p>
                 </div>

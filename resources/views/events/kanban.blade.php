@@ -25,9 +25,11 @@
                     @method('PUT')
                     <h3 id='name' name='name' class="text-lg font-bold text-gray-800">{{ $kanban->task_name }}</h3>
                     <p class="text-sm font-medium text-red-800 break-all"><?= mb_strimwidth($kanban->description, 0, 25, "...") ?></p>
-                    <div class="flex justify-end mt-5">
-                        <button type="submit" class="px-2 py-1  text-white text-xs text-center bg-[#A1C77B] rounded-full">Submit</button>
+                    <p class="text-xs font-medium text-red-800 break-all">{{$kanban->writer}}</p>
 
+                    <div class="flex justify-end mt-5 ">
+{{--                        <button type="submit" name="button" value="0" class="px-2 py-1  text-white text-xs text-center bg-[#A1C77B] rounded-full">Submit</button>--}}
+                        <button type="submit" name="button" value="1" class="px-2 py-1  text-white text-xs text-center bg-[#FF0000] rounded-full">></button>
                     </div>
                 </form>
             </li>
@@ -44,9 +46,12 @@
                     @method('PUT')
                     <h3 id='name' name='name' class="text-lg font-bold text-gray-800">{{ $kanban->task_name }}</h3>
                     <p class="text-sm font-medium text-red-800 break-all"><?= mb_strimwidth($kanban->description, 0, 25, "...") ?></p>
-                    <div class="flex justify-end mt-5">
-                        <button type="submit" class="px-2 py-1  text-white text-xs text-center bg-[#A1C77B] rounded-full">Submit</button>
+                    <p class="text-xs font-medium text-red-800 break-all">{{$kanban->writer}}</p>
 
+                    <div class="flex justify-between p-2 mt-5 ">
+
+                        <button type="submit" name="button" value="0" class="px-2 py-1  text-white text-xs text-center bg-[#A1C77B] rounded-full "><</button>
+                        <button type="submit" name="button" value="1" class="px-2 py-1  text-white text-xs text-center bg-[#FF0000] rounded-full">></button>
                     </div>
                 </form>
             </li>
@@ -63,9 +68,11 @@
                     @method('PUT')
                     <h3 id='name' name='name' class="text-lg font-bold text-gray-800">{{ $kanban->task_name }}</h3>
                     <p class="text-sm font-medium text-red-800 break-all"><?= mb_strimwidth($kanban->description, 0, 25, "...") ?></p>
-                    <div class="flex justify-end mt-5">
-                        <button type="submit" class="px-2 py-1  text-white text-xs text-center bg-[#A1C77B] rounded-full">Submit</button>
+                    <p class="text-xs font-medium text-red-800 break-all">{{$kanban->writer}}</p>
 
+                    <div class="flex justify-between mt-5 ">
+                        <button type="submit" name="button" value="0" class="px-2 py-1  text-white text-xs text-center bg-[#A1C77B] rounded-full "><</button>
+                        <button type="submit" name="button" value="1" class="px-2 py-1  text-white text-xs text-center bg-[#FF0000] rounded-full">></button>
                     </div>
                 </form>
             </li>
@@ -82,17 +89,23 @@
                     @method('PUT')
                     <h3 id='name' name='name' class="text-lg font-bold text-gray-800">{{ $kanban->task_name }}</h3>
                     <p class="text-sm font-medium text-red-800 break-all"><?= mb_strimwidth($kanban->description, 0, 25, "...") ?></p>
-                    <div class="flex justify-end mt-5">
-                        <button type="submit" class="px-2 py-1  text-white text-xs text-center bg-[#A1C77B] rounded-full">Submit</button>
+                    <p class="text-xs font-medium text-red-800 break-all">{{$kanban->writer}}</p>
 
-                    </div>
+                    <div class="flex justify-between mt-5">
+                        <button type="submit" name="button" value="0" class="px-2 py-1  text-white text-xs text-center bg-[#A1C77B] rounded-full "><</button>
+                        <button type="submit" name="button" value="1" class="px-2 py-1  text-white text-xs text-center bg-[#FF0000] rounded-full">></button>
+                     </div>
+
                 </form>
             </li>
             @endforeach
+
         </div>
-    </div>
-</div>
-</div>
+
+        </div>
+
+
+
 <!-- <div class="grid-1">
     <div class="content">
     <a href="{{ route('kanban.createKanbanPage', ['event' => $event]) }}">create kanban</a>

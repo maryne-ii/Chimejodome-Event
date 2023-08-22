@@ -6,20 +6,20 @@
         <div class="">
             <div class="flex flex-row justify-between">
                 <div class="col-span-6 text-left text-xl font-medium pt-10 pb-5">
-                        <p>{{$event->name}}}</p>
+                        <p>{{$event->name}}</p>
                 </div>
                 <div>
                 @if( Auth::check() )
                     @if ($event->joins()->where('user_id', Auth::user()->id)->exists())
                     @elseif ($event->organizes()->where('user_id', Auth::user()->id)->exists())
-                        @elseif ($event->organizes()->whereNotIn('role', [0,1])->exists())
-                    @else
+                        @endif
+                    @if(Auth::user()->role === 2)
                     <div class="col-span-6 text-right pt-10 pb-5">
                         <a class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white" href="{{route('events.join',['event' => $event])}}">
                             Join
                         </a>
                     </div>
-                    @endif
+                            @endif
                 @endif
                 </div>
             </div>
@@ -50,7 +50,7 @@
                             </div>
 
                         </li>
-
+                    @if(Auth::user()->role === 2)
                     <li class="grid grid-cols-12  justify-items-center py-4 px-6 hover:bg-gray-50">
                         <div class="col-span-4">
                             <h3 class="text-sm font-medium text-gray-800 px-2 py-1  text-white text-center bg-[#A1C77B] rounded-md">Location</h3>
@@ -75,6 +75,25 @@
                             <p class="text-xs font-medium text-gray-800">{{ $event->end_date }}</p>
                         </div>
                     </li>
+                    @endif
+                    @if(Auth::user()->role === 1)
+                    <li class="grid grid-cols-12  justify-items-center py-4 px-6 hover:bg-gray-50">
+                        <div class="col-span-4">
+                            <h3 class="text-sm font-medium text-gray-800 px-2 py-1  text-white text-center bg-[#A1C77B] rounded-md">Budget</h3>
+                        </div>
+                        <div class="col-span-8 flex items-center justify-center">
+                            <p class="text-xs font-medium text-gray-800">{{ $event->budget }}</p>
+                        </div>
+                    </li>
+                        <li class="grid grid-cols-12  justify-items-center py-4 px-6 hover:bg-gray-50">
+                            <div class="col-span-4">
+                                <h3 class="text-sm font-medium text-gray-800 px-2 py-1  text-white text-center bg-[#A1C77B] rounded-md">Bank account</h3>
+                            </div>
+                            <div class="col-span-8 flex items-center justify-center">
+                                <p class="text-xs font-medium text-gray-800">{{ $event->bank_account_number }}</p>
+                            </div>
+                        </li>
+                        @endif
 
                 </ul>
             </div>

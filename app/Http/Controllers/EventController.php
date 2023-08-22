@@ -123,6 +123,12 @@ class EventController extends Controller
 
     public function seachMember(Request $request,Event $event) {
 
+        $searchLetter = $request->input('letter');
+
+        // Retrieve users whose names contain the entered letter
+        $user = User::where('name', 'like', '%' . $searchLetter . '%')->whereNotIn('role', [0, 1])
+            ->whereNotIn('id', $event->organizes->pluck('id')->toArray())->get();
+
         $userss = User::whereNotIn('role', [0, 1])
             ->whereNotIn('id', $event->organizes->pluck('id')->toArray())
             ->get()->where('name',$request->get('name'));
@@ -141,7 +147,7 @@ class EventController extends Controller
         // }
         return view('kanban.member', [
             'users' => $users,
-            'userss' => $userss,
+            'userss' => $user,
             'event' =>$event
 
         ]);
@@ -154,8 +160,9 @@ class EventController extends Controller
         // dd($user->name);
 
         // $user3->organizes()->attach($event2->id);
-
-        $event->organizes()->attach($user->id);
+        if (!$event->organizes->contains($user->id)) {
+            $event->organizes()->attach($user->id);
+        }
 
         // dd($user);
         $userss = User::whereNotIn('role', [0, 1])
@@ -163,11 +170,16 @@ class EventController extends Controller
             ->get();
         $users = $event->organizes;
 
-        return view('kanban.member', [
+//        return view('kanban.member', [
+//            'users' => $users,
+//            'userss' => $userss,
+//            'event' =>$event
+//
+//        ]);
+        return redirect()->route('kanban.member',[
             'users' => $users,
             'userss' => $userss,
             'event' =>$event
-
         ]);
     }
     public function delete(Request $request, Event $event)
@@ -398,9 +410,15 @@ class EventController extends Controller
         // $kanban_writer = $request->get('writer');
         // $kanban = new KanbanNote();
         // $kanban = KanbanNote::find(1);
+        $user=Auth::user();
 
         // dd($kanban->id);
-        $kanban->status = $kanban->status+1;
+        $kanban->writer = $user->name;
+        if($request->button =='0'){
+        $kanban->status = $kanban->status-1;}
+        else{
+            $kanban->status = $kanban->status+1;
+        }
         $kanban->save();
         // return view('events.kaban',
         // [
@@ -525,6 +543,7 @@ class EventController extends Controller
     }
     public function acceptBudget(Request $request, Event $event)
     {
+
         $user = Auth::user();
         DB::table('events')->where('id', $event->id)->update(['user_id' => $user->id,
     'budgetStatus'=>1]); // staff useri_d
@@ -617,6 +636,8 @@ class EventController extends Controller
         $event->detail = $request->get('detail');
         $event->location = $request->get('location');
         $event->start_date = $request->get('start_date');
+        $event->participant_total = $request->get('participant_total');
+        $event->organizer_total = $request->get('organizer_total');
         $event->end_date = $request->get('end_date');
         $image_file = $request->file('poster'); // image->poster
         $file_name = now()->getTimestamp().".".$image_file->getClientOriginalExtension();

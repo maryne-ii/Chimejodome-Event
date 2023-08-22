@@ -25,7 +25,7 @@
                     </span>
 
                         <div class="flex justify-center space-x-20">
-                            <button type="submit" class="flex-1 block bg-blue-500 mt-8 text-white font-bold p-2 rounded-full">Submit</button>
+                            <button type="submit" class="flex-1 block bg-[#A1C77B] mt-8 text-white font-bold p-2 rounded-full">Submit</button>
                             <a href="{{route('events.index')}}" class="text-center flex-1 block bg-red-500 mt-8 text-white font-bold p-2 rounded-full">Cancel</a>
                         </div>
                     </div>

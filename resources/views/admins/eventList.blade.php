@@ -39,9 +39,9 @@
             Event
         </p>
     </div>
-    <div class="grid grid-cols-4 gap-4 mt-10 mr-40 ml-40">
+    <div class="grid grid-cols-4 gap-20 mt-10 mr-40 ml-40">
         @foreach ($events as $event)
-            <form class="" action="{{route('DeleteEvent', ['event' => $event]) }}">
+{{--            <form class="" action="{{route('DeleteEvent', ['event' => $event]) }}">--}}
 
                 <div class="flex flex-col justify-center items-center px-5 py-5 bg-white h-full w-full rounded-md mr-10 ml-10  ">
                     <a href="{{ route('events.show', ['event' => $event]) }}">
@@ -50,15 +50,22 @@
                         </div>
                         <hr class="border-2 w-full mt-2 mb-2 border-[rgb(161,199,123)] ">
                         <div class="">
-                            <img class="h-80 w-60" src="{{env('APP_URL')."/".$event->poster}}" alt="event poster">
+                            <img class="h-60 w-60" src="{{env('APP_URL')."/".$event->poster}}" alt="event poster">
                         </div>
                     </a>
                     <div class="mt-6">
-                        <button type="submit" class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white">Delete</button>
+                        <button type="submit" onclick="confirmDelete({{ $event->id }})" class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white">Delete</button>
+                        <script class="mt-100">
+                            function confirmDelete(event) {
+                                if (confirm('Are you sure you want to delete this user?')) {
+                                    window.location.href = '/' + event + '/deleteEvent';
+                                }
+                            }
+                        </script>
                     </div>
 
                 </div>
-            </form>
+{{--            </form>--}}
         @endforeach
     </div>
 </div>

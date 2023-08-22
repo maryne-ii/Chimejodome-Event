@@ -53,7 +53,7 @@
 
     <ul class="divide-y divide-gray-200">
         @foreach ($records as $record)
-        @if((App\Models\Event::find($record->status === 0)))
+        @if((App\Models\Event::find($record->status === 1)))
         <div class="p-10 mt-8 flex flex-col items-center">
             <div class="container bg-white flex flex-col items-center">
                 <div class="logo mt-4">

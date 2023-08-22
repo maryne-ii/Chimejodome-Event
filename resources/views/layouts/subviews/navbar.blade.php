@@ -55,9 +55,6 @@
             <span>
                 <a href="{{route('events.joinList')}}">Join Event</a>
             </span>
-            <span>
-                <a href="{{route('events.organizeList')}}">Organize Event</a>
-            </span>
                 <span>
                 <a  href="{{ route('events.manage') }}">
                     My Event
@@ -128,10 +125,10 @@
             </li>
             @else
             <div class="flex mr-5 gap-14">
-                <a href="{{route('login')}}">
+                <a  href="{{route('login')}}">
                     <span>Login</span>
                 </a>
-                <a href="{{route('register')}}">
+                <a  href="{{route('register')}}">
                     <span>Register</span>
                 </a>
             </div>

@@ -55,6 +55,13 @@
                     <div class="">
                         <img class="h-80 w-60" src="{{env('APP_URL')."/".$event->poster}}" alt="event poster">
                     </div>
+                    <div class="text-xs font-medium mt-2">
+                        <p>start date : {{$event->start_date}}</p>
+                    </div>
+                    <div class="text-xs font-medium mt-2">
+                        <p>end date: {{$event->end_date }}</p>
+                    </div>
+
                 </a>
 
             </div>

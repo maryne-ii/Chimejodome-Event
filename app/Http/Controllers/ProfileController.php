@@ -54,8 +54,6 @@ class ProfileController extends Controller
         // ]);
         // return redirect()->back();
         return redirect()->route('UsersList');
-
-
     }
     /**
      * Update the user's profile information.
@@ -79,7 +77,8 @@ class ProfileController extends Controller
         $user = User::find($id);
         // $user = Auth::user();
         $request->validate([
-            'name' => ['required', 'min:4', 'max:255']
+            'name' => ['required', 'min:4', 'max:255'],
+            'tel' => 'regex:/^[0-9]+$/'
 
         ]);
         $user->name = $request->get('name');
@@ -152,6 +151,7 @@ class ProfileController extends Controller
     {
         $request->validateWithBag('userDeletion', [
             'password' => ['required', 'current_password'],
+
         ]);
 
         $user = $request->user();

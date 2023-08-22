@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="px-[20rem] py-6">
-    <div class="bg-white h-[36rem] px-14 py-5 rounded-3xl shadow-lg">
+    <div class="bg-white h-[36rem] px-14 h-full py-5 rounded-3xl shadow-lg">
         <div class="font-bold text-3xl">Edit Personal Info</div>
         <hr class="border-1 rounded-full mt-2 border-[#A1C77B] ">
         <form action="{{ route('profile.update', ['user' => $user])}}" method="POST" enctype='multipart/form-data'>
@@ -51,9 +51,9 @@
                         </div>
                         <div class="col-span-8">
                             @error('tel')
-                                <div class="text-red-600 display-absolute">{{'This field must be an integer'}}</div>
+                                <div class="text-red-600 text-xs display-absolute">{{'This field must be an integer'}}</div>
                             @enderror
-                            <input type="tel" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{Auth::user()->tel ? Auth::user()->tel : '-'}}" name="tel">
+                            <input type="number" id="disabled-input-2" aria-label="disabled input 2" class="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" value="{{Auth::user()->tel ? Auth::user()->tel : '-'}}" name="tel">
                         </div>
                         <div class="col-span-4">
                             <div class="text-xl">Line ID</div>
@@ -82,5 +82,5 @@
 
     </div>
 </div>
-</div>
+
 @endsection

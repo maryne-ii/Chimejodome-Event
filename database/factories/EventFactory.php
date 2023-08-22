@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Stringable;
@@ -18,6 +19,7 @@ class EventFactory extends Factory
      */
     public function definition(): array
     {
+        $startDate = Carbon::parse(fake()->dateTimeBetween('0 week', '+4 week'));
         return [
             //
             'name' => fake()->realTextBetween(5,30,5),//เดี๋ยวแก้ *ใช้ได้แต่ไม่สวย
@@ -29,10 +31,11 @@ class EventFactory extends Factory
             'organizer_total'=>fake()->numberBetween(1,30),
             'location'=>fake()->city(),//เดี๋ยวแก้ *ใช้ได้แต่ไม่สวย
             'status'=>1,
-            'start_date'=>fake()->dateTimeBetween('0 week', '+4 week')
-            
+            'start_date' => $startDate,
+            'end_date' => $startDate->copy()->addDays(rand(1, 20))
+
         ];
-            
+
             // $table->datetime('start_date')->nullable();
             // $table->datetime('end_date')->nullable();
     }
