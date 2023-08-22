@@ -79,17 +79,17 @@
                 <div class="flex flex-col justify-center items-center px-5 py-5 bg-white h-full w-full rounded-md mr-10 ml-10  ">
                     <a href="{{ route('events.show', ['event' => App\Models\Event::find($record->event_id)]) }}">
                         <div class="">
-                            <p class="text-lg font-medium text-center text-gray-800">{{(App\Models\Event::find($record->user_id))->name}}</p>
+                            <p class="text-lg font-medium text-center text-gray-800">{{(App\Models\User::find($record->user_id))->name}}</p>
                         </div>
                         <hr class="border-2 w-full mt-2 mb-2 border-[rgb(161,199,123)] ">
                         <div class="">
                             <img class="h-80 w-60" src="{{env('APP_URL')."/".$record->image_for_event}}" alt="event poster">
                         </div>
                     </a>
-                                                <form class="mt-6" action="{{ route('kanban.addJoin', ['event' => $event,'user'=>(App\Models\User::find($record->user_id))]) }}" method="GET" enctype="multipart/form-data">
-                                                <input type="hidden" name="user_id" value="{{ (App\Models\User::find($record->user_id))->id }}">
-                                                <button type="submit" class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white">add</button>
-                                                </form>
+                    <form class="mt-6" action="{{ route('kanban.addJoin', ['event' => $event,'user'=>(App\Models\User::find($record->user_id))]) }}" method="GET" enctype="multipart/form-data">
+                        <input type="hidden" name="user_id" value="{{ (App\Models\User::find($record->user_id))->id }}">
+                        <button type="submit" class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white">add</button>
+                    </form>
                 </div>
             @endforeach
         </div>

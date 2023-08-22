@@ -37,43 +37,53 @@
 
 
 
-    <div>
-        <div class="flex items-start justify-center mt-10 mb-10">
-            <p class="mr-20 ml-20 bg-[#A1C77B] text-lg text-center font-medium px-4 py-3 mr-5  rounded-md text-white" >
-                User
-            </p>
-        </div>
-        <div class="grid grid-cols-4 gap-4 mt-10 mr-40 ml-40">
-            @foreach ($users as $user)
-                <form class="" action="{{route('DeleteUser',['user'=>$user])}}">
+        <div>
+            <div class="flex items-start justify-center mt-10 mb-10">
+                <p class="mr-20 ml-20 bg-[#A1C77B] text-lg w-full text-center font-medium px-4 py-3 mr-5  rounded-md text-white" >
+                    User
+                </p>
+            </div>
+            <div class="grid grid-cols-4 gap-20 mt-10 mb-10 mr-40 ml-40">
+                @foreach ($users as $user)
+{{--                    <form class="" action="{{route('DeleteUser',['user'=>$user])}}">--}}
 
-                    <div class="flex flex-col justify-center items-center px-5 py-5 bg-white h-full w-full rounded-md mr-10 ml-10  ">
-                        <a href="{{ route('profile.user', ['user' => $user]) }}">
-                            <div class="">
-                                <p class="text-lg text-center font-medium text-gray-800">{{ $user->name }}</p>
-                                @if ($user->role === 0)
-                                    <p>Admin</p>
-                                @elseif ($user->role === 1)
-                                    <p>Staff</p>
-                                @elseif ($user->role === 2)
-                                    <p>Student</p>
-                                @endif
-                            </div>
-                            <hr class="border-2 w-full mt-2 mb-2 border-[rgb(161,199,123)] ">
-                            <div class="">
-                                <img class="h-80 w-60" src="{{env('APP_URL')."/".$user->profile_image}}" alt="event poster">
+                        <div class="flex flex-col justify-center items-center px-5 py-5 bg-white h-full w-full rounded-md mr-10 ml-10  ">
+                            <a href="{{ route('profile.user', ['user' => $user]) }}">
+                                <div class="">
+                                    <p class="text-lg text-center font-medium text-gray-800">{{ $user->name }}</p>
+                                    @if ($user->role === 0)
+                                        <p>Admin</p>
+                                    @elseif ($user->role === 1)
+                                        <p>Staff</p>
+                                    @elseif ($user->role === 2)
+                                        <p>Student</p>
+                                    @endif
+                                </div>
+                                <hr class="border-2 w-full mt-2 mb-2 border-[rgb(161,199,123)] ">
+                                <div class="">
+                                    <img class="h-70 w-60" src="{{env('APP_URL')."/".$user->profile_image}}" alt="event poster">
+                                </div>
+
+                            </a>
+                            <div class="mt-6">
+                                <button type="submit" onclick="confirmDelete({{ $user->id }})" class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white">Delete</button>
+                                <script class="mt-100">
+                                    function confirmDelete(userId) {
+                                        if (confirm('Are you sure you want to delete this user?')) {
+                                            window.location.href = '/' + userId + '/deleteUser'; // Corrected URL concatenation
+                                        }
+                                    }
+                                </script>
+
+
                             </div>
 
-                        </a>
-                        <div class="mt-6">
-                            <button type="submit" class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white">Delete</button>
                         </div>
+{{--                    </form>--}}
 
-                    </div>
-                </form>
-
-            @endforeach
+                @endforeach
+            </div>
         </div>
-    </div>
+
 
 @endsection

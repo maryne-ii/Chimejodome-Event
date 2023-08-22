@@ -47,7 +47,7 @@
 <div class="flex flex-col">
     <div>
         <div class="flex items-start justify-center mt-10 mb-10">
-            <p class="ml-20 mr-20 bg-[#A1C77B] text-lg text-center font-medium px-4 py-3 mr-5 w-full rounded-md text-white" >
+            <p class="ml-20 mr-20 bg-[#A1C77B] text-lg w-full text-center font-medium px-4 py-3 mr-5  rounded-md text-white" >
                 Event (processing ...)
             </p>
         </div>
@@ -70,7 +70,7 @@
     </div>
 
     <div class="mt-3">      <div class="flex items-start justify-center mt-10 mb-10">
-            <p class="ml-20 mr-20 bg-[#A1C77B] text-lg text-center font-medium px-4 py-3 mr-5 w-full rounded-md text-white" >
+            <p class="ml-20 mr-20 bg-[#A1C77B] text-lg w-full text-center font-medium px-4 py-3 mr-5  rounded-md text-white" >
                 Event (Approved already)
             </p>
         </div>

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('line_account')->nullable();
             $table->string('faculty')->nullable();
             $table->integer('year')->nullable();
+            $table->integer('ban')->default(0)->comment('0=unBan,1=Ban');
         });
     }
 

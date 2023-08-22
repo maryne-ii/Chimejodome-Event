@@ -54,6 +54,7 @@
             </a>
             <div class="mt-6">
                 <button type="submit" class="bg-[#A1C77B] px-3 py-2 rounded-3xl text-white">Accept</button>
+
             </div>
 
         </div>
