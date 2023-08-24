@@ -1,6 +1,4 @@
 
-
-
 ตัวอย่างผู้ใช้งาน
 เข้าระบบโดยใช้ Email และ Password
 1. Email=user00@example.com.           Password=password           (Role=admin.)
