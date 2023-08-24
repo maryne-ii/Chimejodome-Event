@@ -1,3 +1,25 @@
+วิธีการติดตั้ง Project
+1. กำหนด alias สำหรับคำสั่ง sail
+> echo "alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'" >> ~/.bashrc 
+2. Clone Laravel Project
+> git clone https://github.com/AmpornSaejaew/Chimejodome-Event.git
+3. Installing Composer Dependencies 
+> composer install
+4. ใช้คำสั่ง
+> sail npm install
+5. สร้างไฟล์ .env โดยใช้คำสั่ง
+>cp .env.example .env
+6. ใช้คำสั่ง เพื่อสร้าง APP_KEY ใน .env
+>sail up -d
+7. ใช้คำสั่ง เพื่อสร้าง APP_KEY ใน .env
+> sail artisan key:generate
+8. ใช้ yarn แทน npm
+> sail yarn dev
+
+
+> - DB_USERNAME=sail
+> - DB_PASSWORD=password
+> - DB_HOST=mysql
 
 ตัวอย่างผู้ใช้งาน
 เข้าระบบโดยใช้ Email และ Password
