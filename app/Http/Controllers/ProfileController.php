@@ -89,17 +89,17 @@ class ProfileController extends Controller
         $user->line_account = $request->get('line_account');
         $user->instagram_account = $request->get('instagram_account');
         $user->bio = $request->get('bio');
-        // if ($request->file('profile_image')) {
-        //     $image_file = $request->file('profile_image'); // image->poster
-        //     $file_name = now()->getTimestamp() . "." . $image_file->getClientOriginalExtension();
-        //     $image_file->storeAs('public/' . $file_name);
-        //     $image_path = "storage/" . $file_name;
-        //     $user->profile_image = $image_path;
-        // }
-        if ($request->hasFile('profile_image')) {
-            $path = $request->file('profile_image')->store('images', 'public');
-            $user->profile_image = $path;
-        }
+         if ($request->file('profile_image')) {
+             $image_file = $request->file('profile_image'); // image->poster
+             $file_name = now()->getTimestamp() . "." . $image_file->getClientOriginalExtension();
+             $image_file->storeAs('public/' . $file_name);
+             $image_path = "storage/" . $file_name;
+             $user->profile_image = $image_path;
+         }
+//        if ($request->hasFile('profile_image')) {
+//            $path = $request->file('profile_image')->store('images', 'public');
+//            $user->profile_image = $path;
+//        }
         $user->save();
         // $user_update->save();
         // $user_update->update([

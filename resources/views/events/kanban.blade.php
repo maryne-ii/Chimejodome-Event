@@ -4,7 +4,7 @@
 <div class="px-[20rem] py-6">
     <div class="flex gap-10 items-center justify-center">
 
-        <div class="py-4 px-4 w-full text-center bg-white rounded-full">{{$event->name}}</div>
+        <div class="py-4 px-4 w-full text-center bg-[#A1C77B] rounded-full">{{$event->name}}</div>
         <div class="py-4 px-4 w-full text-center bg-white rounded-full"><a href="{{route('events.edit',['event'=>$event])}}">ลงบอร์ด</a></div>
         <div class="py-4 px-4 w-full text-center bg-white rounded-full"><a href="{{route('kanban.join',['event'=>$event])}}">ผู้เข้าร่วม</a></div>
         <div class="py-4 px-4 w-full text-center bg-white rounded-full"><a href="{{route('events.needBudget',['event'=>$event])}}">เบิกงบกิจกรรม</a></div>
