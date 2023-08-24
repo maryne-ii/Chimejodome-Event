@@ -1,3 +1,15 @@
+
+
+
+ตัวอย่างผู้ใช้งาน
+เข้าระบบโดยใช้ Email และ Password
+1. Email=user00@example.com.           Password=password           (Role=admin.)
+2. Email=userStaff@example.com.        Password=password           (Role=staff.)
+3. Email=user02@example.com.           Password=password           (Role=student who join event.)
+4. Email=user03@example.com.           Password=password           (Role=student who have event.)
+
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
